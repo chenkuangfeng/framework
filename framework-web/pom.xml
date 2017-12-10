@@ -13,7 +13,9 @@
     <dependencies>
 
     </dependencies>
+
     <build>
         <finalName>framework-web</finalName>
+
     </build>
 </project>
