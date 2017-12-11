@@ -1,0 +1,34 @@
+<SelectForm layout="border" fdmId="Org" label="选择组织">
+	<toobar region="north" id="mainToolBar">
+	</toobar>
+	<splitpanel region="center">
+		<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+			<grid>
+				<row>
+					<cell width="30%">
+						<text as="T" label="组织代码" field="orgKey"></text>
+					</cell>
+					<cell width="30%">
+						<text as="T" label="组织名称" field="orgName" />
+					</cell>
+					<cell width="30%">
+						<combobox as="T" label="状态" bind="false" field="status" code="STATUS"></combobox>
+					</cell>
+				</row>			
+			</grid>
+		</panel>
+		<panel region="bottom" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column visible="false" width="35" field="id" label="主键" />
+				<column   width="25" field="orgKey" label="组织代码" />
+				<column width="30" field="orgName" label="组织名称" />
+				<column width="5" code="STATUS" field="status" label="状态" />
+				<column field="createdBy" label="创建人" />
+				<column type="datetime" field="createdDate" label="创建日期" />
+				<column field="updatedBy" label="更新人" />
+				<column type="datetime" field="updatedDate" label="更新日期" />
+				<column dataType="Integer" field="version" label="版本" />
+			</datagrid>
+		</panel>
+	</splitpanel>	
+</SelectForm>

@@ -1,0 +1,20 @@
+<fdm>
+	<master entity="com.ubsoft.framework.bi.entity.Report">
+		<sql><![CDATA[
+           	 select * from BI_REPORT T
+            ]]></sql>
+	</master>
+	<detail id="reportField" entity="com.ubsoft.framework.bi.entity.ReportField" fk="reportId" pk="id">
+		<sql><![CDATA[
+           	 select * from BI_REPORT_FIELD T
+            ]]></sql>
+	</detail>
+	<detail id="reportParameter" entity="com.ubsoft.framework.bi.entity.ReportParameter" fk="reportId" pk="id">
+		<sql><![CDATA[
+           	 select * from BI_REPORT_PARAMETER T
+            ]]></sql>
+	</detail>
+	<extentions>
+		<extention name="reportExtention"></extention>
+	</extentions>
+</fdm>

@@ -1,0 +1,7 @@
+<fdm>
+	<master>
+		<sql><![CDATA[
+           	 select T.*,S.TASKNAME from SA_TASK_LOG T INNER JOIN SA_TASK  S ON S.taskKey=T.taskKey
+            ]]></sql>
+	</master>
+</fdm>

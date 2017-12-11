@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serverConfig>
+	<!-- 是否是 调试模式 -->
+	<dataItem name="debug" value="true" />
+	<!-- 服务器端版本 -->
+	<dataItem name="version" value="1.0" />
+	<!-- session超时时间  -->
+	<dataItem name="sessionTimeout" value="30" />
+		
+</serverConfig>

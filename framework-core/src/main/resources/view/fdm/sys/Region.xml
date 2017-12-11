@@ -1,0 +1,7 @@
+<fdm>
+	<master entity="com.ubsoft.framework.core.entity.Region">
+		<sql><![CDATA[
+           	 select T.*,O.regionName OWNERNAME from SC_REGION T left join SC_REGION O on T.ownerKey=O.regionKey 
+            ]]></sql>
+	</master>
+</fdm>

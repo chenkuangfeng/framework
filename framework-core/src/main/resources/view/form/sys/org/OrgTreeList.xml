@@ -1,0 +1,30 @@
+<ListForm layout="border" fdmId="Org" label="组织机构">
+	<toobar region="north" id="mainToolBar">
+	</toobar>
+	<splitpanel region="center" direction="h" position="180">
+		<panel region="left" layout="border">
+			<tree  id="orgTree" region="center"></tree>
+		</panel>
+		<panel region="right" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column  width="25"  field="orgKey" label="组织代码" />
+				<column width="30" field="orgName"  label="名称" />
+				<column code="ORGTYPE" width="15" field="orgType"  label="组织类型" />
+				<column type="search" fromFields="orgName" toFields="ownerName"  select="OrgSelect" selectField="orgKey" width="30" field="ownerKey" label="上级组织代码" />
+				<column width="30" field="ownerName" label="上级组织" editable="false" />
+				<column width="10" field="area" label="区域" />
+				<column width="10" field="province" label="省份" />
+				<column width="10" field="city" label="城市" />
+				<column width="10" field="contactPerson" label="联系人" />
+				<column width="15" field="tel" label="电话" />
+				<column width="15" field="postCode" label="邮编" />
+				<column width="60" field="address" label="地址" />
+				<column width="8" code="STATUS" field="status" label="状态" editable="false" />
+				<column field="createdBy" label="创建人" editable="false" />
+				<column type="datetime" field="createdDate" label="创建日期" editable="false" />
+				<column field="updatedBy" label="更新人" editable="false" />
+				<column type="datetime" field="updatedDate" editable="false" label="更新日期" />
+			</datagrid>
+		</panel>
+	</splitpanel>
+</ListForm>

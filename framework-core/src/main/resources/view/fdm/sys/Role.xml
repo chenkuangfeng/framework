@@ -1,0 +1,13 @@
+<fdm>
+	<master entity="com.ubsoft.framework.core.entity.Role">
+		<sql><![CDATA[
+           	 select T.*,O.ORGNAME from {SA_ROLE:T} INNER JOIN SA_ORG O ON O.ORGKEY=T.ORGKEY
+            ]]></sql>
+	</master>
+	<detail id="roleUser" entity="com.ubsoft.framework.core.entity.UserRole" fk="roleKey" pk="roleKey">
+		<sql><![CDATA[
+		     SELECT T.*,R.USERNAME FROM SA_USER_ROLE T INNER JOIN SA_USER R ON R.USERKEY=T.USERKEY
+            ]]></sql>
+	</detail>	
+	
+</fdm>

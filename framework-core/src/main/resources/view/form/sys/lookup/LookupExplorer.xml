@@ -1,0 +1,73 @@
+<ExplorerForm fdmId="Lookup" layout="border" label="字典">
+	<toobar region="north" id="mainToolBar">
+	</toobar>
+	<splitpanel id="mainSplit" region="center" direction="h" position="400">
+		<splitpanel layout="v" region="left">
+			<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+				<grid>
+					<row>
+						<cell width="50%">
+							<text label="代码" field="lkKey"></text>
+						</cell>
+						<cell width="50%">
+							<text label="名称" field="lkName" />
+						</cell>
+					</row>
+					<row>
+						<cell colSpan="2">
+							<combobox label="状态" bind="false" code="STATUS" field="status"></combobox>
+						</cell>
+					</row>
+				</grid>
+			</panel>
+			<panel region="bottom" label="列表" showTitle="true" layout="border">
+				<datagrid id="mainTable" region="center">
+					<column type="link" width="25" field="lkKey" label="代码" />
+					<column width="30" field="lkName" label="名称" />
+					<column width="5" code="STATUS" field="status" label="状态" />
+					<column field="createdBy" label="创建人" />
+					<column type="datetime" field="createdDate" label="创建日期" />
+					<column field="updatedBy" label="更新人" />
+					<column type="datetime" field="updatedDate" label="更新日期" />
+					<column dataType="Integer" field="version" label="版本" />
+				</datagrid>
+			</panel>
+		</splitpanel>
+		<splitpanel region="right">
+			<tabpanel region="top" id="mainForm">
+				<panel label="基本资料" layout="form">
+					<grid>
+						<row>
+							<cell width="50%">
+								<text label="代码" field="lkKey"></text>
+							</cell>
+							<cell width="50%">
+								<text label="名称" field="lkName" />
+							</cell>
+						</row>
+						<row>
+							<cell colSpan="2">
+								<combobox code="STATUS" label="状态" field="status"></combobox>
+							</cell>
+						</row>
+					</grid>
+				</panel>
+			</tabpanel>
+			<tabpanel region="bottom">
+				<panel label="字典明细" layout="border">
+					<toobar region="north" id="lookupDetail_ToolBar">
+					</toobar>
+					<datagrid id="lookupDetail" region="center">
+						<column width="25" field="lkdKey" label="代码" />
+						<column width="30" field="lkdName" label="名称" />
+						<column width="5" code="STATUS" field="status" label="状态" />
+						<column field="createdBy" label="创建人" />
+						<column type="datetime" field="createdDate" label="创建日期" />
+						<column field="updatedBy" label="更新人" />
+						<column type="datetime" field="updatedDate" label="更新日期" />
+					</datagrid>
+				</panel>
+			</tabpanel>
+		</splitpanel>
+	</splitpanel>	
+</ExplorerForm>

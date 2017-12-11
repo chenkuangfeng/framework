@@ -1,0 +1,131 @@
+<ExplorerForm fdmId="User" layout="border" label="用户">
+	<toobar region="north" id="mainToolBar">
+		<button id="btnSetPwd" icon="icon/pw.png" label="设置密码"></button>	
+		<button id="btnSaveSecurity"  icon="icon/savesecurity.png" label="保存权限"></button>	
+	</toobar>
+	<splitpanel id="mainSplit" region="center" direction="h" position="500">
+		<splitpanel layout="v" region="left">
+			<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+				<grid>
+					<row>
+						<cell width="50%">
+							<text label="用户代码" as="T"   field="userKey"></text>
+						</cell>
+						<cell width="50%">
+							<text label="用户名称" as="T" field="userName" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<lookup label="所属组织" as="T" select="OrgSelect" field="orgKey">
+							</lookup>
+						</cell>
+						<cell>
+							<combobox as="T" label="状态" bind="false" field="status" code="STATUS"></combobox>
+						</cell>
+					</row>
+				</grid>
+			</panel>
+			<panel region="bottom" label="列表" showTitle="true" layout="border">
+				<datagrid id="mainTable" region="center">
+					<column type="link" width="25" editable="false" field="userKey" label="用户代码" />
+					<column width="30" field="userName" editable="false" label="用户名" />
+					<column width="30" field="orgName" label="所属组织" editable="false" />
+					<column width="10" field="province" label="省份" />
+					<column width="10" field="city" label="城市" />
+					<column width="15" field="tel" label="电话" />
+					<column width="15" field="phone" label="手机" />
+					<column width="60" field="address" label="地址" />
+					<column width="20" field="idNum" label="身份证" />
+					<column width="8" code="STATUS" field="status" label="状态" editable="false" />
+					<column field="createdBy" label="创建人" editable="false" />
+					<column type="datetime" field="createdDate" label="创建日期" editable="false" />
+					<column field="updatedBy" label="更新人" editable="false" />
+					<column type="datetime" field="updatedDate" editable="false" label="更新日期" />
+				</datagrid>
+			</panel>
+		</splitpanel>
+		<splitpanel region="right">
+			<tabpanel region="top" id="mainForm">
+				<panel label="基本资料" layout="form">
+					<grid>
+						<row>
+							<cell width="30%">
+								<text label="用户代码"  id="userKey"  field="userKey"></text>
+							</cell>
+							<cell width="30%">
+								<text label="用户名" field="userName" />
+							</cell>
+							<cell width="30%">
+								<combobox label="状态" code="STATUS" field="status"></combobox>
+							</cell>
+						</row>
+						<row>
+							<cell width="30%">
+								<lookup label="所属组织代码" fromFields="orgName" toFields="orgName" select="OrgSelect" field="orgKey">
+								</lookup>
+							</cell>
+							<cell colSpan="2">
+								<text label="所属组织名称" enabled="false" field="orgName" />
+							</cell>
+						</row>
+						<row>
+							<cell width="30%"> 
+								<lookup label="所属部门代码"  selectField="orgKey"  fromFields="orgName" toFields="ownerName" select="OrgSelect" field="ownerKey">
+								</lookup>
+							</cell> 
+							<cell colSpan="2">
+								<text label="所属部门名称" enabled="false" field="ownerName" /> 
+							</cell>
+						</row>
+						<row>
+							<cell width="30%">
+								<text label="省份" field="province" />
+							</cell>
+							<cell width="30%">
+								<text label="城市" field="city" />
+							</cell>
+							<cell width="30%">
+								<text label="电话" field="tel" />
+							</cell>
+						</row>
+						<row>
+							<cell width="30%">
+								<text label="手机" field="phone" />
+							</cell>
+							<cell width="30%">
+								<text label="职位" field="position" />
+							</cell>
+							<cell width="30%">
+								<text label="邮箱" field="email" />
+							</cell>
+						</row>
+						<row>
+							<cell colSpan="3">
+								<text label="地址" field="address" />
+							</cell>
+						</row>
+					</grid>
+				</panel>
+			</tabpanel>
+			<tabpanel region="bottom">
+				<panel label="角色" layout="border">
+						<toobar region="north" id="Role_ToolBar">
+						<button icon="icon/addline.png" id="btnSelectRole" label="添加角色"></button>
+						<button icon="icon/delline.png" id="btnDelRole" label="删除角色"></button>
+					</toobar>
+					<datagrid id="userRole" region="center">
+						<column width="25" field="roleKey" label="角色代码" />
+						<column width="30" field="roleName" label="角色名称" />
+					</datagrid>
+				</panel>
+				<panel label="功能权限" layout="border">
+							<tree  checkbox="true"  id="menuTree" region="center"></tree>				
+				</panel>
+				<panel label="数据权限" layout="border">
+					<tree  checkbox="true"  id="dimTree" region="center"></tree>				
+				</panel>
+			</tabpanel>
+		</splitpanel>
+	</splitpanel>
+</ExplorerForm>

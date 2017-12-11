@@ -1,0 +1,26 @@
+<ListForm layout="border" fdmId="Permission" label="功能菜单">
+	<toobar region="north" id="mainToolBar">
+	
+	</toobar>
+	<splitpanel region="center" direction="h" position="180">
+		<panel region="left" id="permTree" label="功能菜单"  layout="border">
+			<tree id="menuTree" region="center"></tree>
+		</panel>
+		<panel region="right" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column width="25" field="permKey" label="权限代码" />
+				<column width="30" field="permName" label="权限名称" />
+				<column width="10"  align="center"  code="PERMTYPE" field="permType" label="权限类型" />				
+				<column width="10"  align="center" code="STATUS" field="status" label="状态" />
+				<column width="55" field="permModule" label="权限模块" />
+				<column width="10" field="permGroup" label="权限组" />
+				<column width="10" dataType="Integer" field="seq" label="排序" />				
+				<column width="20" field="parentPermKey" label="父权限代码" />
+				<column field="createdBy" label="创建人" />
+				<column type="datetime" field="createdDate" label="创建日期" />
+				<column field="updatedBy" label="更新人" />
+				<column type="datetime" field="updatedDate" label="更新日期" />
+			</datagrid>
+		</panel>
+	</splitpanel>	
+</ListForm>

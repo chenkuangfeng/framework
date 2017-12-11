@@ -1,0 +1,40 @@
+<EditForm fdmId="Lookup" layout="border" label="字典">
+	<toobar region="north" id="mainToolBar">
+	</toobar>
+	<splitpanel region="center">
+		<tabpanel region="top" id="mainForm">
+			<panel label="基本资料" layout="form">
+				<grid>
+					<row>
+						<cell width="50%">
+							<text label="代码" field="lkKey"></text>
+						</cell>
+						<cell width="50%">
+							<text label="名称" field="lkName" />
+						</cell>
+					</row>
+					<row>
+						<cell width="30%">
+							<combobox label="状态"  code="STATUS" field="status"></combobox>
+						</cell>
+					</row>
+				</grid>
+			</panel>
+		</tabpanel>
+		<tabpanel region="bottom">
+			<panel label="字典明细" layout="border">
+				<toobar region="north" id="lookupDetail_ToolBar">
+				</toobar>
+				<datagrid id="lookupDetail" region="center">
+					<column width="25" field="lkdKey" label="代码" />
+					<column width="30" field="lkdName" label="名称" />
+					<column width="5" code="STATUS" field="status" label="状态" />
+					<column field="createdBy" label="创建人" />
+					<column type="datetime" field="createdDate" label="创建日期" />
+					<column field="updatedBy" label="更新人" />
+					<column type="datetime" field="updatedDate" label="更新日期" />
+				</datagrid>
+			</panel>
+		</tabpanel>
+	</splitpanel>
+</EditForm>

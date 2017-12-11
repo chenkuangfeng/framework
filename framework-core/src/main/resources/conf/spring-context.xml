@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/tx   
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
+     http://www.springframework.org/schema/context  
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+     http://www.springframework.org/schema/mvc  
+     http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+     http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<bean id="DefaultDS" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@192.168.11.74:1521:integration"></property>
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="user" value="fws"></property>
+		<property name="password" value="123456"></property>
+		<property name="maxPoolSize" value="40"></property>
+		<property name="minPoolSize" value="1"></property>
+		<property name="initialPoolSize" value="1"></property>
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+
+	<bean id="CJDGDS" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="jdbcUrl"
+			value="jdbc:oracle:thin:@192.168.25.43:1521:cjdgtest"></property>
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="user" value="lachareport"></property>
+		<property name="password" value="lachareportpw"></property>
+		<property name="maxPoolSize" value="40"></property>
+		<property name="minPoolSize" value="1"></property>
+		<property name="initialPoolSize" value="1"></property>
+		<property name="maxIdleTime" value="20"></property>
+	</bean>
+	<bean id="dynamicDataSource"
+		class="com.ubsoft.framework.core.dal.util.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry value-ref="DefaultDS" key="DefaultDS"></entry>
+				<entry value-ref="CJDGDS" key="CJDGDS"></entry>
+
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="DefaultDS"></property>
+	</bean>
+
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dynamicDataSource" />
+		</property>
+	</bean>
+	
+	<bean id="namedParameterJdbcTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dynamicDataSource"></constructor-arg>
+	</bean>
+
+	<bean id="jdbcTemplateTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dynamicDataSource"></property>	
+	</bean>	
+	<!-- 设置需要进行Spring注解扫描的类包 -->
+	<context:component-scan base-package="com.ubsoft.framework,com.lachapelle">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- Enable @AspectJ support -->
+	<aop:aspectj-autoproxy />
+	<!-- 使用注解方式定义事务 -->
+
+	<tx:annotation-driven transaction-manager="jdbcTemplateTransactionManager" />
+	
+
+</beans>
+
+
+
+	
+	
