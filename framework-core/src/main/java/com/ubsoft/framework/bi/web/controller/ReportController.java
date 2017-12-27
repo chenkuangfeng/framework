@@ -10,7 +10,7 @@ import com.ubsoft.framework.bi.web.view.JasperView;
 import com.ubsoft.framework.bi.web.view.JxlsView;
 import com.ubsoft.framework.core.dal.model.Bio;
 import com.ubsoft.framework.core.dal.model.PageResult;
-import com.ubsoft.framework.core.dal.util.DataType;
+import com.ubsoft.framework.core.dal.util.TypeUtil;
 import com.ubsoft.framework.core.dal.util.DynamicDataSource;
 import com.ubsoft.framework.core.dal.util.SQLUtil;
 import com.ubsoft.framework.core.exception.ComException;
@@ -358,7 +358,7 @@ public class ReportController extends BaseController {
 					String type = param.getString("type");
 					String name = param.getString("name");
 					Object value = param.get("value");
-					mapParam.put(name, DataType.convert(type, value));
+					mapParam.put(name, TypeUtil.convert(type, value));
 				}
 			}
 			if (rpt.getReportType().equals("TABLE")) {
@@ -548,7 +548,7 @@ public class ReportController extends BaseController {
 			String type = param.getString("type");
 			String name = param.getString("name");
 			Object value = param.get("value");
-			mapParam.put(name, DataType.convert(type, value));
+			mapParam.put(name, TypeUtil.convert(type, value));
 		}
 		Report rpt = MemoryReport.getInstance().get(rptKey);
 		String unitName = rpt.getUnitName();

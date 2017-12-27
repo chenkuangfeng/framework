@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.ubsoft.framework.core.dal.annotation.Column;
 import com.ubsoft.framework.core.dal.annotation.Table;
+import com.ubsoft.framework.core.dal.annotation.Transient;
 import com.ubsoft.framework.core.dal.entity.BaseEntity;
 
 @Table(name="SA_SESSION") 
@@ -36,11 +37,11 @@ public class Session extends BaseEntity implements Serializable {
 	@Column(name="ORGNAME",length=100) 
 	private String orgName;
 	
-	
+	@Transient
 	private Map permissions=new HashMap();
-	
+	@Transient
 	private Map roles=new HashMap(); 
-	
+	@Transient
 	private Map attributes=new HashMap();	
 	
 	

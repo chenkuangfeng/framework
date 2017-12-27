@@ -1,30 +1,63 @@
 package com.ubsoft.framework.core.dal.entity;
-import com.ubsoft.framework.core.dal.annotation.Table;
 import java.io.Serializable;
-@Table(name = "META_BIO_Property")
-public class BioPropertyMeta implements Serializable {
+
+import com.ubsoft.framework.core.dal.annotation.Table;
+@Table(name = "META_BIO_PROPERTY")
+public class BioPropertyMeta extends BaseEntity implements Serializable { 
+     /*
+      * bioMetaKey
+      */
+    private String bioKey;
+    /*
+     * bioMetaId
+     * 
+     */
+   private String bioId;
     /**
-     * 名称
+     * 属性Key
      **/
-    private String name;
+    private String propertyKey;
+    /**
+     * 属性名称
+     */
+    private String propertyName;
     /**
      * 列
      **/
-    private String column;
+    private String columnKey;
+    
+    /**
+     * 是否是版本
+     **/
+    private int versionKey;
 
     /**
      * 允许空
      **/
-    private boolean nullable;
+    private int nullable;
+    
+    /**
+     * 是否主键1:是,0:否
+     **/
+    private int primaryKey;
 
     /**
      * 长度
      **/
     private int length;
     /**
+     * 小数位数
+     **/
+    private int digits;
+    /**
+     * 排序
+     */
+    private int seq;
+
+    /**
      * 默认值
      **/
-    private Object defaultValue;
+    private String defaultValue;
     /**
      * 数据类型
      **/
@@ -33,62 +66,143 @@ public class BioPropertyMeta implements Serializable {
      * 序列Key,
      **/
     private String seqKey;
+    
+    /**
+     * 备注
+     **/
+    private String remarks;
 
-    public String getName(){
-        return name;
-    }
+	public String getBioKey() {
+		return bioKey;
+	}
 
-    public void setName(String name){
-        this.name = name;
-    }
+	public void setBioKey(String bioKey) {
+		this.bioKey = bioKey;
+	}
 
-    public String getColumn(){
-        return column;
-    }
+	public String getPropertyKey() {
+		return propertyKey;
+	}
 
-    public void setColumn(String column){
-        this.column = column;
-    }
+	public void setPropertyKey(String propertyKey) {
+		this.propertyKey = propertyKey;
+	}
 
-    public boolean isNullable(){
-        return nullable;
-    }
+	public String getPropertyName() {
+		return propertyName;
+	}
 
-    public void setNullable(boolean nullable){
-        this.nullable = nullable;
-    }
+	public void setPropertyName(String propertyName) {
+		this.propertyName = propertyName;
+	}
 
+	public String getColumnKey() {
+		return columnKey;
+	}
 
+	public void setColumnKey(String columnKey) {
+		this.columnKey = columnKey;
+	}
 
-    public int getLength(){
-        return length;
-    }
+	
 
-    public void setLength(int length){
-        this.length = length;
-    }
+	public int getLength() {
+		return length;
+	}
 
-    public Object getDefaultValue(){
-        return defaultValue;
-    }
+	public void setLength(int length) {
+		this.length = length;
+	}
 
-    public void setDefaultValue(Object defaultValue){
-        this.defaultValue = defaultValue;
-    }
+	public String getDefaultValue() {
+		return defaultValue;
+	}
 
-    public String getDataType(){
-        return dataType;
-    }
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
 
-    public void setDataType(String dataType){
-        this.dataType = dataType;
-    }
+	public String getDataType() {
+		return dataType;
+	}
 
-    public String getSeqKey(){
-        return seqKey;
-    }
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
+	}
 
-    public void setSeqKey(String seqKey){
-        this.seqKey = seqKey;
-    }
+	public String getSeqKey() {
+		return seqKey;
+	}
+
+	public void setSeqKey(String seqKey) {
+		this.seqKey = seqKey;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getBioId() {
+		return bioId;
+	}
+
+	public void setBioId(String bioId) {
+		this.bioId = bioId;
+	}
+
+	public int getVersionKey() {
+		return versionKey;
+	}
+
+	public void setVersionKey(int versionKey) {
+		this.versionKey = versionKey;
+	}
+
+	
+
+	public int getNullable() {
+		return nullable;
+	}
+
+	public void setNullable(int nullable) {
+		this.nullable = nullable;
+	}
+
+	public int getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(int primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+	public int getDigits() {
+		return digits;
+	}
+
+	public void setDigits(int digits) {
+		this.digits = digits;
+	}
+
+	public int getSeq() {
+		return seq;
+	}
+
+	public void setSeq(int seq) {
+		this.seq = seq;
+	}
+
+	
+
+	
+    
+	
+    
+    
+
+    
 }

@@ -1,9 +1,8 @@
 package com.ubsoft.framework.metadata.model.form.fdm;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.ubsoft.framework.core.dal.entity.BioMeta;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,8 +16,13 @@ public class DetailMeta implements Serializable{
 	@XmlAttribute
 	private String fk;
 	@XmlAttribute
-	private String refKey;
+	private String mk;
+	
+	@XmlAttribute
+	private String orderBy;
 
+	@XmlTransient
+	private BioMeta bioMeta;
 	public String getId(){
 		return id;
 	}
@@ -51,11 +55,29 @@ public class DetailMeta implements Serializable{
 		this.fk = fk;
 	}
 
-	public String getRefKey(){
-		return refKey;
+	public String getMk() {
+		return mk;
 	}
 
-	public void setRefKey(String refKey){
-		this.refKey = refKey;
+	public void setMk(String mk) {
+		this.mk = mk;
 	}
+
+	public BioMeta getBioMeta() {
+		return bioMeta;
+	}
+
+	public void setBioMeta(BioMeta bioMeta) {
+		this.bioMeta = bioMeta;
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+	
+	
 }

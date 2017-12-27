@@ -46,7 +46,7 @@ public class DimService extends BaseService<Dimension> implements IDimService {
 	public void initDimension() {
 		MemoryDimension.getInstance().clear();
 		String sql="SELECT DIMKEY,D.VALUEFIELD ,D.ENTITYNAME,D.TABLENAME FROM SA_DIMENSION H ,SA_DIMENSION_DTL D WHERE D.DIMID=H.ID";
-		List<Bio> bios=dataSession.queryBio(sql, null);
+		List<Bio> bios=dataSession.query(sql, null);
 		for(Bio bio:bios){
 			List<Bio> listBio=MemoryDimension.getInstance().get(bio.getString("ENTITYNAME"));
 			if(listBio==null){

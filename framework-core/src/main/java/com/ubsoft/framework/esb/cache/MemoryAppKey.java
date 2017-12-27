@@ -6,7 +6,7 @@ import com.ubsoft.framework.core.cache.CacheManager;
 import com.ubsoft.framework.esb.entity.AppKey;
 public class MemoryAppKey {
 	private static MemoryAppKey instance;
-	private  static String cacheName="appkey";
+	private  static String cacheName="APPKEY";
 	private CacheManager storeSpace = new CacheManager();
 	private MemoryAppKey() {
 		

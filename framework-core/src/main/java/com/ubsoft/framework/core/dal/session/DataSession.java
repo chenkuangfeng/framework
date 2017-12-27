@@ -1,23 +1,5 @@
 package com.ubsoft.framework.core.dal.session;
 
-import com.ubsoft.framework.core.cache.MemoryBioMeta;
-import com.ubsoft.framework.core.dal.annotation.Table;
-import com.ubsoft.framework.core.dal.entity.BioMeta;
-import com.ubsoft.framework.core.dal.entity.BioPropertyMeta;
-import com.ubsoft.framework.core.dal.model.Bio;
-import com.ubsoft.framework.core.dal.model.PageResult;
-import com.ubsoft.framework.core.dal.util.BioRowMapper;
-import com.ubsoft.framework.core.dal.util.SQLUtil;
-import com.ubsoft.framework.core.exception.DataAccessException;
-import com.ubsoft.framework.core.support.util.BeanUtil;
-import com.ubsoft.framework.core.support.util.StringUtil;
-import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.CallableStatementCallback;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
-
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
 import java.lang.reflect.Array;
@@ -25,13 +7,39 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.sql.CallableStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.CallableStatementCallback;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.ubsoft.framework.core.cache.MemoryBioMeta;
+import com.ubsoft.framework.core.dal.annotation.Table;
+import com.ubsoft.framework.core.dal.entity.BaseEntity;
+import com.ubsoft.framework.core.dal.entity.BioMeta;
+import com.ubsoft.framework.core.dal.entity.BioPropertyMeta;
+import com.ubsoft.framework.core.dal.model.Bio;
+import com.ubsoft.framework.core.dal.model.PageResult;
+import com.ubsoft.framework.core.dal.util.BeanRowMapper;
+import com.ubsoft.framework.core.dal.util.BioRowMapper;
+import com.ubsoft.framework.core.dal.util.SQLUtil;
+import com.ubsoft.framework.core.dal.util.TypeUtil;
+import com.ubsoft.framework.core.exception.DataAccessException;
+import com.ubsoft.framework.core.support.util.BeanUtil;
+import com.ubsoft.framework.core.support.util.StringUtil;
+import com.ubsoft.framework.system.model.Subject;
 
 @Repository
 public class DataSession implements IDataSession {
 
-	private final static String versionKey = "Version";
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
@@ -39,7 +47,7 @@ public class DataSession implements IDataSession {
 	public Bio getBio(String bioName, Serializable id) {
 		BioMeta meta = MemoryBioMeta.getInstance().get("bioName");
 		if (meta != null) {
-			Bio bio = this.getBio(bioName, meta.getPrimaryKey() + "=?", id);
+			Bio bio = this.getBio(bioName, meta.getPrimaryProperty().getColumnKey() + "=?", id);
 			return bio;
 		} else {
 			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在.");
@@ -86,16 +94,18 @@ public class DataSession implements IDataSession {
 		if (StringUtil.isNotEmpty(orderBy)) {
 			sql.append(" ORDER BY  ").append(orderBy);
 		}
-		List<Bio> result = jdbcTemplate.query(sql.toString(), value, new BioRowMapper(bioName));		
+		List<Bio> result = jdbcTemplate.query(sql.toString(), value, new BioRowMapper(bioName));
 		return result;
 	}
 
 	@Override
 	public void saveBio(Bio bio) {
-		if (bio.getObject(bio.getPrimaryKey()) != null) {
+		if (bio.getStatus().equals(Bio.UPDATE)) {
 			update(bio);
-		} else {
+			bio.setStatus(Bio.UPDATE);
+		} else if (bio.getStatus().equals(Bio.NEW)) {
 			insert(bio);
+			bio.setStatus(Bio.UPDATE);
 		}
 
 	}
@@ -104,19 +114,20 @@ public class DataSession implements IDataSession {
 		StringBuffer batchSql = new StringBuffer();
 		List<Object[]> batchArgs = new ArrayList<Object[]>();
 		for (Bio bio : set) {
-			if (bio.getObject(bio.getPrimaryKey()) != null) {
+			if (bio.getStatus().equals(Bio.UPDATE)) {
 				Map<String, Object> updateArgs = this.getUpdateArgs(bio);
 				String sql = updateArgs.get("sql").toString();
 				Object[] args = (Object[]) updateArgs.get("args");
 				batchSql.append(sql).append(",");
 				batchArgs.add(args);
-			} else {
+			} else if (bio.getStatus().equals(Bio.NEW)) {
 				Map<String, Object> insertArgs = this.getInsertArgs(bio);
 				String sql = insertArgs.get("sql").toString();
 				Object[] args = (Object[]) insertArgs.get("args");
 				batchSql.append(",").append(sql);
 				batchArgs.add(args);
 			}
+			// bio.setStatus(Bio.NONE);
 		}
 		String sql = batchSql.toString();
 		sql = sql.replaceFirst(",", "");
@@ -133,7 +144,7 @@ public class DataSession implements IDataSession {
 
 	private void update(Bio bio) {
 		Map<String, Object> updateArgs = this.getUpdateArgs(bio);
-		String sql = updateArgs.get("sql") + "";
+		String sql = updateArgs.get("sql").toString();
 		Object[] args = (Object[]) updateArgs.get("args");
 		int count = this.jdbcTemplate.update(sql, args);
 		if (count < 1) {
@@ -147,56 +158,79 @@ public class DataSession implements IDataSession {
 		final String sql = insertArgs.get("sql") + "";
 		Object[] args = (Object[]) insertArgs.get("args");
 		this.jdbcTemplate.update(sql, args);
-//		 //如果自增长列,考虑下代码面获取主键
-//		 KeyHolder keyHolder = new GeneratedKeyHolder();
-//		 jdbcTemplate.update(new PreparedStatementCreator() {
-//		 public PreparedStatement createPreparedStatement(Connection conn)
-//		 throws SQLException {
-//		 PreparedStatement ps = conn.prepareStatement(sql, new String[] {
-//		 "SITE_ID", "NAME" });
-//		 ps.setObject(parameterIndex, x)
-//		 return ps;
-//		 }
-//		 }, keyHolder);
-//		 bio.setInt(bio.getPrimaryKey(), keyHolder.getKey().intValue());
+		// bio.setStatus(Bio.NONE);
+		// //如果自增长列,考虑下代码面获取主键
+		// KeyHolder keyHolder = new GeneratedKeyHolder();
+		// jdbcTemplate.update(new PreparedStatementCreator() {
+		// public PreparedStatement createPreparedStatement(Connection conn)
+		// throws SQLException {
+		// PreparedStatement ps = conn.prepareStatement(sql, new String[] {
+		// "SITE_ID", "NAME" });
+		// ps.setObject(parameterIndex, x)
+		// return ps;
+		// }
+		// }, keyHolder);
+		// bio.setInt(bio.getPrimaryKey(), keyHolder.getKey().intValue());
 
+	}
+
+	private void setDefaultValue(BioPropertyMeta property, Bio bio) {
+		String propertyKey = property.getPropertyKey();
+		//String columnKey = property.getColumnKey();
+		if (property.getPrimaryKey()==1) {
+			if (property.getDataType().equals(TypeUtil.STRING)) {
+				if (StringUtil.isEmpty(bio.getString(propertyKey))) {
+					bio.setString(propertyKey, UUID.randomUUID().toString().replace("-", ""));
+				}
+			}
+		}
+		if (bio.getStatus().equals("NEW")) {
+			if (property.getPropertyKey().equals("CREATEDBY")) {
+				bio.setString("CREATEDBY", Subject.getSubject().getUserKey());
+			}
+			if (property.getPropertyKey().equals("CREATEDDATE")) {
+				bio.setDate("CREATEDDATE", new Date(System.currentTimeMillis()));
+			}
+		}else{
+			if (property.getPropertyKey().equals("UPDATEDBY")) {
+				bio.setString("UPDATEDBY", Subject.getSubject().getUserKey());
+			}
+			if (property.getPropertyKey().equals("UPDATEDDATE")) {
+				bio.setDate("UPDATEDDATE", new Date(System.currentTimeMillis()));
+			}
+
+		}
 	}
 
 	private <T extends Serializable> Map<String, Object> getInsertArgs(Bio bio) {
 		BioMeta meta = bio.getMeta();
 		Map<String, Object> result = new HashMap<String, Object>();
-		StringBuilder sql = new StringBuilder("INSERT INTO ");
 		List<Object> params = new ArrayList<Object>();
-		if (meta.hasProperty(versionKey)) {
-			bio.setInt(versionKey, 0);
-		}
-		sql.append(bio.getMeta().getTableName());
+		StringBuilder sql = new StringBuilder("INSERT INTO ");
+		sql.append(bio.getMeta().getTableKey());
 		sql.append("(");
 		StringBuilder args = new StringBuilder();
 		args.append("(");
-		for (Map.Entry<String, BioPropertyMeta> entry : meta.getProperties().entrySet()) {
-			BioPropertyMeta property = entry.getValue();
-			String propertyName = entry.getKey().toString();
-			Object value = bio.getObject(propertyName);
+		for (BioPropertyMeta property : meta.getPropertySet()) {
+			String propertyKey = property.getPropertyKey();
+			String columnKey = property.getColumnKey();
+			setDefaultValue(property,bio);
+			Object value = bio.getObject(propertyKey);
 			if (value == null) {
-//				if (!property.isNullable()) {
-//					if (value == null) {
-//						throw new DataAccessException(101, meta.getName() + "的属性:" + property.getName() + "不能为空.");
-//					}
-//				} else if (property.getDefaultValue() != null) {
-//					bio.setObject(propertyName, property.getDefaultValue());
-//				} else {// 不插入
-//					continue;
-//				}
 				continue;
-
 			}
-			sql.append(property.getColumn());
+			sql.append(columnKey);
 			args.append("?");
-			params.add(value);
+			// 乐观锁字段默认是0
+			if (property.getVersionKey() == 1 && property.getDataType().toLowerCase().equals(TypeUtil.INTEGER)) {
+				params.add(0);
+			} else {
+				params.add(value);
+			}
 			sql.append(",");
 			args.append(",");
 		}
+
 		sql.deleteCharAt(sql.length() - 1);
 		args.deleteCharAt(args.length() - 1);
 		args.append(")");
@@ -213,44 +247,55 @@ public class DataSession implements IDataSession {
 		BioMeta meta = bio.getMeta();
 		Map<String, Object> result = new HashMap<String, Object>();
 		StringBuilder sql = new StringBuilder("UPDATE ");
+		sql.append(meta.getTableKey());
 		List<Object> params = new ArrayList<Object>();
+		String versionKey = null;
+		String versionType = null;
 		sql.append(" SET ");
 		// 获取属性信息
 		Object primaryValue = null;
 		String primaryKey = null;
-		for (Map.Entry<String, BioPropertyMeta> entry : meta.getProperties().entrySet()) {
-			BioPropertyMeta property = entry.getValue();
-			String propertyName = entry.getKey().toString();
-			Object value = bio.getObject(propertyName);
+		for (BioPropertyMeta property : meta.getPropertySet()) {
+			String propertyKey = property.getPropertyKey();
+			String columnKey = property.getColumnKey();
+			Object value = bio.getObject(propertyKey);
+			setDefaultValue(property,bio);
 			// 主键不更新
-			if (property.equals(meta.getPrimaryKey())) {
-				primaryValue = bio.getObject(propertyName);
-				primaryKey = property.getColumn();
+			if (property.getPrimaryKey()==1) {
+				primaryValue = value;
+				primaryKey = columnKey;
 				continue;
 			}
-			sql.append(primaryKey);
+			if (property.getVersionKey() == 1) {
+				versionKey = property.getColumnKey();
+				versionType = property.getDataType();
+			}
+			sql.append(property.getColumnKey());
 			sql.append(" = ?");
 			sql.append(",");
 			params.add(value);
 		}
-		// 乐观锁用固定字段Version,如果更新行为0
-		if (meta.hasProperty(versionKey)) {
-			sql.append(versionKey).append("=").append(versionKey).append("+1");
+		// 乐观锁用
+		if (versionKey != null) {
+			if (versionType.toLowerCase().equals(TypeUtil.INTEGER)) {
+				sql.append(versionKey).append("=").append(versionKey).append("+1");
+			}
 		}
 		sql.deleteCharAt(sql.length() - 1);
 		sql.append(" WHERE ");
 		sql.append(primaryKey);
 		sql.append(" = ?");
-		if (meta.hasProperty(versionKey)) {
-			sql.append(" AND ").append(versionKey);
-			sql.append("=?");
-			params.add(bio.getInt(versionKey));
-		}
 		if (primaryValue != null) {
 			params.add(primaryValue);
 		} else {
-			throw new DataAccessException(101, meta.getName() + "缺少主键配置.");
-
+			throw new DataAccessException(101, meta.getBioKey() + "主键不能为空.");
+		}
+		if (versionKey != null) {
+			if (versionType.toLowerCase().equals(TypeUtil.INTEGER)) {
+				sql.append(" AND ").append(versionKey);
+				sql.append("=?");
+				params.add(bio.getInt(versionKey));
+			}
 		}
 		result.put("sql", sql);
 		result.put("args", params.toArray());
@@ -261,14 +306,19 @@ public class DataSession implements IDataSession {
 	public void deleteBio(Bio bio) {
 		BioMeta meta = bio.getMeta();
 		StringBuffer sql = new StringBuffer();
+		String primaryKey = meta.getPrimaryProperty().getColumnKey();
+		String primaryProperty = meta.getPrimaryProperty().getPropertyKey();
+		String versionKey = meta.getVersionProperty().getColumnKey();
+		String versionProperty = meta.getVersionProperty().getPropertyKey();
 		int count = 0;
-		sql.append("DELETE FROM ").append(meta.getTableName()).append(" WHERE ");
-		sql.append(meta.getPrimaryKey()).append("=?");
-		if (meta.hasProperty(versionKey)) {
+		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
+		sql.append(primaryKey).append("=?");
+		if (versionKey != null) {
 			sql.append(" AND ").append(versionKey).append("=?");
-			count = jdbcTemplate.update(sql.toString(), new Object[] { bio.getObject(meta.getPrimaryKey()), bio.getInt("Version") });
+			count = jdbcTemplate.update(sql.toString(), new Object[] { bio.getObject(primaryProperty), bio.getObject(versionProperty) });
+
 		} else {
-			count = jdbcTemplate.update(sql.toString(), new Object[] { bio.getObject(meta.getPrimaryKey()) });
+			count = jdbcTemplate.update(sql.toString(), new Object[] { bio.getObject(versionProperty) });
 		}
 		if (count < 1) {
 			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "记录已经被修改.");
@@ -285,17 +335,17 @@ public class DataSession implements IDataSession {
 	public void deleteBio(String bioName, Serializable id) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
-		sql.append("DELETE FROM ").append(meta.getTableName()).append(" WHERE ");
-		sql.append(meta.getPrimaryKey()).append("=?");
+		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
+		sql.append(meta.getPrimaryProperty().getColumnKey()).append("=?");
 		jdbcTemplate.update(sql.toString(), new Object[] { id });
 	}
 
-	public void deleteBio(String bioName, Serializable [] ids) {
+	public void deleteBio(String bioName, Serializable[] ids) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
-		for(Serializable id:ids) {
-			sql.append("DELETE FROM ").append(meta.getTableName()).append(" WHERE ");
-			sql.append(meta.getPrimaryKey()).append("=?");
+		for (Serializable id : ids) {
+			sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
+			sql.append(meta.getPrimaryProperty().getColumnKey()).append("=?");
 			jdbcTemplate.update(sql.toString(), new Object[] { id });
 
 		}
@@ -304,7 +354,7 @@ public class DataSession implements IDataSession {
 	public void deleteBio(String bioName, String property, Object... value) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
-		sql.append("DELETE FROM ").append(meta.getTableName()).append(" WHERE ");
+		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
 		sql.append(property);
 		if (value.length == 1) {
 			sql.append(property).append("=?");
@@ -319,31 +369,31 @@ public class DataSession implements IDataSession {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Bio> queryBio(String sql, Object[] params) {
+	public List<Bio> select(String sql, Object[] params, String bioName) {
 		sql = SQLUtil.parseSql(sql, this.getDbType());
-		List<Bio> result = jdbcTemplate.query(sql, params, new BioRowMapper());
+		List<Bio> result = jdbcTemplate.query(sql, params, new BioRowMapper(bioName));
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Bio> queryBio(String sql, Object[] params, int limit) {
+	public List<Bio> select(String sql, Object[] params, int limit, String bioName) {
 		String dbType = this.getDbType();
 		sql = SQLUtil.parseSql(sql, dbType);
 		sql = SQLUtil.getLimitSql(sql, limit, dbType);
-		return jdbcTemplate.query(sql, params, new BioRowMapper());
+		return jdbcTemplate.query(sql, params, new BioRowMapper(bioName));
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public PageResult<Bio> queryBio(String sql, int pageSize, int pageNumber, Object[] params) {
+	public PageResult<Bio> select(String sql, int pageSize, int pageNumber, Object[] params, String bioName) {
 		PageResult<Bio> pager = new PageResult<Bio>();
 		String dbType = this.getDbType();
 		sql = SQLUtil.parseSql(sql, dbType);
 		String totalSql = "select count(1) from (" + sql + ") t ";
 		int total = Integer.parseInt(getUniqueResult(totalSql, params) + "");
 		sql = SQLUtil.getPageSql(sql, pageSize, pageNumber, dbType);
-		List<Bio> result = jdbcTemplate.query(sql, params, new BioRowMapper());
+		List<Bio> result = jdbcTemplate.query(sql, params, new BioRowMapper(bioName));
 		pager.setRows(result);
 		pager.setTotal(total);
 		return pager;
@@ -351,9 +401,28 @@ public class DataSession implements IDataSession {
 	}
 
 	@Override
+	public List<Bio> query(String sql, Object[] params) {
+		String bioName = null;
+		return this.select(sql, params, bioName);
+	}
+
+	@Override
+	public List<Bio> query(String sql, Object[] params, int limit) {
+		String bioName = null;
+		return this.select(sql, params, limit, bioName);
+	}
+
+	@Override
+	public PageResult<Bio> query(String sql, int pageSize, int pageNumber, Object[] params) {
+		String bioName = null;
+		return this.select(sql, pageSize, pageNumber, params, bioName);
+	}
+
+	@Override
 	public <T extends Serializable> T get(Class<T> clazz, Serializable id) {
 		Table ta = clazz.getAnnotation(Table.class);
 		String primaryKey = ta.primarykey();
+
 		return get(clazz, primaryKey, id);
 	}
 
@@ -397,32 +466,18 @@ public class DataSession implements IDataSession {
 		if (StringUtil.isNotEmpty(orderBy)) {
 			sql.append(" ORDER BY  ").append(orderBy);
 		}
-		List<T> result = jdbcTemplate.query(sql.toString(), value, new BeanPropertyRowMapper<T>(clazz));
+		List<T> result = jdbcTemplate.query(sql.toString(), value, new BeanRowMapper<T>(clazz));
 
 		return result;
 	}
 
 	private <T extends Serializable> Map<String, Object> getInsertArgs(T entity, Table ta) {
 		String tableName = ta.name();
-		String primaryKey = ta.primarykey();
+		String versionKey = ta.versionkey().toUpperCase();
 		Map<String, Object> result = new HashMap<String, Object>();
 		StringBuilder sql = new StringBuilder("INSERT INTO ");
 		List<Object> params = new ArrayList<Object>();
 		sql.append(tableName);
-
-		// Field[] fields = clazz.getDeclaredFields();
-		// for (Field field : fields) {
-		// boolean fieldHasAnno = field.isAnnotationPresent(Column.class);
-		// if (fieldHasAnno) {
-		// Column column = field.getAnnotation(Column.class);
-		// // 输出注解属性
-		// String name = column.name();
-		//
-		// }else{
-		// field.get
-		// }
-		//
-		// }
 		PropertyDescriptor[] pds = BeanUtil.getPropertyDescriptors(entity.getClass());
 		sql.append("(");
 		StringBuilder args = new StringBuilder();
@@ -430,16 +485,22 @@ public class DataSession implements IDataSession {
 		for (PropertyDescriptor pd : pds) {
 			if (pd.getName().equals("class"))
 				continue;
+			String columnName = BeanUtil.getPropertyColumn(entity.getClass(), pd.getName());
+			if (columnName == null) {
+				continue;
+			}
 			Object value = getReadMethodValue(pd.getReadMethod(), entity);
 			if (value == null) {
 				continue;
+
 			}
-			if(value instanceof List||value instanceof Map || value instanceof Array){
-				continue;
-			}
-			sql.append(pd.getName());
+			sql.append(columnName);
 			args.append("?");
-			params.add(value);
+			if (versionKey != null && columnName.equals(versionKey)) {
+				params.add(0);
+			} else {
+				params.add(value);
+			}
 			sql.append(",");
 			args.append(",");
 		}
@@ -456,9 +517,10 @@ public class DataSession implements IDataSession {
 	}
 
 	private <T extends Serializable> Map<String, Object> getUpdateArgs(T entity, Table ta) {
+
 		String tableName = ta.name();
-		String primaryKey = ta.primarykey();
-		String versionKey = ta.versionkey();
+		String primaryKey = ta.primarykey().toUpperCase();
+		String versionKey = ta.versionkey().toUpperCase();
 		Map<String, Object> result = new HashMap<String, Object>();
 		StringBuilder sql = new StringBuilder("UPDATE ");
 		sql.append(tableName);
@@ -468,37 +530,39 @@ public class DataSession implements IDataSession {
 		Object primaryValue = null;
 		Object versionValue = null;
 		PropertyDescriptor[] pds = BeanUtil.getPropertyDescriptors(entity.getClass());
-		sql.append("(");
+		// sql.append("(");
 		StringBuilder args = new StringBuilder();
-		args.append("(");
+		// args.append("(");
 		for (PropertyDescriptor pd : pds) {
+			// String typeName = pd.getPropertyType().getName();
 			if (pd.getName().equals("class"))
 				continue;
+			String columnName = BeanUtil.getPropertyColumn(entity.getClass(), pd.getName());
+			if (columnName == null) {
+				continue;
+			}
 			Object value = getReadMethodValue(pd.getReadMethod(), entity);
-			if (pd.getName().equals(primaryKey)) {
+
+			if (columnName.equals(primaryKey)) {
 				primaryValue = value;
 				continue;
 			}
-			if (pd.getName().equals(versionKey)) {
+			if (columnName.equals(versionKey)) {
 				versionValue = value;
 				continue;
 			}
-			//bean中只能是基础类型
-			if(value instanceof List||value instanceof Map || value instanceof Array){
-				continue;
-			}
-			sql.append(pd.getName());
-
-			sql.append(primaryKey);
+			sql.append(columnName);
 			sql.append(" = ?");
 			sql.append(",");
 			params.add(value);
 		}
+		sql.deleteCharAt(sql.length() - 1);
 		// 乐观锁用字段Version,如果更新行为0
 		if (versionKey != null) {
+			sql.append(", ");
 			sql.append(versionKey).append("=").append(versionKey).append("+1");
 		}
-		sql.deleteCharAt(sql.length() - 1);
+
 		sql.append(" WHERE ");
 		sql.append(primaryKey);
 		sql.append(" = ?");
@@ -519,27 +583,52 @@ public class DataSession implements IDataSession {
 
 	}
 
+	private <T extends Serializable> void setDefaultPropertyValue(T entity) {
+		if (entity instanceof BaseEntity) {
+			BaseEntity baseEntity = (BaseEntity) entity;
+			Subject subject = Subject.getSubject();
+			String userKey = null;
+			if (subject != null) {
+				userKey = subject.getUserKey();
+			}
+			if (!StringUtil.isEmpty(baseEntity.getId())) {
+				// 设置修改时间
+				Timestamp updateTmp = new Timestamp(System.currentTimeMillis());
+				baseEntity.setUpdatedDate(updateTmp);
+				if (userKey != null) {
+					baseEntity.setUpdatedBy(userKey);
+				}
+
+			} else {
+				if (baseEntity.getCreatedDate() == null) {
+					Timestamp createTmp = new Timestamp(System.currentTimeMillis());
+					baseEntity.setCreatedDate(createTmp);
+				}
+				if (userKey != null) {
+					baseEntity.setCreatedBy(userKey);
+				}
+				baseEntity.setId(UUID.randomUUID().toString().replace("-", ""));
+
+			}
+		}
+	}
+
 	@Override
 	public <T extends Serializable> void save(T entity) {
 		Table ta = entity.getClass().getAnnotation(Table.class);
-
 		String primaryKey = ta.primarykey();
-		String primaryValue = null;
-		try {
-			primaryValue = BeanUtils.getProperty(entity, primaryKey);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Object primaryValue = BeanUtil.getProperty(entity, primaryKey);
 		if (primaryValue == null) {
+			setDefaultPropertyValue(entity);
 			Map<String, Object> insertArgs = this.getInsertArgs(entity, ta);
 			String sql = insertArgs.get("sql").toString();
 			Object[] args = (Object[]) insertArgs.get("args");
 			this.jdbcTemplate.update(sql, args);
 		} else {
-			Map<String, Object> insertArgs = this.getUpdateArgs(entity, ta);
-			String sql = insertArgs.get("sql").toString();
-			Object[] args = (Object[]) insertArgs.get("args");
+			setDefaultPropertyValue(entity);
+			Map<String, Object> updateArgs = this.getUpdateArgs(entity, ta);
+			String sql = updateArgs.get("sql").toString();
+			Object[] args = (Object[]) updateArgs.get("args");
 			int count = this.jdbcTemplate.update(sql, args);
 			if (count < 1) {
 				throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "记录已经被修改.");
@@ -587,22 +676,22 @@ public class DataSession implements IDataSession {
 	}
 
 	@Override
-	public <T extends Serializable> List<T> query(String sql, Object[] params, Class<T> clazz) {
+	public <T extends Serializable> List<T> select(String sql, Object[] params, Class<T> clazz) {
 
 		sql = SQLUtil.parseSql(sql, this.getDbType());
-		List<T> result = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<T>(clazz));
+		List<T> result = jdbcTemplate.query(sql, params, new BeanRowMapper<T>(clazz));
 		return result;
 	}
 
 	@Override
-	public <T extends Serializable> PageResult<T> query(String sql, int pageSize, int pageNumber, Object[] params, Class<T> clazz) {
+	public <T extends Serializable> PageResult<T> select(String sql, int pageSize, int pageNumber, Object[] params, Class<T> clazz) {
 		PageResult<T> result = new PageResult<T>();
 		String dbType = this.getDbType();
 		sql = SQLUtil.parseSql(sql, dbType);
 		String totalSql = "select count(1) from (" + sql + ") t ";
 		int total = Integer.parseInt(getUniqueResult(totalSql, params) + "");
 		sql = SQLUtil.getPageSql(sql, pageSize, pageNumber, dbType);
-		List<T> rows = jdbcTemplate.query(sql, params, new BeanPropertyRowMapper<T>(clazz));
+		List<T> rows = jdbcTemplate.query(sql, params, new BeanRowMapper<T>(clazz));
 		result.setRows(rows);
 		result.setTotal(total);
 		return result;

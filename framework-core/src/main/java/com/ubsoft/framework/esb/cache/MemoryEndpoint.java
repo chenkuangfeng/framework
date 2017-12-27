@@ -6,7 +6,7 @@ import com.ubsoft.framework.core.cache.CacheManager;
 import com.ubsoft.framework.esb.entity.Endpoint;
 public class MemoryEndpoint {
 	private static MemoryEndpoint instance;
-	private  static String cacheName="endpoint";
+	private  static String cacheName="ENDPOINT";
 	private CacheManager storeSpace = new CacheManager();	
 	private MemoryEndpoint() {
 

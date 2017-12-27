@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ubsoft.framework.core.dal.util.DataType;
+import com.ubsoft.framework.core.dal.util.TypeUtil;
 import com.ubsoft.framework.core.support.util.StringUtil;
 
 public class ConditionTree implements Serializable {
@@ -137,7 +137,7 @@ public class ConditionTree implements Serializable {
 			if (leafNode.getFieldValue() instanceof Object[]) {
 				for (Object obj : (Object[]) leafNode.getFieldValue()) {
 					if (leafNode.getDataType() != null) {
-						obj = DataType.convert(leafNode.getDataType(), obj);
+						obj = TypeUtil.convert(leafNode.getDataType(), obj);
 						parameters.add(obj);
 					} else {
 						parameters.add(obj);
@@ -146,7 +146,7 @@ public class ConditionTree implements Serializable {
 				}
 			} else {
 				if (leafNode.getDataType() != null) {
-					Object obj = DataType.convert(leafNode.getDataType(), leafNode.getFieldValue());
+					Object obj = TypeUtil.convert(leafNode.getDataType(), leafNode.getFieldValue());
 					parameters.add(obj);
 				} else {
 					parameters.add(leafNode.getFieldValue());

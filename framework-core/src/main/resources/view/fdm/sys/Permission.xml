@@ -1,7 +1,0 @@
-<fdm>
-	<master entity="com.ubsoft.framework.core.entity.Permission">
-		<sql><![CDATA[
-           	 select * from SA_PERMISSION T
-            ]]></sql>
-	</master>
-</fdm>

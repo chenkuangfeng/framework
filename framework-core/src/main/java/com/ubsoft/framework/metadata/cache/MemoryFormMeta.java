@@ -5,7 +5,7 @@ import com.ubsoft.framework.metadata.model.form.FormMeta;
 public class MemoryFormMeta {
 	private static MemoryFormMeta instance;
 
-	private  static String cacheName="formMeta";
+	private  static String cacheName="FORMMETA";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryFormMeta() {

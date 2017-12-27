@@ -6,7 +6,7 @@ import com.ubsoft.framework.core.dal.entity.BioMeta;
 
 public class MemoryBioMeta {
 	private static MemoryBioMeta instance;
-	private  static String cacheName="biometa";
+	private  static String cacheName="BIOMETA";
 	private CacheManager storeSpace = new CacheManager();
 	private MemoryBioMeta() {
 

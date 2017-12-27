@@ -8,9 +8,15 @@ public @interface Table {
 
 	String name() default "";
 
-	String primarykey() default "ID";
+	String primarykey() default "id";
 	
-	String versionkey() default "Version";
+	String pkType() default "String";
+
+	
+	String versionkey() default "version";
+	
+	String vkType() default "Integer";
+
 	
 	String catalog() default "";
 

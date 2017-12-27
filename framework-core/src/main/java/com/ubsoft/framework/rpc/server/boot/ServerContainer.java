@@ -25,12 +25,9 @@ public class ServerContainer implements Container {
         //加载缓存
         String cachePath = ServerContainer.class.getClassLoader().getResource("conf/ehcache.xml").getPath();
         AppConfig.initCache(cachePath);
-        ////加载数据模型
-        String fdmPath = ServerContainer.class.getClassLoader().getResource("view/fdm/").getPath();
-        AppConfig.initFdm(fdmPath);
-        ////加载界面模型
-        String formPath = ServerContainer.class.getClassLoader().getResource("view/form/").getPath();
-        AppConfig.initForm(formPath);
+        
+        //加载数据模型,界面模型, 界面配置
+        AppConfig.initMetadata();
 
     }
 

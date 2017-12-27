@@ -42,12 +42,19 @@ public interface IDataSession {
 
 	void deleteBio(String bioName, String property, Object... value);
 
-	// 查询
-	List<Bio> queryBio(String sql, Object[] params);
+	// Bio查询
+	List<Bio> select(String sql, Object[] params,String bioName);
 
-	List<Bio> queryBio(String sql, Object[] params, int limit);
+	List<Bio> select(String sql, Object[] params, int limit,String bioName);
 
-	PageResult<Bio> queryBio(String sql, int pageSize, int pageNumber, Object[] params);
+	PageResult<Bio> select(String sql, int pageSize, int pageNumber, Object[] params,String bioName);
+	
+	List<Bio> query(String sql, Object[] params);
+
+	//普通查询
+	List<Bio> query(String sql, Object[] params, int limit);
+
+	PageResult<Bio> query(String sql, int pageSize, int pageNumber, Object[] params);
 
 	// 获取bean
 	<T extends Serializable> T get(Class<T> clazz, Serializable id);
@@ -71,9 +78,9 @@ public interface IDataSession {
 	<T extends Serializable> void delete(List<T> entities);
 
 	// 原生sql查询
-	<T extends Serializable> List<T> query(String sql, Object[] params, Class<T> clazz);
+	<T extends Serializable> List<T> select(String sql, Object[] params, Class<T> clazz);
 
-	<T extends Serializable> PageResult<T> query(String sql, int pageSize, int pageNumber, Object[] params, Class<T> clazz);
+	<T extends Serializable> PageResult<T> select(String sql, int pageSize, int pageNumber, Object[] params, Class<T> clazz);
 
 	// 执行sql
 	int executeUpdate(String sql, Object[] params);

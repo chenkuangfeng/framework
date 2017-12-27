@@ -8,7 +8,7 @@ import com.ubsoft.framework.scheduler.entity.Task;
 public class MemoryTask {
 	private static MemoryTask instance;
 
-	private static String cacheName = "task";
+	private static String cacheName = "TASK";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryTask() {

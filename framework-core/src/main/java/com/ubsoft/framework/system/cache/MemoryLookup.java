@@ -8,7 +8,7 @@ import com.ubsoft.framework.system.entity.LookupDetail;
 public class MemoryLookup {
 	private static MemoryLookup instance;
 
-	private  static String cacheName="lookup";
+	private  static String cacheName="LOOKUP";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryLookup() {

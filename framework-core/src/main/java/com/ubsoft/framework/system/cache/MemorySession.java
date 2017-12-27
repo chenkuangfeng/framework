@@ -8,7 +8,7 @@ import com.ubsoft.framework.system.entity.Session;
 public class MemorySession {
 	private static MemorySession instance;
 
-	private  static String cacheName="session";
+	private  static String cacheName="SESSION";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemorySession() {

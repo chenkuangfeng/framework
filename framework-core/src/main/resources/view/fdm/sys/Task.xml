@@ -1,7 +1,0 @@
-<fdm>
-	<master entity="com.ubsoft.framework.scheduler.entity.Task">
-		<sql><![CDATA[
-           	 select T.*,Q.TRIGGER_STATE TRIGGER_STATE,Q.PREV_FIRE_TIME,Q.NEXT_FIRE_TIME from SA_TASK T LEFT JOIN QRTZ_TRIGGERS Q ON T.TASKKEY=Q.JOB_NAME
-            ]]></sql>
-	</master>
-</fdm>

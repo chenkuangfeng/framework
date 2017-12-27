@@ -20,7 +20,7 @@ public class OrgService extends BaseService<Org> implements IOrgService {
 		String sql = "select * from {SA_ORG:T}";
 		sql = SQLUtil.getDimensionSql(sql);// 加入数据纬度权限
 		sql += " order by T.orgKey ";
-		return this.dataSession.query(sql, new Object[] {}, Org.class);
+		return this.dataSession.select(sql, new Object[] {}, Org.class);
 
 	}
 

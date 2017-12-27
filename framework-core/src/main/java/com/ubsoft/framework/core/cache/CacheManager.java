@@ -8,7 +8,6 @@ import java.util.Map;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import redis.clients.jedis.JedisCluster;
-
 import com.ubsoft.framework.core.conf.AppConfig;
 import com.ubsoft.framework.core.context.AppContext;
 import com.ubsoft.framework.core.support.util.JedisUtil;
@@ -32,6 +31,7 @@ public class CacheManager {
 			jedisCluster=(JedisCluster) AppContext.getBean("jedisCluster");
 		}
 	} 
+	
 
 	/**	
 	* @Title: get

@@ -104,7 +104,7 @@ public class SessionService extends BaseService<Session> implements ISessionServ
 		sql += "	select P.* from SA_ROLE_PERMISSION  RP join SA_USER_ROLE   R on R.ROLEKEY=RP.ROLEKEY and R.USERKEY=? join SA_PERMISSION P on P.PERMKEY=RP.PERMKEY";
 		sql += "	) T";
 
-		List<Permission> listPerm = dataSession.query(sql, new Object[] { userKey, userKey }, Permission.class);
+		List<Permission> listPerm = dataSession.select(sql, new Object[] { userKey, userKey }, Permission.class);
 		return listPerm;
 		// List<Bio> listPermission = dataSession.queryForBio(sql, new Object[]
 		// { userKey, userKey });

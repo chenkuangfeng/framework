@@ -8,7 +8,7 @@ import com.ubsoft.framework.core.cache.CacheManager;
 public class MemoryReport {
 	private static MemoryReport instance;
 
-	private  static String cacheName="report";
+	private  static String cacheName="REPORT";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryReport() {

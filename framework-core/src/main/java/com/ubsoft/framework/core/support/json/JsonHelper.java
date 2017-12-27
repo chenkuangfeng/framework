@@ -20,7 +20,7 @@ import org.apache.log4j.Logger;
 
 import com.ubsoft.framework.core.dal.model.Bio;
 import com.ubsoft.framework.core.dal.model.BioSet;
-import com.ubsoft.framework.core.dal.util.DataType;
+import com.ubsoft.framework.core.dal.util.TypeUtil;
 import com.ubsoft.framework.core.support.util.DateUtil;
 import com.ubsoft.framework.core.support.util.StringUtil;
 
@@ -207,7 +207,7 @@ public class JsonHelper {
 			String type = param.getString("type");
 			Object value = param.get("value");
 			String name = param.getString("name");
-			mapParam.put(name, DataType.convert(type, value));
+			mapParam.put(name, TypeUtil.convert(type, value));
 
 		}
 		return mapParam;
@@ -215,34 +215,33 @@ public class JsonHelper {
 	}
 
 	public static Object getGeneralValue(String type, Object value) {
-
 		String val = value + "";
 		if (value instanceof JSONNull)
 			val = "";
-		if (type.equals(DataType.INTEGER)) {
+		if (type.equals(TypeUtil.INTEGER)) {
 			int p = Integer.parseInt(val);
 			return p;
-		} else if (type.equals(DataType.FLOAT)) {
+		} else if (type.equals(TypeUtil.FLOAT)) {
 			Float p = Float.parseFloat(val);
 			return p;
-		} else if (type.equals(DataType.STRING)) {
+		} else if (type.equals(TypeUtil.STRING)) {
 			return val;
-		} else if (type.equals(DataType.DATE)) {
+		} else if (type.equals(TypeUtil.DATE)) {
 			Date p = DateUtil.string2Date(val, "yyyy-MM-dd");
 			return p;
-		} else if (type.equals(DataType.TIMESTAMP)) {
+		} else if (type.equals(TypeUtil.TIMESTAMP)) {
 			Timestamp p = Timestamp.valueOf(val);
 			return p;
-		} else if (type.equals(DataType.TIME)) {
+		} else if (type.equals(TypeUtil.TIME)) {
 			Date p = DateUtil.string2Date(val, DateUtil.dateTimeFormat);
 			return p;
-		} else if (type.equals(DataType.DOUBLE)) {
+		} else if (type.equals(TypeUtil.DOUBLE)) {
 			Double p = Double.parseDouble(val);
 			return p;
-		} else if (type.equals(DataType.LONG)) {
+		} else if (type.equals(TypeUtil.LONG)) {
 			Long p = Long.parseLong(val);
 			return p;
-		} else if (type.equals(DataType.STRINGARRAY)) {
+		} else if (type.equals(TypeUtil.STRING_ARRAY)) {
 			String[] p = (String[]) JsonHelper.json2Array(value.toString(), String.class);
 			return p;
 		} else {
@@ -258,7 +257,6 @@ public class JsonHelper {
 				Object[] p = (Object[]) JsonHelper.json2Array(value.toString(), clazz);
 				return p;
 			} else {
-
 				Object p = JsonHelper.json2Bean(value.toString(), clazz);
 				return p;
 			}

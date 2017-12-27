@@ -62,6 +62,7 @@ public class UserService extends BaseService<User> implements IUserService {
 		}
 
 		Session session = new Session();
+		//session.setId(UUID.randomUUID().toString().replace("-", ""));
 		session.setSessionId(UUID.randomUUID().toString());
 		session.setUserKey(userKey);
 		session.setUserName(user.getUserName());
@@ -149,7 +150,7 @@ public class UserService extends BaseService<User> implements IUserService {
 			return dataSession.gets(Role.class);
 		} else {
 			sql = " select r from SA_Role r,SA_Role_User u where u.roleKey=r.roleKey and u.userKey=?";
-			return dataSession.query(sql, new Object[] { userKey }, Role.class);
+			return dataSession.select(sql, new Object[] { userKey }, Role.class);
 
 		}
 	}
@@ -170,7 +171,7 @@ public class UserService extends BaseService<User> implements IUserService {
 			sql += "	union ";
 			sql += "	SELECT P.* FROM SA_ROLE_PERMISSION  RP JOIN SA_USER_ROLE   R ON R.ROLEKEY=RP.ROLEKEY AND R.USERKEY=? JOIN SA_PERMISSION P ON P.PERMKEY=RP.PERMKEY";
 			sql += "	) T order by seq";
-			listPerm = dataSession.query(sql, new Object[] { userKey, userKey }, Permission.class);
+			listPerm = dataSession.select(sql, new Object[] { userKey, userKey }, Permission.class);
 		}
 		return listPerm;
 	}
@@ -186,7 +187,7 @@ public class UserService extends BaseService<User> implements IUserService {
 		} else {
 			// 查询用户的权限
 			String sql = "	SELECT P.* FROM SA_USER_PERMISSION UP JOIN SA_PERMISSION P ON UP.PERMKEY=P.PERMKEY WHERE UP.USERKEY=? order by P.seq";
-			listPerm = dataSession.query(sql, new Object[] { userKey }, Permission.class);
+			listPerm = dataSession.select(sql, new Object[] { userKey }, Permission.class);
 		}
 		return listPerm;
 	}
@@ -200,13 +201,13 @@ public class UserService extends BaseService<User> implements IUserService {
 		if (userKey.equals("admin")) {
 			sql = " select T." + dm.getValueField() + " DIMVALUE," + dm.getTextField() + " DIMTEXT,T." + dm.getOwnerDimKey() + " PID from "
 					+ tableName + " T order by T." + dm.getValueField();
-			dataList = dataSession.queryBio(sql, new Object[] {});
+			dataList = dataSession.query(sql, new Object[] {});
 		} else {
 			sql = " select T." + dm.getValueField() + " DIMVALUE," + dm.getTextField() + " DIMTEXT,T." + dm.getOwnerDimKey() + " PID from "
 					+ tableName + " T";
 			sql += "  JOIN SA_USER_DIMENSION U on U.DIMVALUE=T." + dm.getValueField() + "  and   U.DIMKEY=? AND U.USERKEY=? order by T."
 					+ dm.getValueField();
-			dataList = dataSession.queryBio(sql, new Object[] { dimKey, userKey });
+			dataList = dataSession.query(sql, new Object[] { dimKey, userKey });
 		}
 		return dataList;
 	}
@@ -264,7 +265,7 @@ public class UserService extends BaseService<User> implements IUserService {
 			if (userKey.equals("admin")) {
 				sql = " select T." + dm.getValueField() + " DIMVALUE,'" + dm.getDimKey() + "' DIMKEY,T." + dm.getTextField() + " DIMTEXT, "
 						+ ownerDimKey + " from " + tableName + " T order by T." + dm.getValueField();
-				subDataList = dataSession.queryBio(sql, new Object[] {});
+				subDataList = dataSession.query(sql, new Object[] {});
 				if (subDataList.size() > 0) {
 					dataList.add(dmBio);
 				}
@@ -279,7 +280,7 @@ public class UserService extends BaseService<User> implements IUserService {
 				sql += "  JOIN SA_ROLE_DIMENSION U on U.DIMVALUE=T." + dm.getValueField();
 				sql += "  JOIN SA_USER_ROLE   R ON R.ROLEKEY=U.ROLEKEY  AND R.USERKEY=? ";
 				sql += ") T";
-				subDataList = dataSession.queryBio(sql, new Object[] { userKey, userKey });
+				subDataList = dataSession.query(sql, new Object[] { userKey, userKey });
 				if (subDataList.size() > 0) {
 					dataList.add(dmBio);
 				}
@@ -318,12 +319,12 @@ public class UserService extends BaseService<User> implements IUserService {
 			if (userKey.equals("admin")) {
 				sql = " select T." + dm.getValueField() + " DIMVALUE,'" + dm.getDimKey() + "' DIMKEY,T." + dm.getTextField() + " DIMTEXT, "
 						+ ownerDimKey + " from " + tableName + " T order by T." + dm.getValueField();
-				subDataList = dataSession.queryBio(sql, new Object[] {});
+				subDataList = dataSession.query(sql, new Object[] {});
 			} else {
 				sql = " select  T." + dm.getValueField() + " DIMVALUE,'" + dm.getDimKey() + "' DIMKEY,T." + dm.getTextField() + " DIMTEXT,"
 						+ ownerDimKey + "  from " + tableName + " T";
 				sql += "  JOIN SA_USER_DIMENSION U on U.DIMVALUE=T." + dm.getValueField() + "  AND U.USERKEY=? order by T." + dm.getValueField();
-				subDataList = dataSession.queryBio(sql, new Object[] { userKey });
+				subDataList = dataSession.query(sql, new Object[] { userKey });
 			}
 			for (Bio bio : subDataList) {
 				if (bio.getString("PID").equals("ROOT")) {

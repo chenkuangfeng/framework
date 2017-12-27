@@ -8,7 +8,7 @@ import com.ubsoft.framework.core.dal.model.Bio;
 public class MemoryDimension {
 	private static MemoryDimension instance;
 
-	private  static String cacheName="dimension";
+	private  static String cacheName="DIMENSION";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryDimension() {

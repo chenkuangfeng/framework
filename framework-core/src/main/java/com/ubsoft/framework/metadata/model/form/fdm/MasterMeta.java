@@ -1,9 +1,8 @@
 package com.ubsoft.framework.metadata.model.form.fdm;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
+import com.ubsoft.framework.core.dal.entity.BioMeta;
+
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -12,6 +11,8 @@ public class MasterMeta implements Serializable{
 	@XmlAttribute
 	private String bio;
 	private String sql;
+	@XmlTransient
+	private BioMeta bioMeta;
 	public String getBio() {
 		return bio;
 	}
@@ -24,8 +25,12 @@ public class MasterMeta implements Serializable{
 	public void setSql(String sql) {
 		this.sql = sql;
 	}
-	
-	
-	
-	
+
+	public BioMeta getBioMeta() {
+		return bioMeta;
+	}
+
+	public void setBioMeta(BioMeta bioMeta) {
+		this.bioMeta = bioMeta;
+	}
 }

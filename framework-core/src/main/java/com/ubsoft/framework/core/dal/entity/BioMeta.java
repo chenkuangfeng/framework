@@ -1,134 +1,173 @@
 package com.ubsoft.framework.core.dal.entity;
 
-import com.ubsoft.framework.core.dal.annotation.Table;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
+
+import com.ubsoft.framework.core.dal.annotation.Table;
+import com.ubsoft.framework.core.dal.annotation.Transient;
 
 @Table(name = "META_BIO")
-public class BioMeta implements Serializable {
-    /**
-     * 名称
-    */
-    private String name;
-    /**
-     * 主键字段名
-     */
-    private String primaryKey;
-    /**
-     * 版本乐观锁字
-     */
-    private String versionKey = "Version";
-    /**
-     * 表名
-     **/
-    private String tableName;
-    /**
-     * 备注
-     **/
-    private String remarks;
-    /**
-     * 是否全局缓存
-     */
-    private Boolean cache;
-    /**
-     * 是否审计
-     **/
-    private Boolean audit;
-    /**
-     * 数据列信息
-     **/
-    private Map<String, BioPropertyMeta> properties = new HashMap<String, BioPropertyMeta>();
-    /**
-     * 数据列列表
-     **/
-    private List<BioPropertyMeta> propertyList = new ArrayList<BioPropertyMeta>();
+public class BioMeta extends BaseEntity implements Serializable {
+	/**
+	 * bio名称
+	 */
+	private String bioKey;
+	/**
+	 * bio名称
+	 */
+	private String bioName;
+	
+	
+	/**
+	 * 表名
+	 **/
+	private String tableKey;
+	/**
+	 * 备注
+	 **/
+	private String remarks;
+	/**
+	 * 是否全局缓存0否,1是
+	 */
+	private String cacheable;
+	/**
+	 * 是否审计
+	 **/
+	private String auditable;
+	
+	
+	/**
+	 * 主键属性名名
+	 */
+	@Transient
+	private BioPropertyMeta primaryProperty;
+	
+	
+	/**
+	 * 版本属性
+	 */
+	@Transient
+	private BioPropertyMeta versionProperty;
+	
+	/**
+	 * 数据列字典信息,Key不区分大小写,Bio属性名和数据库列名可不一样,列名和属性名都存一份。
+	 * 
+	 **/
+	@Transient
+	private Map<String, BioPropertyMeta> propertyMap = new HashMap<String, BioPropertyMeta>();
 
-    public String getName(){
-        return name;
-    }
+	/**
+	 * 列集合
+	 */
+	@Transient
+	private Set<BioPropertyMeta> propertySet = new HashSet<BioPropertyMeta>();
 
-    public void setName(String name){
-        this.name = name;
-    }
+	public String getBioKey() {
+		return bioKey;
+	}
 
-    public Boolean getCache(){
-        return cache;
-    }
+	public void setBioKey(String bioKey) {
+		this.bioKey = bioKey;
+	}
 
-    public void setCache(Boolean cache){
-        this.cache = cache;
-    }
+	public String getRemarks() {
+		return remarks;
+	}
 
-    public Boolean getAudit(){
-        return audit;
-    }
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
-    public void setAudit(Boolean audit){
-        this.audit = audit;
-    }
+	public String getBioName() {
+		return bioName;
+	}
 
-    public Map<String, BioPropertyMeta> getProperties(){
-        return properties;
-    }
+	public void setBioName(String bioName) {
+		this.bioName = bioName;
+	}
 
-    public void setProperties(Map<String, BioPropertyMeta> properties){
-        this.properties = properties;
-    }
+	public String getTableKey() {
+		return tableKey;
+	}
+
+	public void setTableKey(String tableKey) {
+		this.tableKey = tableKey;
+	}
 
 
-    public String getRemarks(){
-        return remarks;
-    }
 
-    public void setRemarks(String remarks){
-        this.remarks = remarks;
-    }
+	
+	
+	
 
-    public List<BioPropertyMeta> getPropertyList(){
-        return propertyList;
-    }
+	public BioPropertyMeta getPrimaryProperty() {
+		return primaryProperty;
+	}
 
-    public void setPropertyList(List<BioPropertyMeta> propertyList){
-        this.propertyList = propertyList;
-    }
+	public void setPrimaryProperty(BioPropertyMeta primaryProperty) {
+		this.primaryProperty = primaryProperty;
+	}
 
-    /**
-     * 是否有指定的属性
-     *
-     * @param key
-     * @return
-     */
-    public boolean hasProperty(String key){
-        return properties.containsKey(key);
-    }
+	public BioPropertyMeta getVersionProperty() {
+		return versionProperty;
+	}
 
-    public String getTableName(){
-        return tableName;
-    }
+	public void setVersionProperty(BioPropertyMeta versionProperty) {
+		this.versionProperty = versionProperty;
+	}
 
-    public void setTableName(String tableName){
-        this.tableName = tableName;
-    }
+	
+	
 
-    public String getPrimaryKey(){
-        return primaryKey;
-    }
+	public String getCacheable() {
+		return cacheable;
+	}
 
-    public void setPrimaryKey(String primaryKey){
-        this.primaryKey = primaryKey;
-    }
+	public void setCacheable(String cacheable) {
+		this.cacheable = cacheable;
+	}
 
-    public String getVersionKey(){
-        return versionKey;
-    }
+	public String getAuditable() {
+		return auditable;
+	}
 
-    public void setVersionKey(String versionKey){
-        this.versionKey = versionKey;
-    }
+	public void setAuditable(String auditable) {
+		this.auditable = auditable;
+	}
 
+	public Map<String, BioPropertyMeta> getPropertyMap() {
+		return propertyMap;
+	}
+
+	public void setPropertyMap(Map<String, BioPropertyMeta> propertyMap) {
+		this.propertyMap = propertyMap;
+	}
+
+	public Set<BioPropertyMeta> getPropertySet() {
+		return propertySet;
+	}
+
+	public void setPropertySet(Set<BioPropertyMeta> propertySet) {
+		this.propertySet = propertySet;
+	}
+
+	/**
+	 * 是否有指定的属性
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public boolean hasProperty(String key) {
+		key = key.toUpperCase();
+		return propertyMap.containsKey(key);
+	}
+	
+	public BioPropertyMeta getProperty(String key){
+		key = key.toUpperCase();
+		return propertyMap.get(key);
+	}
 
 }

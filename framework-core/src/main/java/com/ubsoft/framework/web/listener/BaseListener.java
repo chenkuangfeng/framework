@@ -53,7 +53,7 @@ public class BaseListener implements ServletContextListener {
 		AppConfig.initCache(cachePath);
 		AppConfig.sprintContext = ContextLoader.getCurrentWebApplicationContext();
 		// 加载fdm
-		AppConfig.initFdm(fdmPath);
+		AppConfig.initMetadata();
 		AppConfig.webRootPath = event.getServletContext().getRealPath("/");		
 		//IDbTableMetaService ds = (IDbTableMetaService) AppContext.getBean("dbTableMetaService");		
 		//ds.initDbTableMeta("DefaultDS", null, null);

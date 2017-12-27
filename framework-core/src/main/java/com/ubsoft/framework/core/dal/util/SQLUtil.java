@@ -40,7 +40,7 @@ public class SQLUtil {
 		StringBuffer sb = new StringBuffer();
 		if (dbType.equals("oracle")) {
 			sb.append("SELECT T.*, ROWNUM RN ");
-			sb.append("FROM (").append(sql).append(") T");
+			sb.append("FROM (").append(sql).append(") T ");
 			sb.append("WHERE ROWNUM <=").append(limit);
 		}
 		if (dbType.equals("mysql")) {

@@ -24,7 +24,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 	@Override
 	public List<User> getUsers(String roleKey) {
 		String sql = " select u.* from SA_USER u,SA_USER_ROLE r where r.userKey=u.userKey and r.roleKey=?";
-		List<User> u = this.dataSession.query(sql, new Object[] { roleKey },User.class);
+		List<User> u = this.dataSession.select(sql, new Object[] { roleKey },User.class);
 		return u;
 	}
 	public List<Bio> getRoleDimension(String dimKey, String roleKey,boolean isCurrentRole) {
@@ -36,18 +36,18 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 		if(isCurrentRole){
 			if (userKey.equals("admin")) {
 				sql = " select T." + dm.getValueField() + " DIMVALUE," + dm.getTextField() + " DIMTEXT,T."+dm.getOwnerDimKey()+" PID from " + tableName + " T order by T."+dm.getValueField();
-				dataList = dataSession.queryBio(sql, new Object[] {});
+				dataList = dataSession.query(sql, new Object[] {});
 			}else{
 				sql = " select distinct T." + dm.getValueField() + " DIMVALUE," + dm.getTextField() + " DIMTEXT,T."+dm.getOwnerDimKey()+" PID from " + tableName + " T ";
 				sql += "  JOIN SA_ROLE_DIMENSION U on U.DIMVALUE=T." + dm.getValueField() + "  and   U.DIMKEY=? AND U.ROLEKEY=? order by T."+dm.getValueField();				
 				sql+=" JOIN SA_USER_ROLE R ON R.roleKey=U.roleKey and userKey=?";
-				dataList = dataSession.queryBio(sql, new Object[] { dimKey, roleKey,Subject.getSubject().getUserKey() });
+				dataList = dataSession.query(sql, new Object[] { dimKey, roleKey,Subject.getSubject().getUserKey() });
 				
 			}
 		}else{
 			sql = " select distinct T." + dm.getValueField() + " DIMVALUE," + dm.getTextField() + " DIMTEXT,T."+dm.getOwnerDimKey()+" PID from " + tableName + " T";
 			sql += "  JOIN SA_ROLE_DIMENSION U on U.DIMVALUE=T." + dm.getValueField() + "  and   U.DIMKEY=? AND U.ROLEKEY=? order by T."+dm.getValueField();
-			dataList = dataSession.queryBio(sql, new Object[] { dimKey, roleKey});
+			dataList = dataSession.query(sql, new Object[] { dimKey, roleKey});
 		
 		}
 		
@@ -71,7 +71,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 	@Override
 	public List<Permission> getRolePermission(String roleKey) {
 		String sql = "  select p from Sa_Permission p, SA_Role_Permission r where r.permKey=p.permKey and r.roleKey=? order by p.seq";
-		List<Permission> up = this.dataSession.query(sql, new Object[] { roleKey },Permission.class);
+		List<Permission> up = this.dataSession.select(sql, new Object[] { roleKey },Permission.class);
 		return up;
 	}
 	
@@ -138,7 +138,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 			
 					sql = " select  T." + dm.getValueField() + " DIMVALUE,'"+dm.getDimKey()+"' DIMKEY,T." + dm.getTextField() + " DIMTEXT," + ownerDimKey + "  from " + tableName + " T";
 					sql += "  JOIN SA_ROLE_DIMENSION R on R.DIMVALUE=T." + dm.getValueField() + "  AND R.ROLEKEY=? order by T." + dm.getValueField();				
-					subDataList = dataSession.queryBio(sql, new Object[] { roleKey }); 
+					subDataList = dataSession.query(sql, new Object[] { roleKey }); 
 				
 				for (Bio bio : subDataList) {
 					if (bio.getString("PID").equals("ROOT")) {

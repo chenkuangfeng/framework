@@ -153,7 +153,9 @@ public class TransactionService implements ApplicationContextAware, ITransaction
 		//BaseService 泛型方法处理
 		if (target instanceof BaseService && methodName.equals("save")) {
 			result = ReflectUtil.callMethod(bean, methodName, params, new Class[] { Serializable.class });
-		} else {
+		} else if(target instanceof FormService &&  methodName.equals("load")) {
+			result = ReflectUtil.callMethod(bean, methodName, params,new Class[] {String.class, Serializable.class });
+		}else{
 			result = ReflectUtil.callMethod(bean, methodName, params);
 		}
 		return result;

@@ -16,19 +16,27 @@ import org.dom4j.io.XMLWriter;
  */
 public class ExceptionHelper {
 
-	
-
 	/**
 	 * 统一异常处理,json格式
+	 * 
 	 * @param e
 	 * @return
 	 */
 	public static RuntimeException dealRuntimeException(Throwable e) {
-		
+
 		if (e instanceof ComException) {
 			return dealRuntimeExceptionJson((ComException) e);
 		} else {
 			return dealRuntimeExceptionJson(new ComException(-1, e));
+		}
+	}
+
+	public static RuntimeException dealRuntimeException1(Throwable e) {
+
+		if (e instanceof ComException) {
+			return  (ComException)e;
+		} else {
+			return new ComException(-1,e.getMessage());
 		}
 	}
 

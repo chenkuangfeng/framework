@@ -6,7 +6,7 @@ import com.ubsoft.framework.core.cache.CacheManager;
 public class MemoryPermission {
 	private static MemoryPermission instance;
 
-	private static String cacheName = "permission";
+	private static String cacheName = "PERMISSION";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryPermission() {

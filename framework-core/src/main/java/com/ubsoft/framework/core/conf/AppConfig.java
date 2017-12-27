@@ -247,139 +247,17 @@ public class AppConfig {
 
 	
 
-	public static void initFdm(String filePath) {
-//		try {
-//			File dir = new File(filePath);
-//			File[] files = dir.listFiles();
-//			if (files == null)
-//				return;
-//			for (int i = 0; i < files.length; i++) {
-//				if (files[i].isDirectory()) {
-//					initFdm(files[i].getPath());
-//				} else {
-//					String fileName = files[i].getName();
-//					fileName = fileName.split("\\.")[0];
-//					JAXBContext jc = JAXBContext.newInstance(FdmMeta.class);
-//					Unmarshaller m = jc.createUnmarshaller();
-//					InputStream in = new FileInputStream(files[i]);
-//					FdmMeta meta = (FdmMeta) m.unmarshal(in);
-//					MemoryFdmMeta.getInstance().put(fileName, meta);
-//				}
-//			}
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
+	/**
+	 * 加载数据模型,界面模型, 界面配置
+	 */
+	public static void initMetadata() {
+		ITransactionService ds = (ITransactionService) AppContext.getBean("transactionService");
+		ds.execute("bioMetaService", "initBioMeta", new Object[] {});
+		ds.execute("fdmMetaService", "initFdmMeta", new Object[] {});
+		ds.execute("formService", "initFormMeta", new Object[] {});
+
+
 	}
 
-	public static void refreshForm(String formId, String path) {
-
-//		try {
-//			File dir = new File(path);
-//			File[] files = dir.listFiles();
-//			if (files == null)
-//				return;
-//			for (int i = 0; i < files.length; i++) {
-//				if (files[i].isDirectory()) {
-//					refreshForm(formId, files[i].getPath());
-//				} else {
-//					String fileName = files[i].getName();
-//					fileName = fileName.split("\\.")[0];
-//					if (fileName.equals(formId)) {
-//						SAXReader reader = new SAXReader();
-//						reader.setEncoding("UTF-8");
-//						Document document = reader.read(files[i]);
-//						Element root = document.getRootElement();
-//						JAXBContext jc = null;
-//						if (root.getName().equals("ListForm")) {
-//							jc = JAXBContext.newInstance(ListFormMeta.class);
-//						} else if (root.getName().equals("EditForm")) {
-//							jc = JAXBContext.newInstance(EditFormMeta.class);
-//						} else if (root.getName().equals("ExplorerForm")) {
-//							jc = JAXBContext.newInstance(ExplorerFormMeta.class);
-//						} else if (root.getName().equals("SelectForm")) {
-//							jc = JAXBContext.newInstance(SelectFormMeta.class);
-//						} else {
-//							jc = JAXBContext.newInstance(FormMeta.class);
-//						}
-//						Unmarshaller m = jc.createUnmarshaller();
-//						InputStream in = new FileInputStream(files[i]);
-//						FormMeta meta = (FormMeta) m.unmarshal(in);
-//						if (meta.getId() == null) {
-//							meta.setId(fileName);
-//						}
-//						MemoryFormMeta.getInstance().put(fileName, meta);
-//						String fdmId = meta.getFdmId();
-//						if (fdmId != null) {
-//							FdmMeta fdmMeta = MemoryFdmMeta.getInstance().get(fdmId);
-//							if (fdmMeta == null) {
-//								throw new ComException(ComException.MIN_ERROR_CODE_FDM + 1, "找不到界面数据模型:" + fdmId);
-//
-//							} else {
-//								meta.setFdm(fdmMeta);
-//							}
-//
-//						}
-//						break;
-//					}
-//				}
-//			}
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
-	}
-
-	public static void initForm(String filePath) {
-//		try {
-//			File dir = new File(filePath);
-//			File[] files = dir.listFiles();
-//			if (files == null)
-//				return;
-//			for (int i = 0; i < files.length; i++) {
-//				if (files[i].isDirectory()) {
-//					initForm(files[i].getPath());
-//				} else {
-//					SAXReader reader = new SAXReader();
-//					reader.setEncoding("UTF-8");
-//					Document document = reader.read(files[i]);
-//					Element root = document.getRootElement();
-//					String fileName = files[i].getName();
-//					fileName = fileName.split("\\.")[0];
-//					JAXBContext jc = null;
-//					if (root.getName().equals("ListForm")) {
-//						jc = JAXBContext.newInstance(ListFormMeta.class);
-//					} else if (root.getName().equals("EditForm")) {
-//						jc = JAXBContext.newInstance(EditFormMeta.class);
-//					} else if (root.getName().equals("ExplorerForm")) {
-//						jc = JAXBContext.newInstance(ExplorerFormMeta.class);
-//					} else if (root.getName().equals("SelectForm")) {
-//						jc = JAXBContext.newInstance(SelectFormMeta.class);
-//					} else {
-//						jc = JAXBContext.newInstance(FormMeta.class);
-//					}
-//					Unmarshaller m = jc.createUnmarshaller();
-//					InputStream in = new FileInputStream(files[i]);
-//					FormMeta meta = (FormMeta) m.unmarshal(in);
-//					if (meta.getId() == null) {
-//						meta.setId(fileName);
-//					}
-//					MemoryFormMeta.getInstance().put(fileName, meta);
-//					String fdmId = meta.getFdmId();
-//					if (fdmId != null) {
-//						FdmMeta fdmMeta = MemoryFdmMeta.getInstance().get(fdmId);
-//						if (fdmMeta == null) {
-//							throw new ComException(ComException.MIN_ERROR_CODE_FDM + 1, "找不到界面数据模型:" + fdmId);
-//
-//						} else {
-//							meta.setFdm(fdmMeta);
-//						}
-//
-//					}
-//
-//				}
-//			}
-//		} catch (Exception ex) {
-//			ex.printStackTrace();
-//		}
-	}
-
+	
 }

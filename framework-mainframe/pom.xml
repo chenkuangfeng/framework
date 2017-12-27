@@ -10,6 +10,107 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>framework-mainframe</artifactId>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.ubsoft</groupId>
+            <artifactId>framework-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>dbswing</groupId>
+            <artifactId>dbswing</artifactId>
+            <version>0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/dbswing.jar</systemPath>
+        </dependency>
 
+        <dependency>
+            <groupId>dx</groupId>
+            <artifactId>dx</artifactId>
+<version>0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/dx.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>jide-common</groupId>
+            <artifactId>jide-common</artifactId>
+			<version>0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/jide-common.jar</systemPath>
+        </dependency>
+
+
+
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/commons-logging-1.1.1.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/dom4j-1.6.1.jar</systemPath>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>mainframe</finalName>
+        <plugins>
+            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <classesDirectory>target/classes/</classesDirectory>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.framework.mainframe.system.MainApp</mainClass>
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                        <manifestEntries>
+                            <Class-Path>.</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2.1</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin-->
+            <!-- plugin> <groupId>org.codehaus.mojo.webstart</groupId> <artifactId>webstart-maven-plugin</artifactId> <version>1.0-beta-2</version> <executions> <execution> <id>package</id> <phase>package</phase>
+                <goals> <goal>jnlp</goal> </goals> </execution> </executions> <configuration> <jnlp> <outputFile>launch.jnlp</outputFile> <mainClass>com.framework.mainframe.system.MainApp</mainClass> </jnlp> <sign> <keystore>SwingWebstartMavenExample-KeyStore</keystore>
+                <keypass>YourPassword</keypass> <storepass>YourPassword</storepass> <alias>lachapelle</alias> <validity>3650</validity> <dnameCn>Your Name</dnameCn> <dnameOu>Organizational Unit</dnameOu> <dnameO>Organization</dnameO>
+                <dnameL>City or Locality</dnameL> <dnameSt>State or Province</dnameSt> <dnameC>US</dnameC> <verify>true</verify> <keystoreConfig> <delete>true</delete> <gen>true</gen> </keystoreConfig> </sign> <pack200>false</pack200>
+                <gzip>true</gzip> <outputJarVersions>false</outputJarVersions> <verbose>true</verbose> </configuration> </plugin -->
+        </plugins>
+    </build>
 
 </project>

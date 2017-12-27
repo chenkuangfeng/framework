@@ -15,6 +15,22 @@ public class FormEntity extends  BaseEntity implements Serializable {
 	private String formName;
 	@Column
 	private String formXml;	
+	
+	@Column
+	private String fdmKey;
+
+	
+	@Column
+	private String remarks;
+	
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
 
 	public String getFormKey() {
 		return formKey;
@@ -39,5 +55,15 @@ public class FormEntity extends  BaseEntity implements Serializable {
 	public void setFormXml(String formXml){
 		this.formXml = formXml;
 	}
+
+	public String getFdmKey() {
+		return fdmKey;
+	}
+
+	public void setFdmKey(String fdmKey) {
+		this.fdmKey = fdmKey;
+	}
+	
+	
 }
 

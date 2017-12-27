@@ -21,8 +21,11 @@ public class FormMeta extends WidgetMeta implements Serializable{
 	@XmlTransient  
 	private Map<String,Boolean> permision;
 	
-	@XmlTransient
+	@XmlAttribute
 	private String fdm;
+	
+	@XmlTransient
+	private FdmMeta fdmMeta;
 	
 	
 	public String getUnitName() {
@@ -43,6 +46,12 @@ public class FormMeta extends WidgetMeta implements Serializable{
 	}
 	public void setFdm(String fdm) {
 		this.fdm = fdm;
+	}
+	public FdmMeta getFdmMeta() {
+		return fdmMeta;
+	}
+	public void setFdmMeta(FdmMeta fdmMeta) {
+		this.fdmMeta = fdmMeta;
 	}
 	
 		

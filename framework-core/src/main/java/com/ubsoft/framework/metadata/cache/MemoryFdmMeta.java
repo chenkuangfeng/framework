@@ -5,7 +5,7 @@ import com.ubsoft.framework.metadata.model.form.fdm.FdmMeta;
 public class MemoryFdmMeta {
 	private static MemoryFdmMeta instance;
 
-	private  static String cacheName="fdm";
+	private  static String cacheName="FDMMETA";
 	private CacheManager storeSpace = new CacheManager();
 
 	private MemoryFdmMeta() {

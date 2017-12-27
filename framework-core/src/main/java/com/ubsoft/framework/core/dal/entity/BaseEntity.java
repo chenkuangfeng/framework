@@ -9,7 +9,7 @@ public abstract class BaseEntity implements Serializable {
 	@Column(name = "ID", length = 32, nullable = false)
 	protected String id;
 	@Column(name = "VERSION")
-	protected Integer version;
+	protected int version;
 	@Column(name = "CREATEDBY", length = 32)
 	protected String createdBy;
 
@@ -33,11 +33,13 @@ public abstract class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getVersion() {
+
+
+	public int getVersion() {
 		return version;
 	}
 
-	public void setVersion(Integer version) {
+	public void setVersion(int version) {
 		this.version = version;
 	}
 

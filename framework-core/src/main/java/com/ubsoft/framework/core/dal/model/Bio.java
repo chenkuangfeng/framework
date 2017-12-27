@@ -13,23 +13,37 @@ import com.ubsoft.framework.core.exception.DataAccessException;
 import com.ubsoft.framework.core.support.util.DateUtil;
 
 public class Bio extends HashMap<String,Object> implements Serializable {
-    private String name; 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	//新建
+	public static String NEW="NEW";
+	//更新
+	public static String UPDATE="UPDATE";
+	//删除
+	public static String DELETE="DELETE";
+	//没有动作,但需要传到后台
+	public static String NONE="NONE";
 
+  
     public Bio(String name){
-        this.name = name;
+    	put("BIO_NAME",name);
+        put("ROW_STATUS",NEW);
 
     }
 
     public Bio(){
-
+    	put("ROW_STATUS",NEW);
     }
 
     public String getName(){
-        return name;
+        return get("BIO_NAME")==null?null:get("BIO_NAME").toString();
     }
 
     public void setName(String name){
-        this.name = name;
+    	put("BIO_NAME",name);
     }
 
    
@@ -326,15 +340,36 @@ public class Bio extends HashMap<String,Object> implements Serializable {
 
 
     public BioMeta getMeta(){
-
-        BioMeta meta = MemoryBioMeta.getInstance().get(name);
+        BioMeta meta = MemoryBioMeta.getInstance().get(this.getName());
         return meta;
 
     }
 
-    public String getPrimaryKey(){
-        return getMeta().getPrimaryKey();
+    
+    
+    @Override
+    public Object put(String key, Object value) {
+       key=key.toUpperCase();
+       return super.put(key, value);
     }
+    @Override
+    public Object get(Object key) {
+    	key=key.toString().toUpperCase();
+    	return super.get(key);
+    }
+    @Override
+    public boolean containsKey(Object key){
+    	key=key.toString().toUpperCase();
+    	return super.containsKey(key);
+    }
+
+	public String getStatus() {
+        return get("ROW_STATUS")==null?null:get("ROW_STATUS").toString();
+	}
+
+	public void setStatus(String status) {
+		put("ROW_STATUS",status);
+	}
 
 //    public boolean containsKey(String key){
 //        BioMeta meta = MemoryBioMeta.getInstance().get(key);

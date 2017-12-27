@@ -1,5 +1,8 @@
 package com.ubsoft.framework.metadata.model.form.fdm;
 
+import com.ubsoft.framework.core.dal.entity.BioMeta;
+import com.ubsoft.framework.metadata.model.form.FormListenerMeta;
+
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +17,8 @@ public class FdmMeta implements Serializable{
     @XmlElementWrapper(name = "listeners")
     @XmlElement(name = "listener")
 	private List<FormListenerMeta> listeners;
-    
+
+
 	public MasterMeta getMaster() {
 		return master;
 	}
@@ -39,6 +43,8 @@ public class FdmMeta implements Serializable{
 		}
 		return null;
 	}
+
+
 
 	public List<FormListenerMeta> getListeners(){
 		return listeners;
