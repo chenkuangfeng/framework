@@ -1,0 +1,7 @@
+<fdm>
+	<master entity="com.ubsoft.framework.core.entity.Org">
+		<sql><![CDATA[
+           	 select T.*,O.orgName OWNERNAME from SA_ORG T left join SA_ORG O on T.ownerKey=O.orgKey 
+            ]]></sql>
+	</master>
+</fdm>

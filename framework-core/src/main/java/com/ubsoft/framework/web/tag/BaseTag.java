@@ -126,7 +126,7 @@ public class BaseTag extends TagSupport {
 		List<LookupDetail> listResult = MemoryLookup.getInstance().get(code);
 		if (listResult == null) {
 			ILookupDetailService lookupService = (ILookupDetailService) AppContext.getBean("lookupDetailService");
-			listResult = lookupService.gets("lkKey=? and status=?", "seq", new Object[] { code, "1" });
+			listResult = lookupService.gets(new String[]{"lkKey","status"} , new Object[] { code, "1" },"seq");
 			LookupDetail lkd = new LookupDetail();
 			lkd.setLkdKey("");
 			lkd.setLkdName("----");
@@ -145,7 +145,7 @@ public class BaseTag extends TagSupport {
 		List<LookupDetail> listResult = MemoryLookup.getInstance().get(code);
 		if (listResult == null) {
 			ILookupDetailService lookupService = (ILookupDetailService) AppContext.getBean("lookupDetailService");
-			listResult = lookupService.gets("lkKey=? and status=?", "seq", new Object[] { code, "1" });
+			listResult = lookupService.gets(new String[]{"lkKey","status"} , new Object[] { code, "1" },"seq");
 			LookupDetail lkd = new LookupDetail();
 			lkd.setLkdKey("");
 			lkd.setLkdName("----");

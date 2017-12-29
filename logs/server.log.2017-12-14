@@ -1,0 +1,1343 @@
+[ERROR] 2017-12-14 13:49:28 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务bioMetaService的方法initBioMeta失败：argument type mismatch
+[ERROR] 2017-12-14 13:49:28 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'3100',
+ source:'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:77)',
+ originalMessage:'argument type mismatch',
+ message:'argument type mismatch',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'argument type mismatch',
+   sources:
+    [
+     'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:77)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:93)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:60)',
+     'org.springframework.jdbc.core.JdbcTemplate$1.doInPreparedStatement(JdbcTemplate.java:693)',
+     'org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:629)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:680)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:712)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:722)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:772)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:405)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:390)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:385)',
+     'com.ubsoft.framework.core.service.impl.BioMetaService.initBioMeta(BioMetaService.java:21)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy21.initBioMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:255)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 13:51:21 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务bioMetaService的方法initBioMeta失败：argument type mismatch
+[ERROR] 2017-12-14 13:51:21 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'3100',
+ source:'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:78)',
+ originalMessage:'argument type mismatch',
+ message:'argument type mismatch',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'argument type mismatch',
+   sources:
+    [
+     'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:78)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:93)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:60)',
+     'org.springframework.jdbc.core.JdbcTemplate$1.doInPreparedStatement(JdbcTemplate.java:693)',
+     'org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:629)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:680)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:712)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:722)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:772)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:405)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:390)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:385)',
+     'com.ubsoft.framework.core.service.impl.BioMetaService.initBioMeta(BioMetaService.java:21)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy21.initBioMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:255)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:00:17 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务bioMetaService的方法initBioMeta失败：argument type mismatch
+[ERROR] 2017-12-14 14:00:17 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'3100',
+ source:'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:81)',
+ originalMessage:'argument type mismatch',
+ message:'argument type mismatch',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'argument type mismatch',
+   sources:
+    [
+     'com.ubsoft.framework.core.dal.util.BeanRowMapper.mapRow(BeanRowMapper.java:81)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:93)',
+     'org.springframework.jdbc.core.RowMapperResultSetExtractor.extractData(RowMapperResultSetExtractor.java:60)',
+     'org.springframework.jdbc.core.JdbcTemplate$1.doInPreparedStatement(JdbcTemplate.java:693)',
+     'org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:629)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:680)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:712)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:722)',
+     'org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:772)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:405)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:390)',
+     'com.ubsoft.framework.core.dal.session.DataSession.gets(DataSession.java:385)',
+     'com.ubsoft.framework.core.service.impl.BioMetaService.initBioMeta(BioMetaService.java:21)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy21.initBioMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:255)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:10:04 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务fdmMetaService的方法initFdmMeta失败：PreparedStatementCallback; bad SQL grammar [SELECT T.* FROM META_BIO T WHERE name=?]; nested exception is java.sql.SQLSyntaxErrorException: ORA-00904: "NAME": 标识符无效
+
+[ERROR] 2017-12-14 14:10:04 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'12100',
+ source:'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+ originalMessage:'PreparedStatementCallback; bad SQL grammar [SELECT T.* FROM META_BIO T WHERE name=?]; nested exception is java.sql.SQLSyntaxErrorException: ORA-00904: "NAME": 标识符无效
+',
+ message:'PreparedStatementCallback; bad SQL grammar [SELECT T.* FROM META_BIO T WHERE name=?]; nested exception is java.sql.SQLSyntaxErrorException: ORA-00904: "NAME": 标识符无效
+',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'PreparedStatementCallback; bad SQL grammar [SELECT T.* FROM META_BIO T WHERE name=?]; nested exception is java.sql.SQLSyntaxErrorException: ORA-00904: "NAME": 标识符无效
+',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.initFdmMeta(FdmMetaService.java:30)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy22.initFdmMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:256)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:12:59 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务fdmMetaService的方法initFdmMeta失败：null
+[ERROR] 2017-12-14 14:12:59 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'12100',
+ source:'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+ originalMessage:'null',
+ message:'null',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'null',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.initFdmMeta(FdmMetaService.java:30)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy22.initFdmMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:256)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:17:51 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务fdmMetaService的方法initFdmMeta失败：找不到BioMetabioMeta
+[ERROR] 2017-12-14 14:17:51 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'12100',
+ source:'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+ originalMessage:'找不到BioMetabioMeta',
+ message:'找不到BioMetabioMeta',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'找不到BioMetabioMeta',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.initFdmMeta(FdmMetaService.java:30)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy22.initFdmMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:256)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:21:24 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务fdmMetaService的方法initFdmMeta失败：找不到BioMeta:bioMeta
+[ERROR] 2017-12-14 14:21:24 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'12100',
+ source:'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+ originalMessage:'找不到BioMeta:bioMeta',
+ message:'找不到BioMeta:bioMeta',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'找不到BioMeta:bioMeta',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.genFdmMeta(FdmMetaService.java:52)',
+     'com.ubsoft.framework.core.service.impl.FdmMetaService.initFdmMeta(FdmMetaService.java:30)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy22.initFdmMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:256)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:24:22 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:24:22 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'-1',
+ source:'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+ originalMessage:'Transaction rolled back because it has been marked as rollback-only',
+ message:'org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'org.springframework.transaction.UnexpectedRollbackException',
+   message:'Transaction rolled back because it has been marked as rollback-only',
+   sources:
+    [
+     'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:484)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:291)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.initFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:257)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:28:17 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:28:17 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'-1',
+ source:'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+ originalMessage:'Transaction rolled back because it has been marked as rollback-only',
+ message:'org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'org.springframework.transaction.UnexpectedRollbackException',
+   message:'Transaction rolled back because it has been marked as rollback-only',
+   sources:
+    [
+     'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:484)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:291)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.initFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:257)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:30:50 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:30:50 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'-1',
+ source:'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+ originalMessage:'Transaction rolled back because it has been marked as rollback-only',
+ message:'org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'org.springframework.transaction.UnexpectedRollbackException',
+   message:'Transaction rolled back because it has been marked as rollback-only',
+   sources:
+    [
+     'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:484)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:291)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.initFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:257)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:32:27 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:32:27 [com.ubsoft.framework.rpc.server.boot.Main main] {
+ code:'-1',
+ source:'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+ originalMessage:'Transaction rolled back because it has been marked as rollback-only',
+ message:'org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'org.springframework.transaction.UnexpectedRollbackException',
+   message:'Transaction rolled back because it has been marked as rollback-only',
+   sources:
+    [
+     'org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:724)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:484)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:291)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.initFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:113)',
+     'com.ubsoft.framework.core.conf.AppConfig.initMetadata(AppConfig.java:257)',
+     'com.ubsoft.framework.rpc.server.boot.ServerContainer.start(ServerContainer.java:30)',
+     'com.ubsoft.framework.rpc.server.boot.Main.main(Main.java:46)'
+    ]
+  }
+}
+[ERROR] 2017-12-14 14:36:10 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:36:10 [com.ubsoft.framework.rpc.server.boot.Main main] org.springframework.transaction.UnexpectedRollbackException: Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:37:46 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:37:46 [com.ubsoft.framework.rpc.server.boot.Main main] Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:39:11 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:39:11 [com.ubsoft.framework.rpc.server.boot.Main main] Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:45:23 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法initFormMeta失败：Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:45:23 [com.ubsoft.framework.rpc.server.boot.Main main] Transaction rolled back because it has been marked as rollback-only
+[ERROR] 2017-12-14 14:47:10 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:BioExplorer
+[ERROR] 2017-12-14 14:51:41 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:BioExplorer
+[ERROR] 2017-12-14 14:51:41 [com.alibaba.dubbo.rpc.filter.ExceptionFilter invoke]  [DUBBO] Got unchecked and undeclared exception which called by 192.168.11.120. service: com.ubsoft.framework.rpc.api.ITransactionRemote, method: execute, exception: java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}, dubbo version: 2.5.5, current host: 127.0.0.1
+java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeExceptionJson(ExceptionHelper.java:131)
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeException(ExceptionHelper.java:28)
+	at com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:52)
+	at com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR] 2017-12-14 14:52:57 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:FdmExplorer
+[ERROR] 2017-12-14 14:52:57 [com.alibaba.dubbo.rpc.filter.ExceptionFilter invoke]  [DUBBO] Got unchecked and undeclared exception which called by 192.168.11.120. service: com.ubsoft.framework.rpc.api.ITransactionRemote, method: execute, exception: java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:FdmExplorer',
+ message:'不存在Form:FdmExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:FdmExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}, dubbo version: 2.5.5, current host: 127.0.0.1
+java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:FdmExplorer',
+ message:'不存在Form:FdmExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:FdmExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeExceptionJson(ExceptionHelper.java:131)
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeException(ExceptionHelper.java:28)
+	at com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:52)
+	at com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR] 2017-12-14 14:53:07 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:BioExplorer
+[ERROR] 2017-12-14 14:53:07 [com.alibaba.dubbo.rpc.filter.ExceptionFilter invoke]  [DUBBO] Got unchecked and undeclared exception which called by 192.168.11.120. service: com.ubsoft.framework.rpc.api.ITransactionRemote, method: execute, exception: java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}, dubbo version: 2.5.5, current host: 127.0.0.1
+java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeExceptionJson(ExceptionHelper.java:131)
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeException(ExceptionHelper.java:28)
+	at com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:52)
+	at com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR] 2017-12-14 14:56:23 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:BioExplorer
+[ERROR] 2017-12-14 14:56:23 [com.alibaba.dubbo.rpc.filter.ExceptionFilter invoke]  [DUBBO] Got unchecked and undeclared exception which called by 192.168.11.120. service: com.ubsoft.framework.rpc.api.ITransactionRemote, method: execute, exception: java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}, dubbo version: 2.5.5, current host: 127.0.0.1
+java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:BioExplorer',
+ message:'不存在Form:BioExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:BioExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeExceptionJson(ExceptionHelper.java:131)
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeException(ExceptionHelper.java:28)
+	at com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:52)
+	at com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)
+[ERROR] 2017-12-14 15:03:30 [com.ubsoft.framework.core.service.impl.TransactionService execute] 调用服务formService的方法getFormMeta失败：不存在Form:FormExplorer
+[ERROR] 2017-12-14 15:03:30 [com.alibaba.dubbo.rpc.filter.ExceptionFilter invoke]  [DUBBO] Got unchecked and undeclared exception which called by 192.168.11.120. service: com.ubsoft.framework.rpc.api.ITransactionRemote, method: execute, exception: java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:FormExplorer',
+ message:'不存在Form:FormExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:FormExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}, dubbo version: 2.5.5, current host: 127.0.0.1
+java.lang.RuntimeException: {
+ code:'12001',
+ source:'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+ originalMessage:'不存在Form:FormExplorer',
+ message:'不存在Form:FormExplorer',
+ parameters:
+  [
+  ],
+ stacktrace:
+  {
+   classname:'com.ubsoft.framework.core.exception.ComException',
+   message:'不存在Form:FormExplorer',
+   sources:
+    [
+     'com.ubsoft.framework.core.service.impl.FormService.getFormMeta(FormService.java:204)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:302)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:157)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:99)',
+     'org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:281)',
+     'org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:96)',
+     'org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)',
+     'org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:208)',
+     '$Proxy23.getFormMeta(Unknown Source)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)',
+     'sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)',
+     'sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)',
+     'java.lang.reflect.Method.invoke(Method.java:597)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:254)',
+     'com.ubsoft.framework.core.support.util.ReflectUtil.callMethod(ReflectUtil.java:265)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.callMethod(TransactionService.java:157)',
+     'com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:48)',
+     'com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)',
+     'com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)',
+     'com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)',
+     'com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)',
+     'com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)',
+     'com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)',
+     'com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)',
+     'com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)',
+     'com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)',
+     'com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)',
+     'java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)',
+     'java.lang.Thread.run(Thread.java:619)'
+    ]
+  }
+}
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeExceptionJson(ExceptionHelper.java:131)
+	at com.ubsoft.framework.core.exception.ExceptionHelper.dealRuntimeException(ExceptionHelper.java:28)
+	at com.ubsoft.framework.core.service.impl.TransactionService.execute(TransactionService.java:52)
+	at com.ubsoft.framework.rpc.server.service.TransactionRemote.execute(TransactionRemote.java:16)
+	at com.alibaba.dubbo.common.bytecode.Wrapper1.invokeMethod(Wrapper1.java)
+	at com.alibaba.dubbo.rpc.proxy.javassist.JavassistProxyFactory$1.doInvoke(JavassistProxyFactory.java:46)
+	at com.alibaba.dubbo.rpc.proxy.AbstractProxyInvoker.invoke(AbstractProxyInvoker.java:72)
+	at com.alibaba.dubbo.rpc.protocol.InvokerWrapper.invoke(InvokerWrapper.java:53)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.filter.TraceFilter.invoke(TraceFilter.java:78)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.monitor.support.MonitorFilter.invoke(MonitorFilter.java:75)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.TimeoutFilter.invoke(TimeoutFilter.java:42)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ExceptionFilter.invoke(ExceptionFilter.java:64)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ContextFilter.invoke(ContextFilter.java:61)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.GenericFilter.invoke(GenericFilter.java:132)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.ClassLoaderFilter.invoke(ClassLoaderFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.filter.EchoFilter.invoke(EchoFilter.java:38)
+	at com.alibaba.dubbo.rpc.protocol.ProtocolFilterWrapper$1.invoke(ProtocolFilterWrapper.java:69)
+	at com.alibaba.dubbo.rpc.protocol.dubbo.DubboProtocol$1.reply(DubboProtocol.java:102)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.handleRequest(HeaderExchangeHandler.java:98)
+	at com.alibaba.dubbo.remoting.exchange.support.header.HeaderExchangeHandler.received(HeaderExchangeHandler.java:170)
+	at com.alibaba.dubbo.remoting.transport.DecodeHandler.received(DecodeHandler.java:52)
+	at com.alibaba.dubbo.remoting.transport.dispatcher.ChannelEventRunnable.run(ChannelEventRunnable.java:81)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:886)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:908)
+	at java.lang.Thread.run(Thread.java:619)

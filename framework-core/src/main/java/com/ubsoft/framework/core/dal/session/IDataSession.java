@@ -17,13 +17,20 @@ public interface IDataSession {
 
 	Bio getBio(String bioName, Serializable id);
 
-	Bio getBio(String bioName, String property, Object... value);
+	Bio getBio(String bioName, String property, Object value);
+	
+	Bio getBio(String bioName, String [] properties, Object [] value);
+
 
 	List<Bio> getBios(String bioName);
+	
+	List<Bio> getBios(String bioName, String property, Object value);
+	List<Bio> getBios(String bioName, String property, Object value,String orderBy);
 
-	List<Bio> getBios(String bioName, String condition, Object... value);
+	
+	List<Bio> getBios(String bioName, String [] properties, Object [] value);
 
-	List<Bio> getBios(String bioName, String condition, String orderBy, Object... value);
+	List<Bio> getBios(String bioName, String [] properties, Object [] value,String orderBy);
 
 	// 保存Bio
 	void saveBio(Bio bio);
@@ -34,13 +41,11 @@ public interface IDataSession {
 
 	// 删除bio
 	void deleteBio(Bio bio);
-
 	void deleteBio(List<Bio> bios);
-
 	void deleteBio(String bioName, Serializable id);
-	void deleteBio(String bioName, Serializable[] id);
-
-	void deleteBio(String bioName, String property, Object... value);
+	void deleteBio(String bioName, Serializable [] ids);
+	void deleteBio(String bioName, String  property, Object  value);
+	void deleteBio(String bioName, String [] properties, Object [] value);
 
 	// Bio查询
 	List<Bio> select(String sql, Object[] params,String bioName);
@@ -49,9 +54,8 @@ public interface IDataSession {
 
 	PageResult<Bio> select(String sql, int pageSize, int pageNumber, Object[] params,String bioName);
 	
-	List<Bio> query(String sql, Object[] params);
-
 	//普通查询
+	List<Bio> query(String sql, Object[] params);	
 	List<Bio> query(String sql, Object[] params, int limit);
 
 	PageResult<Bio> query(String sql, int pageSize, int pageNumber, Object[] params);
@@ -59,13 +63,22 @@ public interface IDataSession {
 	// 获取bean
 	<T extends Serializable> T get(Class<T> clazz, Serializable id);
 
-	<T extends Serializable> T get(Class<T> clazz, String conditions, Object... value);
+	<T extends Serializable> T get(Class<T> clazz, String property, Object value);
+	
+	<T extends Serializable> T get(Class<T> clazz, String [] properties, Object [] value);
+
 
 	<T extends Serializable> List<T> gets(Class<T> clazz);
+	<T extends Serializable> List<T> gets(Class<T> clazz,String orderBy);
 
-	<T extends Serializable> List<T> gets(Class<T> clazz, String property, Object... value);
 
-	<T extends Serializable> List<T> gets(Class<T> clazz, String property, String orderBy, Object... value);
+	<T extends Serializable> List<T> gets(Class<T> clazz, String  property, Object value);
+	<T extends Serializable> List<T> gets(Class<T> clazz, String  property, Object value,String orderBy);
+
+
+	<T extends Serializable> List<T> gets(Class<T> clazz, String [] properties, Object [] value);
+
+	<T extends Serializable> List<T> gets(Class<T> clazz, String [] properties, Object [] value, String orderBy);
 
 	// 保存实体bean
 	<T extends Serializable> void save(T entity);

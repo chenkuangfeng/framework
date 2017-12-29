@@ -19,7 +19,6 @@ public class BaseService<T extends Serializable> implements IBaseService<T> {
 	protected Class<T> clazz;
 	@Autowired
 	protected IDataSession dataSession;
-
 	@SuppressWarnings("unchecked")
 	public BaseService() {
 		// 当前对象的直接超类的 Type
@@ -47,18 +46,44 @@ public class BaseService<T extends Serializable> implements IBaseService<T> {
 	}
 
 	@Override
-	public Bio getBio(String bioName, String property, Object... value) {
+	public Bio getBio(String bioName, String property, Object value) {
 		return dataSession.getBio(bioName, property, value);
 	}
 
 	@Override
-	public List<Bio> getBios(String bioName, String property, Object... value) {
+	public Bio getBio(String bioName, String[] properties, Object[] value) {
+		return dataSession.getBio(bioName, properties, value);
+	}
+	@Override
+	public List<Bio> getBios(String bioName, String property, Object value, String orderBy) {
+		return dataSession.getBios(bioName, property, value, orderBy);
+	}
+
+	@Override
+	public List<Bio> getBios(String bioName, String property, Object value) {
 		return dataSession.getBios(bioName, property, value);
 	}
 
 	@Override
-	public List<Bio> getBios(String bioName, String property, String orderBy, Object... value) {
-		return dataSession.getBios(bioName, property, orderBy, value);
+	public List<Bio> getBios(String bioName, String[] properties, Object[] value) {
+		return dataSession.getBios(bioName, properties, value);
+	}
+
+	@Override
+	public List<Bio> getBios(String bioName, String[] properties, Object[] value, String orderBy) {
+		return dataSession.getBios(bioName, properties, value, orderBy);
+				
+	}
+
+	@Override
+	public void deleteBio(String bioName, String property, Object value) {
+		 dataSession.deleteBio(bioName, property, value);
+		
+	}
+
+	@Override
+	public void deleteBio(String bioName, String[] properties, Object[] value) {
+		dataSession.deleteBio(bioName, properties, value);
 	}
 
 	@Override
@@ -96,38 +121,52 @@ public class BaseService<T extends Serializable> implements IBaseService<T> {
 	@Override
 	public void deleteBio(String bioName, Serializable [] ids) {
 		dataSession.deleteBio(bioName, ids);
-
-	}
-	@Override
-	public void deleteBio(String bioName, String property, Object... value) {
-		dataSession.deleteBio(bioName, property, value);
-
-	}
+	}	
 
 	@Override
 	public T get(Serializable id) {
 		return dataSession.get(clazz, id);
+	}	
+	@Override
+	public T get(String property, Object value) {
+		return dataSession.get(clazz, property,value);
+
 	}
 
 	@Override
-	public T get(String property, Object... value) {
-		return dataSession.get(clazz, property, value);
+	public T get(String[] properties, Object[] value) {
+		return dataSession.get(clazz, properties, value);
 	}
+
+	
+	@Override
+	public List<T> gets(String property, Object value, String orderBy) {
+		return dataSession.gets(clazz, property, value, orderBy);
+	}
+
+	@Override
+	public List<T> gets(String[] properties, Object[] value) {
+	
+		return dataSession.gets(clazz, properties, value);
+	}
+
+	@Override
+	public List<T> gets(String property, Object value) {
+		return dataSession.gets(clazz, property, value);
+	}
+
+	@Override
+	public List<T> gets(String[] properties, Object[] value, String orderBy) {
+		return dataSession.gets(clazz, properties, value, orderBy);
+	}
+	
 
 	@Override
 	public List<T> gets() {
 		return dataSession.gets(clazz);
 	}
 
-	@Override
-	public List<T> gets(String property, Object... value) {
-		return dataSession.gets(clazz, property, value);
-	}
-
-	public List<T> gets(String property, String orderBy,Object [] value) {
-		return dataSession.gets(clazz, property, orderBy, value);
-	}
-
+	
 	@Override
 	public void save(T entity) {
 		dataSession.save(entity);
@@ -151,6 +190,12 @@ public class BaseService<T extends Serializable> implements IBaseService<T> {
 		dataSession.delete(entities);
 
 	}
+
+	
+
+	
+
+	
 
 	
 

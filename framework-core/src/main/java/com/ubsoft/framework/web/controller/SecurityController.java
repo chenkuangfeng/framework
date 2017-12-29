@@ -108,7 +108,7 @@ public class SecurityController extends BaseController {
 	@RequestMapping("/form/menu.ctrl")
 	@ResponseBody
 	public String getMenus() {
-		List<Permission> menus = permService.gets("", "seq", new Object[]{});
+		List<Permission> menus = permService.gets(new String[]{},new Object[]{},"seq");
 		// 将bean集合转换成Map
 		List<Map> listMap = new ArrayList<Map>();
 		for (Permission perm : menus) {

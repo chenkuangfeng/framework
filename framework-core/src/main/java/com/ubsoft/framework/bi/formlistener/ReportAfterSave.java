@@ -25,9 +25,9 @@ public class ReportAfterSave extends BaseService<Report> implements IFormListene
         List<ReportField> rptFields = null;// 报表字段
         List<ReportParameter> rptParameters = null;// 报表参数
         List<ReportDataSet> rptDataSets = null;// 报表子数据集
-        List<Report> rpts = this.dataSession.gets(Report.class, "status=?", new Object[]{"1"});
-        rptFields = this.dataSession.gets(ReportField.class, "reportId=?", "seq", rpt.getId());
-        rptParameters = this.dataSession.gets(ReportParameter.class, "reportId=?", "seq", rpt.getId());
+        List<Report> rpts = this.dataSession.gets(Report.class, "status", "1");
+        rptFields = this.dataSession.gets(ReportField.class, "reportId",  rpt.getId(),"seq");
+        rptParameters = this.dataSession.gets(ReportParameter.class, "reportId", rpt.getId(),"seq");
         // rptDataSets = this.dataSession.gets(ReportDataSet.class,
         // "reportId=?","seq" ,rpt.getId());
         rpt.setRptFields(rptFields);

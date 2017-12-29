@@ -1,0 +1,33 @@
+<ListForm layout="border" fdmId="Code" label="系统代码">
+	<toobar region="north" id="mainToolBar">
+	<button icon="icon/save.gif" label="测试"></button>
+	</toobar>
+	<splitpanel region="center">
+		<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+			<grid>
+				<row>
+					<cell width="30%">
+						<text label="代码" field="codeKey"></text>
+					</cell>
+					<cell width="30%">
+						<text label="名称" field="codeName" />
+					</cell>
+					<cell width="30%">
+						<combobox bind="false" label="状态" field="status" code="STATUS"></combobox>
+					</cell>					
+				</row>	
+			</grid>
+		</panel>
+		<panel region="bottom" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column width="25" field="codeKey" label="代码" />
+				<column width="30" field="codeName" label="名称" />
+				<column width="5" code="STATUS" field="status" label="状态" />
+				<column field="createdBy" label="创建人" />
+				<column type="datetime" field="createdDate" label="创建日期" />
+				<column field="updatedBy" label="更新人" />
+				<column type="datetime" field="updatedDate" label="更新日期" />
+			</datagrid>
+		</panel>
+	</splitpanel>	
+</ListForm>

@@ -289,7 +289,7 @@ public class FormController extends BaseController {
 			if (obj != null) {
 				listResult = (List<LookupDetail>) obj;
 			} else {
-				listResult = lookupService.gets("lkKey=?", "seq", new Object[] { lkkey });
+				listResult = lookupService.gets("lkKey", lkkey, "seq");
 				LookupDetail lkd = new LookupDetail();
 				lkd.setLkdKey("");
 				lkd.setLkdName("----");

@@ -4,6 +4,8 @@ import java.awt.Component;
 import java.awt.Container;
 import java.util.Map;
 
+import javax.swing.JScrollPane;
+
 import com.borland.dbswing.JdbTextArea;
 import com.ubsoft.framework.mainframe.widgets.renderer.IRenderer;
 import com.ubsoft.framework.mainframe.widgets.renderer.RendererUtil;
@@ -18,13 +20,16 @@ public class XTextArea extends JdbTextArea implements IRenderer {
 	public Component render(WidgetMeta meta, Container parent,Map<String,Object> params) {
 		TextAreaMeta compMeta = (TextAreaMeta) meta;
 		this.meta=compMeta;
+		this.setLineWrap(true); 
+		JScrollPane scr = new JScrollPane(this);
+		//this.setRows(200);
 		if(meta.getLabel()!=null){
-			RendererUtil.addLabelField(meta, this, parent, params);
-
+		
+			RendererUtil.addLabelField(meta, scr, parent, params);
 		}else{
-			RendererUtil.addComponent(compMeta, this, parent, params);
+			RendererUtil.addComponent(compMeta, scr, parent, params);
 		}		
-		this.setColumns(8);
+		//this.setColumns(8);
 		//RendererUtil.addComponent(compMeta, this, parent);
 		return this;
 	}

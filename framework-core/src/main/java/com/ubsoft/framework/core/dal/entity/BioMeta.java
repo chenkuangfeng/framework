@@ -8,6 +8,7 @@ import java.util.Set;
 
 import com.ubsoft.framework.core.dal.annotation.Table;
 import com.ubsoft.framework.core.dal.annotation.Transient;
+import com.ubsoft.framework.core.exception.DataAccessException;
 
 @Table(name = "META_BIO")
 public class BioMeta extends BaseEntity implements Serializable {
@@ -167,7 +168,11 @@ public class BioMeta extends BaseEntity implements Serializable {
 	
 	public BioPropertyMeta getProperty(String key){
 		key = key.toUpperCase();
-		return propertyMap.get(key);
+		BioPropertyMeta meta= propertyMap.get(key);
+		if(meta==null){
+			throw new DataAccessException(1,bioName+"不存在属性:"+key);
+		}
+		return meta;
 	}
 
 }

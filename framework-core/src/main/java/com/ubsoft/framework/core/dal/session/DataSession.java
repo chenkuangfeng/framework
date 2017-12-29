@@ -45,56 +45,72 @@ public class DataSession implements IDataSession {
 
 	@Override
 	public Bio getBio(String bioName, Serializable id) {
-		BioMeta meta = MemoryBioMeta.getInstance().get("bioName");
-		if (meta != null) {
-			Bio bio = this.getBio(bioName, meta.getPrimaryProperty().getColumnKey() + "=?", id);
-			return bio;
-		} else {
-			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在.");
-		}
+		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
+		return this.getBio(bioName, meta.getPrimaryProperty().getColumnKey(), id);
+
 	}
 
 	@Override
-	public Bio getBio(String bioName, String property, Object... value) {
-		List<Bio> set = null;
-		if (value.length == 1) {
-			set = this.getBios(bioName, property + "=?", value);
+	public Bio getBio(String bioName, String property, Object value) {
+
+		return this.getBio(bioName, new String[] { property }, new Object[] { value });
+	}
+
+	public Bio getBio(String bioName, String[] properties, Object[] value) {
+		List<Bio> bios = this.getBios(bioName, properties, value);
+		if (bios.size() == 1)
+			return bios.get(0);
+		if (bios.size() > 1) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "记录不唯一.");
 		}
-		if (value.length > 1) {
-			set = this.getBios(bioName, property, value);
-		}
-		if (set != null && set.size() == 1) {
-			Bio bio = set.get(0);
-			return bio;
-		} else if (set.size() > 1) {
-			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "record is not only。");
-		} else {
-			return null;
-		}
+		return null;
 	}
 
 	@Override
 	public List<Bio> getBios(String bioName) {
-		return this.getBios(bioName, null, null, new Object[] {});
+		return this.getBios(bioName, new String[] {}, new Object[] {});
 	}
 
 	@Override
-	public List<Bio> getBios(String bioName, String condition, Object... value) {
-		return this.getBios(bioName, condition, null, value);
+	public List<Bio> getBios(String bioName, String property, Object value) {
+		return this.getBios(bioName, new String[] { property }, new Object[] { value });
+	}
+
+	public List<Bio> getBios(String bioName, String property, Object value, String orderBy) {
+		return this.getBios(bioName, new String[] { property }, new Object[] { value }, orderBy);
+	}
+
+	public List<Bio> getBios(String bioName, String[] properties, Object[] parmas) {
+		return this.getBios(bioName, properties, parmas, null);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Bio> getBios(String bioName, String condition, String orderBy, Object... value) {
-		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT T.* FROM ").append(bioName).append(" T");
-		if (StringUtil.isNotEmpty(condition)) {
-			sql.append(" WHERE ").append(condition);
+	public List<Bio> getBios(String bioName, String[] properties, Object[] value, String orderBy) {
+		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
+		if (meta == null) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在.");
 		}
+		StringBuffer sql = new StringBuffer();
+		sql.append("SELECT T.* FROM ").append(meta.getTableKey()).append(" T");
+		if (properties != null && properties.length > 0) {
+			sql.append(" WHERE ");
+			int count = properties.length;
+			int i = 1;
+			for (String property : properties) {
+				String columnKey = meta.getProperty(property).getColumnKey();
+				sql.append(columnKey).append("=?");
+				if (i != count) {
+					sql.append(" AND ");
+				}
+				i++;
+			}
+		}
+
 		if (StringUtil.isNotEmpty(orderBy)) {
 			sql.append(" ORDER BY  ").append(orderBy);
 		}
-		List<Bio> result = jdbcTemplate.query(sql.toString(), value, new BioRowMapper(bioName));
+		List<Bio> result = this.select(sql.toString(), value, bioName);
 		return result;
 	}
 
@@ -176,8 +192,8 @@ public class DataSession implements IDataSession {
 
 	private void setDefaultValue(BioPropertyMeta property, Bio bio) {
 		String propertyKey = property.getPropertyKey();
-		//String columnKey = property.getColumnKey();
-		if (property.getPrimaryKey()==1) {
+		// String columnKey = property.getColumnKey();
+		if (StringUtil.isTrue(property.getPrimaryKey())) {
 			if (property.getDataType().equals(TypeUtil.STRING)) {
 				if (StringUtil.isEmpty(bio.getString(propertyKey))) {
 					bio.setString(propertyKey, UUID.randomUUID().toString().replace("-", ""));
@@ -191,7 +207,7 @@ public class DataSession implements IDataSession {
 			if (property.getPropertyKey().equals("CREATEDDATE")) {
 				bio.setDate("CREATEDDATE", new Date(System.currentTimeMillis()));
 			}
-		}else{
+		} else {
 			if (property.getPropertyKey().equals("UPDATEDBY")) {
 				bio.setString("UPDATEDBY", Subject.getSubject().getUserKey());
 			}
@@ -214,7 +230,7 @@ public class DataSession implements IDataSession {
 		for (BioPropertyMeta property : meta.getPropertySet()) {
 			String propertyKey = property.getPropertyKey();
 			String columnKey = property.getColumnKey();
-			setDefaultValue(property,bio);
+			setDefaultValue(property, bio);
 			Object value = bio.getObject(propertyKey);
 			if (value == null) {
 				continue;
@@ -222,7 +238,7 @@ public class DataSession implements IDataSession {
 			sql.append(columnKey);
 			args.append("?");
 			// 乐观锁字段默认是0
-			if (property.getVersionKey() == 1 && property.getDataType().toLowerCase().equals(TypeUtil.INTEGER)) {
+			if (StringUtil.isTrue(property.getVersionKey()) && property.getDataType().toLowerCase().equals(TypeUtil.INTEGER)) {
 				params.add(0);
 			} else {
 				params.add(value);
@@ -259,14 +275,14 @@ public class DataSession implements IDataSession {
 			String propertyKey = property.getPropertyKey();
 			String columnKey = property.getColumnKey();
 			Object value = bio.getObject(propertyKey);
-			setDefaultValue(property,bio);
+			setDefaultValue(property, bio);
 			// 主键不更新
-			if (property.getPrimaryKey()==1) {
+			if (StringUtil.isTrue(property.getPrimaryKey())) {
 				primaryValue = value;
 				primaryKey = columnKey;
 				continue;
 			}
-			if (property.getVersionKey() == 1) {
+			if (StringUtil.isTrue(property.getVersionKey())) {
 				versionKey = property.getColumnKey();
 				versionType = property.getDataType();
 			}
@@ -335,6 +351,9 @@ public class DataSession implements IDataSession {
 	public void deleteBio(String bioName, Serializable id) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
+		if (meta == null) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在");
+		}
 		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
 		sql.append(meta.getPrimaryProperty().getColumnKey()).append("=?");
 		jdbcTemplate.update(sql.toString(), new Object[] { id });
@@ -343,21 +362,41 @@ public class DataSession implements IDataSession {
 	public void deleteBio(String bioName, Serializable[] ids) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
+		if (meta == null) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在");
+		}
 		for (Serializable id : ids) {
 			sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
 			sql.append(meta.getPrimaryProperty().getColumnKey()).append("=?");
 			jdbcTemplate.update(sql.toString(), new Object[] { id });
-
 		}
 	}
 
-	public void deleteBio(String bioName, String property, Object... value) {
+	public void deleteBio(String bioName, String property, Object value) {
+
+		this.deleteBio(bioName, new String[] { property }, new Object[] { value });
+	}
+
+	public void deleteBio(String bioName, String[] properties, Object[] value) {
 		StringBuffer sql = new StringBuffer();
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
+		if (meta == null) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在");
+
+		}
 		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
-		sql.append(property);
-		if (value.length == 1) {
-			sql.append(property).append("=?");
+		if (properties != null && properties.length > 0) {
+			sql.append(" WHERE ");
+			int count = properties.length;
+			int i = 1;
+			for (String property : properties) {
+				String columnKey = meta.getProperty(property).getColumnKey();
+				sql.append(columnKey).append("=?");
+				if (i != count) {
+					sql.append(" AND ");
+				}
+				i++;
+			}
 		}
 		jdbcTemplate.update(sql.toString(), new Object[] { value });
 	}
@@ -422,51 +461,70 @@ public class DataSession implements IDataSession {
 	public <T extends Serializable> T get(Class<T> clazz, Serializable id) {
 		Table ta = clazz.getAnnotation(Table.class);
 		String primaryKey = ta.primarykey();
-
 		return get(clazz, primaryKey, id);
 	}
 
 	@Override
-	public <T extends Serializable> T get(Class<T> clazz, String property, Object... value) {
-		List<T> set = null;
-		if (value.length == 1) {
-			set = this.gets(clazz, property + "=?", value);
+	public <T extends Serializable> T get(Class<T> clazz, String field, Object value) {
+		return this.get(clazz, new String[] { field }, new Object[] { value });
+	}
+
+	public <T extends Serializable> T get(Class<T> clazz, String[] fields, Object[] value) {
+		List<T> entities = this.gets(clazz, fields, value);
+		if (entities.size() == 1)
+			return entities.get(0);
+		if (entities.size() > 1) {
+			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "记录不唯一.");
 		}
-		if (value.length > 1) {
-			set = this.gets(clazz, property, value);
-		}
-		if (set != null && set.size() == 1) {
-			return set.get(0);
-		} else if (set.size() > 1) {
-			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "record is not only。");
-		} else {
-			return null;
-		}
+		return null;
 	}
 
 	@Override
 	public <T extends Serializable> List<T> gets(Class<T> clazz) {
-		return this.gets(clazz, null, new Object[] {});
+		return this.gets(clazz, new String[] {}, new Object[] {});
+	}
+
+	public <T extends Serializable> List<T> gets(Class<T> clazz,String orderBy) {
+		return this.gets(clazz, new String[] {}, new Object[] {},orderBy);
+	}
+	@Override
+	public <T extends Serializable> List<T> gets(Class<T> clazz, String field, Object value) {
+		return this.gets(clazz, new String[] { field }, new Object[] { value });
+	}
+
+	public <T extends Serializable> List<T> gets(Class<T> clazz, String field, Object value, String orderBy) {
+		return this.gets(clazz, new String[] { field }, new Object[] { value }, orderBy);
+	}
+
+	public <T extends Serializable> List<T> gets(Class<T> clazz, String[] fields, Object[] value) {
+		return this.gets(clazz, fields, value, null);
 	}
 
 	@Override
-	public <T extends Serializable> List<T> gets(Class<T> clazz, String condition, Object... value) {
-		return this.gets(clazz, condition, null, value);
-	}
-
-	@Override
-	public <T extends Serializable> List<T> gets(Class<T> clazz, String condition, String orderBy, Object... value) {
+	public <T extends Serializable> List<T> gets(Class<T> clazz, String[] fields, Object[] params, String orderBy) {
 		Table ta = clazz.getAnnotation(Table.class);
 		String tableName = ta.name();
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT T.* FROM ").append(tableName).append(" T");
-		if (StringUtil.isNotEmpty(condition)) {
-			sql.append(" WHERE ").append(condition);
+		if (fields != null && fields.length > 0) {
+			sql.append(" WHERE ");
+			int count = fields.length;
+			int i = 1;
+			for (String field : fields) {
+				String columnKey = BeanUtil.getPropertyColumn(clazz, field);
+				sql.append(columnKey).append("=?");
+				if (i != count) {
+					sql.append(" AND ");
+				}
+				i++;
+			}
 		}
 		if (StringUtil.isNotEmpty(orderBy)) {
+			orderBy = BeanUtil.getPropertyColumn(clazz, orderBy);
 			sql.append(" ORDER BY  ").append(orderBy);
 		}
-		List<T> result = jdbcTemplate.query(sql.toString(), value, new BeanRowMapper<T>(clazz));
+
+		List<T> result = this.select(sql.toString(), params, clazz);
 
 		return result;
 	}

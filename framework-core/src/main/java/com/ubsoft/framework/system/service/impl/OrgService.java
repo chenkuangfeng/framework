@@ -26,7 +26,7 @@ public class OrgService extends BaseService<Org> implements IOrgService {
 
 	@Override
 	public List<Region> getRegionList() {
-		List<Region> regionList=dataSession.gets(Region.class, "status=?", "seq", new Object[]{"1"});
+		List<Region> regionList=dataSession.gets(Region.class, "status","1" , "seq");
 		return regionList;
 	}
 

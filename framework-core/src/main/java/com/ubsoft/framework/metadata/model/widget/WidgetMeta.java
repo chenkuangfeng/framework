@@ -70,6 +70,8 @@ public class WidgetMeta implements Serializable {
 	@XmlElement(name = "datetime", type = DateTimeFieldMeta.class), 
 	@XmlElement(name = "hidden", type = HiddenFieldMeta.class), 
 	@XmlElement(name = "text", type = TextFieldMeta.class), 	
+	@XmlElement(name = "textarea", type = TextAreaMeta.class), 	
+
 	@XmlElement(name = "grid", type = GridMeta.class), 
 	@XmlElement(name = "row", type = GridRowMeta.class), 
 	@XmlElement(name = "cell", type = GridCellMeta.class), 

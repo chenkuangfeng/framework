@@ -170,12 +170,12 @@ public class BeanUtil {
 	}
 	public static String getPropertyColumn(Class<?> clazz, String property) {
 		if (mapedColumn.containsKey(clazz)) {
-			return mapedColumn.get(clazz).get(property);
+			return mapedColumn.get(clazz).get(property.toUpperCase());
 		} else {
 			Map<String,String> map=new HashMap<String,String>();
 			getFields(clazz,map);
 			mapedColumn.put(clazz,map);
-			return map.get(property);
+			return map.get(property.toUpperCase());
 		}
 		
 	}
@@ -196,13 +196,13 @@ public class BeanUtil {
 				// 输出注解属性
 				String name = column.name();
 				if (name != null) {
-					map.put(fieldName, name);
+					map.put(fieldName.toUpperCase(), name);
 				} else {
-					map.put(fieldName, fieldName);
+					map.put(fieldName.toUpperCase(), fieldName);
 				}
 
 			}else{
-				map.put(fieldName, fieldName);
+				map.put(fieldName.toUpperCase(), fieldName);
 			}
 		
 

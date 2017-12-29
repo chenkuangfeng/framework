@@ -217,7 +217,7 @@ public class XmlUtil {
 	}
 
 	public static String formatXml(String xmlStr) throws Exception {
-		Document document = DocumentHelper.parseText(xmlStr);
+		Document document = DocumentHelper.parseText(xmlStr);		
 		return formatXml(document);
 	}
 

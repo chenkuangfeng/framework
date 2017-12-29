@@ -1,0 +1,92 @@
+<ExplorerForm fdmId="Role" layout="border" label="用户">
+	<toobar region="north" id="mainToolBar">
+			<button id="btnSaveSecurity"  icon="icon/savesecurity.png" label="保存权限"></button>
+	</toobar>
+	<splitpanel id="mainSplit" region="center" direction="h" position="500">
+		<splitpanel layout="v" region="left">
+			<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+				<grid>
+					<row>
+						<cell width="50%">
+							<text label="角色代码" field="roleKey"></text>
+						</cell>
+						<cell width="50%">
+							<text label="角色名称" field="roleName" />
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<lookup label="所属组织" as="T" select="OrgSelect" field="orgKey">
+							</lookup>
+						</cell>
+						<cell>
+							<combobox as="T" label="状态" bind="false" field="status" code="STATUS"></combobox>
+						</cell>
+					</row>
+				</grid>
+			</panel>
+			<panel region="bottom" label="列表" showTitle="true" layout="border">
+				<datagrid id="mainTable" region="center">
+					<column type="link" width="25" editable="false" field="roleKey" label="角色代码" />
+					<column width="30" field="roleName" editable="false" label="角色名称" />
+					<column width="15" code="ROLETYPE" field="roleType" label="角色类型" editable="false" />
+					<column width="30" field="orgName" label="所属组织" editable="false" />
+					<column width="8" code="STATUS" field="status" label="状态" editable="false" />
+					<column field="createdBy" label="创建人" editable="false" />
+					<column type="datetime" field="createdDate" label="创建日期" editable="false" />
+					<column field="updatedBy" label="更新人" editable="false" />
+					<column type="datetime" field="updatedDate" editable="false" label="更新日期" />
+				</datagrid>
+			</panel>
+		</splitpanel>
+		<splitpanel region="right">
+			<tabpanel region="top" id="mainForm">
+				<panel label="基本资料" layout="form">
+					<grid>
+						<row>
+							<cell width="30%">
+								<text id="roleKey" label="角色代码" field="roleKey"></text>
+							</cell> 
+							<cell width="30%">
+								<text label="角色名称" field="roleName" />
+							</cell>
+							<cell width="30%">
+								<combobox label="状态" code="STATUS" field="status"></combobox>
+							</cell>
+						</row>
+						<row>
+							<cell width="30%">
+								<combobox label="角色类型" code="ROLETYPE" field="roleType"></combobox>
+							</cell>
+							<cell width="30%">
+								<lookup label="所属组织代码" fromFields="orgName" toFields="orgName" select="OrgSelect" field="orgKey">
+								</lookup>
+							</cell>
+							<cell>
+								<text label="所属组织名称" enabled="false" field="orgName" />
+							</cell>
+						</row>
+					</grid>
+				</panel>
+			</tabpanel>
+			<tabpanel region="bottom">
+				<panel label="用户" layout="border">
+					<toobar region="north" id="User_ToolBar">
+						<button icon="icon/addline.png" id="btnSelectUser" label="添加用户"></button>
+						<button icon="icon/delline.png" id="btnDelUser" label="删除用户"></button>
+					</toobar>
+					<datagrid id="roleUser" region="center">
+						<column width="25" field="userKey" label="用户代码" />
+						<column width="30" field="userName" label="用户名称" />
+					</datagrid>
+				</panel>
+				<panel label="功能权限" layout="border">
+							<tree  checkbox="true"  id="menuTree" region="center"></tree>				
+				</panel>
+				<panel label="数据权限" layout="border">
+					<tree  checkbox="true"  id="dimTree" region="center"></tree>				
+				</panel>
+			</tabpanel>
+		</splitpanel>
+	</splitpanel>
+</ExplorerForm>

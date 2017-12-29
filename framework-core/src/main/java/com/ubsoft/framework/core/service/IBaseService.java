@@ -8,39 +8,52 @@ import java.util.List;
 public interface IBaseService<T extends Serializable> {
 	Bio getBio(String bioName, Serializable id);
 
-	Bio getBio(String bioName, String property, Object... value);
+	Bio getBio(String bioName, String property, Object value);
+
+	List<Bio> getBios(String bioName, String property, Object value, String orderBy);
+
+	Bio getBio(String bioName, String[] properties, Object[] value);
 
 	List<Bio> getBios(String bioName);
 
-	List<Bio> getBios(String bioName, String property, Object... value);
+	List<Bio> getBios(String bioName, String property, Object value);
 
-	List<Bio> getBios(String bioName, String property, String orderBy, Object... value);
+	List<Bio> getBios(String bioName, String[] properties, Object[] value);
+
+	List<Bio> getBios(String bioName, String[] properties, Object[] value, String orderBy);
 
 	// 保存Bio
 	void saveBio(Bio bio);
 
 	void saveBio(List<Bio> set);
 
-	// 删除bio
 	void deleteBio(Bio bio);
-	// 删除bio
-	void deleteBio(List<Bio> set);
+
+	void deleteBio(List<Bio> bios);
 
 	void deleteBio(String bioName, Serializable id);
+
 	void deleteBio(String bioName, Serializable[] ids);
 
+	void deleteBio(String bioName, String property, Object value);
 
-	void deleteBio(String bioName, String property, Object... value);
+	void deleteBio(String bioName, String[] properties, Object[] value);
 
 	T get(Serializable id);
 
-	T get(String property, Object... value);
+	T get(String property, Object value);
+
+	T get(String[] properties, Object[] value);
 
 	List<T> gets();
 
-	List<T> gets(String property, Object... value);
+	List<T> gets(String property, Object value);
 
-	List<T> gets(String property, String orderBy, Object[] value);
+	List<T> gets(String property, Object value, String orderBy);
+
+	List<T> gets(String[] properties, Object[] value);
+
+	List<T> gets(String[] properties, Object[] value, String orderBy);
 
 	// 保存实体bean
 	void save(T entity);

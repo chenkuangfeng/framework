@@ -29,17 +29,17 @@ public class BioPropertyMeta extends BaseEntity implements Serializable {
     /**
      * 是否是版本
      **/
-    private int versionKey;
+    private String versionKey;
 
     /**
      * 允许空
      **/
-    private int nullable;
+    private String nullable;
     
     /**
      * 是否主键1:是,0:否
      **/
-    private int primaryKey;
+    private String primaryKey;
 
     /**
      * 长度
@@ -154,31 +154,7 @@ public class BioPropertyMeta extends BaseEntity implements Serializable {
 		this.bioId = bioId;
 	}
 
-	public int getVersionKey() {
-		return versionKey;
-	}
-
-	public void setVersionKey(int versionKey) {
-		this.versionKey = versionKey;
-	}
-
 	
-
-	public int getNullable() {
-		return nullable;
-	}
-
-	public void setNullable(int nullable) {
-		this.nullable = nullable;
-	}
-
-	public int getPrimaryKey() {
-		return primaryKey;
-	}
-
-	public void setPrimaryKey(int primaryKey) {
-		this.primaryKey = primaryKey;
-	}
 
 	public int getDigits() {
 		return digits;
@@ -194,6 +170,30 @@ public class BioPropertyMeta extends BaseEntity implements Serializable {
 
 	public void setSeq(int seq) {
 		this.seq = seq;
+	}
+
+	public String getVersionKey() {
+		return versionKey;
+	}
+
+	public void setVersionKey(String versionKey) {
+		this.versionKey = versionKey;
+	}
+
+	public String getNullable() {
+		return nullable;
+	}
+
+	public void setNullable(String nullable) {
+		this.nullable = nullable;
+	}
+
+	public String getPrimaryKey() {
+		return primaryKey;
+	}
+
+	public void setPrimaryKey(String primaryKey) {
+		this.primaryKey = primaryKey;
 	}
 
 	

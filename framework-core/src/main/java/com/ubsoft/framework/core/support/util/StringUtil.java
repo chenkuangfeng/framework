@@ -84,6 +84,17 @@ public class StringUtil {
 		return true;
 	}
 	
+	public static boolean isTrue(String flag){
+		if (flag == null||flag.length()==0)
+			return false;
+		if(flag.equals("1")||flag.toLowerCase().equals("true")){
+			return true;
+		}
+		if(flag.equals("0")||flag.toLowerCase().equals("false")){
+			return false;
+		}
+		return false;
+	}
 	public static String join(String seperator, String[] strings) {
 		int length = strings.length;
 		if (length == 0) {

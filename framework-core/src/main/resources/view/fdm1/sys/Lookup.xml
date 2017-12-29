@@ -1,0 +1,16 @@
+<fdm>
+	<master entity="com.ubsoft.framework.core.entity.Lookup">
+		<sql><![CDATA[
+           	 select * from SA_LOOKUP T
+            ]]></sql>
+	</master>
+	<detail id="lookupDetail" entity="com.ubsoft.framework.core.entity.LookupDetail" fk="lkId" sets="lkKey:lkKey" pk="id">
+		<sql><![CDATA[
+           	 select * from SA_LOOKUP_DTL T
+            ]]></sql>
+	</detail>
+	
+	<extentions>
+		<extention name="lookupExtention"></extention>
+	</extentions>
+</fdm>

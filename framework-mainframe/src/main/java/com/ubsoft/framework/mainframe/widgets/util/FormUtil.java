@@ -20,6 +20,7 @@ import com.ubsoft.framework.core.support.util.StringUtil;
 import com.ubsoft.framework.mainframe.widgets.component.XDateField;
 import com.ubsoft.framework.mainframe.widgets.component.XDateTimeField;
 import com.ubsoft.framework.mainframe.widgets.component.XLookupField;
+import com.ubsoft.framework.mainframe.widgets.component.XTextArea;
 import com.ubsoft.framework.mainframe.widgets.component.XTextField;
 import com.ubsoft.framework.mainframe.widgets.component.combobox.ValueText;
 import com.ubsoft.framework.mainframe.widgets.component.combobox.XComboBox;
@@ -57,20 +58,20 @@ public class FormUtil {
 		} else if (comp instanceof XDateTimeField) {
 			XDateTimeField dataField = (XDateTimeField) comp;
 			value = dataField.getDateTime();
-		}else if (comp instanceof XLookupField) {
+		} else if (comp instanceof XLookupField) {
 			XLookupField lookupField = (XLookupField) comp;
-			String text=lookupField.getText();
-			if(StringUtil.isNotEmpty(text)){
-				String [] textArray=text.split(";");
-				if(textArray.length>1){
-					value=textArray;
-					
-				}else{
-					value=textArray[0];
+			String text = lookupField.getText();
+			if (StringUtil.isNotEmpty(text)) {
+				String[] textArray = text.split(";");
+				if (textArray.length > 1) {
+					value = textArray;
+
+				} else {
+					value = textArray[0];
 				}
-				
+
 			}
-			
+
 		}
 		if (op == null) {
 			op = "=";
@@ -115,13 +116,12 @@ public class FormUtil {
 					if (leafNode != null) {
 						conditionNode.add(leafNode);
 					}
-				}else if (comp instanceof XLookupField) {
+				} else if (comp instanceof XLookupField) {
 					XLookupField lookupField = (XLookupField) comp;
 					ConditionLeafNode leafNode = FormUtil.getConditionLeafNode(lookupField.getMeta(), lookupField);
 					if (leafNode != null) {
 						conditionNode.add(leafNode);
 					}
-
 
 				} else {
 					getQueryCondition((Container) comp, conditionNode);
@@ -150,12 +150,13 @@ public class FormUtil {
 			if (meta instanceof ComboBoxMeta) {
 				ComboBoxMeta cmbMeta = (ComboBoxMeta) meta;
 				String code = cmbMeta.getCode();
-				Boolean bind=cmbMeta.getBind()==null?true:cmbMeta.getBind();
-				
-				if (code != null&&bind) {
+				Boolean bind = cmbMeta.getBind() == null ? true : cmbMeta.getBind();
+
+				if (code != null && bind) {
 					try {
 						DataSet ds = LookupManager.getLookupDataSet(code);
-						PickListDescriptor pd = new PickListDescriptor(ds, new String[] { "value" }, new String[] { "text" }, new String[] { meta.getField()}, "text", true);						
+						PickListDescriptor pd = new PickListDescriptor(ds, new String[] { "value" }, new String[] { "text" },
+								new String[] { meta.getField() }, "text", true);
 						column.setPickList(pd);
 						column.setWidth(50);
 					} catch (Exception ex) {
@@ -201,33 +202,34 @@ public class FormUtil {
 		}
 
 	}
+
 	public static void setFormEditable(Container container, boolean editable) {
 		for (Component comp : container.getComponents()) {
 			if (comp instanceof XTextField) {
-				XTextField textField=(XTextField)comp;				
+				XTextField textField = (XTextField) comp;
 				textField.setEditable(editable);
-				if(textField.getMeta()!=null){ 
-					if(textField.getMeta().getEnabled()!=null &&textField.getMeta().getEnabled()==false){
+				if (textField.getMeta() != null) {
+					if (textField.getMeta().getEnabled() != null && textField.getMeta().getEnabled() == false) {
 						textField.setEditable(false);
 					}
 				}
 			} else if (comp instanceof XComboBox) {
-				XComboBox compField=(XComboBox)comp;
+				XComboBox compField = (XComboBox) comp;
 				compField.setEnabled(editable);
-				if(compField.getMeta()!=null){
-					if(compField.getMeta().getEnabled()!=null &&compField.getMeta().getEnabled()==false){
+				if (compField.getMeta() != null) {
+					if (compField.getMeta().getEnabled() != null && compField.getMeta().getEnabled() == false) {
 						compField.setEnabled(false);
 					}
 				}
-			}else if(comp instanceof XLookupField){
-				XLookupField lookupField=(XLookupField)comp;
+			} else if (comp instanceof XLookupField) {
+				XLookupField lookupField = (XLookupField) comp;
 				lookupField.setEnabled(editable);
-				if(lookupField.getMeta()!=null){
-					if(lookupField.getMeta().getEnabled()!=null &&lookupField.getMeta().getEnabled()==false){
+				if (lookupField.getMeta() != null) {
+					if (lookupField.getMeta().getEnabled() != null && lookupField.getMeta().getEnabled() == false) {
 						lookupField.setEnabled(false);
 					}
 				}
-			}else {			
+			} else {
 				if (comp instanceof Container) {
 					Container temp = (Container) comp;
 					setFormEditable(temp, editable);
@@ -236,6 +238,7 @@ public class FormUtil {
 		}
 
 	}
+
 	public static void setFormModel(Container form, StorageDataSet dataSet) {
 		for (Component comp : form.getComponents()) {
 			if (comp instanceof XTextField) {
@@ -272,7 +275,7 @@ public class FormUtil {
 					dataField.setColumnName(dataField.getMeta().getField());
 				}
 
-			}else if (comp instanceof XLookupField) {
+			} else if (comp instanceof XLookupField) {
 				XLookupField lookupField = (XLookupField) comp;
 				addDataSetColumn(lookupField.getMeta(), dataSet);
 
@@ -281,27 +284,43 @@ public class FormUtil {
 					lookupField.setColumnName(lookupField.getMeta().getField());
 				}
 
+			} else if (comp instanceof XTextArea) {
+				XTextArea textField = (XTextArea) comp;
+				if (textField.getMeta().getField() != null) {
+					addDataSetColumn(textField.getMeta(), dataSet);
+					textField.setDataSet(dataSet);
+					textField.setColumnName(textField.getMeta().getField());
+				}
+
 			} else {
+
 				setFormModel((Container) comp, dataSet);
 			}
 
 		}
 
 	}
-	
+
 	/**
 	 * 
-	 * @param idProperty:tree id javabean属性名
-	 * @param textProperty：tree text javabean属性名
-	 * @param parentIdProperty tree 上级ID javabean属性名
-	 * @param beans： javabean
-	 * @param rootId ：tree 根节点固定ID
-	 * @param rootText：tree根节点名称
+	 * @param idProperty
+	 *            :tree id javabean属性名
+	 * @param textProperty
+	 *            ：tree text javabean属性名
+	 * @param parentIdProperty
+	 *            tree 上级ID javabean属性名
+	 * @param beans
+	 *            ： javabean
+	 * @param rootId
+	 *            ：tree 根节点固定ID
+	 * @param rootText
+	 *            ：tree根节点名称
 	 * @return
 	 */
-	public static TreeNodeModel loadTreeModel(String idProperty,String textProperty,String moduleProperty,String parentIdProperty,List beans,String rootId,String rootText){
+	public static TreeNodeModel loadTreeModel(String idProperty, String textProperty, String moduleProperty, String parentIdProperty, List beans,
+			String rootId, String rootText) {
 		TreeNodeModel root = new TreeNodeModel();
-		root.setId(rootId);	
+		root.setId(rootId);
 		root.setText(rootText);
 		try {
 			builderModel(root, beans, idProperty, textProperty, moduleProperty, parentIdProperty);
@@ -311,21 +330,22 @@ public class FormUtil {
 		}
 		return root;
 	}
-	
-	private static void builderModel(TreeNodeModel parentNode, List beans,String idProperty,String textProperty,String moduleProperty,String parentIdProperty) throws Exception {
+
+	private static void builderModel(TreeNodeModel parentNode, List beans, String idProperty, String textProperty, String moduleProperty,
+			String parentIdProperty) throws Exception {
 		List<TreeNodeModel> childNode = new ArrayList<TreeNodeModel>();
 		Class type = beans.get(0).getClass();
-		for (Object bean : beans) {				
-			String id=BeanUtils.getProperty(bean,idProperty);
-			String text=BeanUtils.getProperty(bean, textProperty);
-			//只有一级作为Jlist用
-			String pid=null;
-			if(parentIdProperty==null){
-				pid="ROOT";
-			}else{
-			 pid=BeanUtils.getProperty(bean, parentIdProperty);
+		for (Object bean : beans) {
+			String id = BeanUtils.getProperty(bean, idProperty);
+			String text = BeanUtils.getProperty(bean, textProperty);
+			// 只有一级作为Jlist用
+			String pid = null;
+			if (parentIdProperty == null) {
+				pid = "ROOT";
+			} else {
+				pid = BeanUtils.getProperty(bean, parentIdProperty);
 			}
-			String module=BeanUtils.getProperty(bean, moduleProperty);
+			String module = BeanUtils.getProperty(bean, moduleProperty);
 			if (parentNode.getId().equals(pid)) {
 				TreeNodeModel item = new TreeNodeModel();
 				item.setId(id);
@@ -338,12 +358,11 @@ public class FormUtil {
 		parentNode.setChildren(childNode);
 
 	}
-	
-	
-	
-	public static TreeNodeModel loadTreeModelFormBio(String idProperty,String textProperty,String moduleProperty,String parentIdProperty,List<Bio> beans,String rootId,String rootText){
+
+	public static TreeNodeModel loadTreeModelFormBio(String idProperty, String textProperty, String moduleProperty, String parentIdProperty,
+			List<Bio> beans, String rootId, String rootText) {
 		TreeNodeModel root = new TreeNodeModel();
-		root.setId(rootId);	
+		root.setId(rootId);
 		root.setText(rootText);
 		try {
 			builderModel(root, beans, idProperty, textProperty, moduleProperty, parentIdProperty);
@@ -353,16 +372,17 @@ public class FormUtil {
 		}
 		return root;
 	}
-	
-	private static void builderModelFormBio(TreeNodeModel parentNode, List<Bio> beans,String idProperty,String textProperty,String moduleProperty,String parentIdProperty) throws Exception {
-		List<TreeNodeModel> childNode = new ArrayList<TreeNodeModel>();
-		for (Bio bean : beans) {				
-			String id=bean.getString(idProperty);
-			String text=bean.getString(textProperty);
-			String module=bean.getString(moduleProperty);
 
-			//只有一级作为Jlist用
-			String pid=bean.getString(parentIdProperty);	
+	private static void builderModelFormBio(TreeNodeModel parentNode, List<Bio> beans, String idProperty, String textProperty, String moduleProperty,
+			String parentIdProperty) throws Exception {
+		List<TreeNodeModel> childNode = new ArrayList<TreeNodeModel>();
+		for (Bio bean : beans) {
+			String id = bean.getString(idProperty);
+			String text = bean.getString(textProperty);
+			String module = bean.getString(moduleProperty);
+
+			// 只有一级作为Jlist用
+			String pid = bean.getString(parentIdProperty);
 			if (parentNode.getId().equals(pid)) {
 				TreeNodeModel item = new TreeNodeModel();
 				item.setId(id);

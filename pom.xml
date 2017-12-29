@@ -7,7 +7,6 @@
     <modules>
         <module>framework-core</module>
         <module>framework-web</module>
-        <module>framework-designer</module>
         <module>framework-mainframe</module>
     </modules>
     <packaging>pom</packaging>

@@ -1,0 +1,32 @@
+<ListForm layout="border" fdmId="Lookup" editForm="com.ubsoft.framework.mainframe.system.lookup.LookupEdit" editFormTitle="字典管理">
+	<toobar region="north" id="mainToolBar">
+	</toobar>
+	<splitpanel region="center">
+		<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+			<grid>
+				<row>
+					<cell width="30%">
+						<text label="字典代码" field="lkKey"></text>
+					</cell>
+					<cell width="30%">
+						<text label="字典名称" field="lkName" />
+					</cell>
+					<cell  width="30%">
+						<combobox label="状态" bind="false" field="status" code="STATUS"></combobox>
+					</cell>
+				</row>			
+			</grid>
+		</panel>
+		<panel region="bottom" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column type="link"  width="25" field="lkKey" label="代码" />
+				<column width="30" field="lkName" label="名称" />
+				<column width="5" code="STATUS" field="status" label="状态" />
+				<column field="createdBy" label="创建人" />
+				<column type="datetime" field="createdDate" label="创建日期" />
+				<column field="updatedBy" label="更新人" />
+				<column type="datetime" field="updatedDate" label="更新日期" />
+			</datagrid>
+		</panel>
+	</splitpanel>	
+</ListForm>

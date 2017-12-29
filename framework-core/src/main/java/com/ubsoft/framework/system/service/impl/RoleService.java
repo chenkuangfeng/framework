@@ -121,7 +121,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 	  */
 	 public List<Bio> getRoleDimension(String roleKey){
 		 List<Bio> dataList = new ArrayList<Bio>();
-			List<Dimension> dms = dataSession.gets(Dimension.class, "", "", new Object[] {});
+			List<Dimension> dms = dataSession.gets(Dimension.class);
 			List<Bio> subDataList = new ArrayList<Bio>();
 			String userKey=Subject.getSubject().getUserKey();
 			for (Dimension dm : dms) {

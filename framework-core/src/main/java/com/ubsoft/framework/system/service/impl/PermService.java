@@ -14,7 +14,7 @@ import com.ubsoft.framework.system.service.IPermService;
 public class PermService extends BaseService<Permission> implements IPermService {
 	@Override
 	public List<Permission> getMenus() {
-		return this.gets("permType=?", new Object[]{"MENU"},"seq");
+		return this.gets("permType","MENU","seq");
 	}
 
 }

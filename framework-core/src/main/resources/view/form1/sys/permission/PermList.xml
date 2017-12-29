@@ -1,0 +1,45 @@
+<ListForm layout="border" fdmId="Permission" label="权限纬度">
+	<toobar region="north" id="mainToolBar">
+	
+	</toobar>
+	<splitpanel region="center">
+		<panel region="top" id="mainQuery" label="查询" showTitle="true" layout="form">
+			<grid>
+				<row>
+					<cell width="30%">
+						<text label="权限代码" field="permKey"></text>
+					</cell>
+					<cell width="30%">
+						<text label="权限名称" field="permName" />
+					</cell>
+					<cell width="30%">
+						<combobox bind="false" label="状态" field="status" code="STATUS"></combobox>
+					</cell>					
+				</row>
+				<row>
+					<cell>
+						<combobox bind="false" label="权限类别" field="permType" code="PERMTYPE"></combobox>					
+					</cell>
+					
+				</row>
+						
+			</grid>
+		</panel>
+		<panel region="bottom" label="列表" showTitle="true" layout="border">
+			<datagrid region="center" id="mainTable">
+				<column width="25" field="permKey" label="权限代码" />
+				<column width="30" field="permName" label="权限名称" />
+				<column width="15" code="PERMTYPE" field="permType" label="权限类型" />				
+				<column width="5" code="STATUS" field="status" label="状态" />
+				<column width="30" field="permModule" label="权限模块" />
+				<column width="10" field="permGroup" label="权限组" />
+				<column width="25" field="parentPermKey" label="父权限代码" />
+				<column width="10" dataType="Integer" field="seq" label="排序" />
+				<column field="createdBy" label="创建人" />
+				<column type="datetime" field="createdDate" label="创建日期" />
+				<column field="updatedBy" label="更新人" />
+				<column type="datetime" field="updatedDate" label="更新日期" />
+			</datagrid>
+		</panel>
+	</splitpanel>	
+</ListForm>

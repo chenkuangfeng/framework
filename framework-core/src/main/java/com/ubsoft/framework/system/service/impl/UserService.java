@@ -163,7 +163,7 @@ public class UserService extends BaseService<User> implements IUserService {
 		List<Permission> listPerm = null;
 		// 如果是管理员,可以看到所有权限
 		if (userKey.equals("admin")) {
-			listPerm = dataSession.gets(Permission.class, "", "seq", new Object[] {});
+			listPerm = dataSession.gets(Permission.class,"seq");
 		} else {
 			// 查询用户的权限
 			String sql = "select distinct T.*  from (";
@@ -183,7 +183,7 @@ public class UserService extends BaseService<User> implements IUserService {
 		List<Permission> listPerm = null;
 		// 如果是管理员,可以看到所有权限
 		if (userKey.equals("admin")) {
-			listPerm = dataSession.gets(Permission.class, "status=?", "seq", new Object[] { "1" });
+			listPerm = dataSession.gets(Permission.class, "status",  "1" ,"seq");
 		} else {
 			// 查询用户的权限
 			String sql = "	SELECT P.* FROM SA_USER_PERMISSION UP JOIN SA_PERMISSION P ON UP.PERMKEY=P.PERMKEY WHERE UP.USERKEY=? order by P.seq";
@@ -245,7 +245,7 @@ public class UserService extends BaseService<User> implements IUserService {
 	@Override
 	public List<Bio> getDimension(String userKey) {
 		List<Bio> dataList = new ArrayList<Bio>();
-		List<Dimension> dms = dataSession.gets(Dimension.class, "", "", new Object[] {});
+		List<Dimension> dms = dataSession.gets(Dimension.class);
 		List<Bio> subDataList = new ArrayList<Bio>();
 		for (Dimension dm : dms) {
 			String tableName = dm.getTableName();
@@ -299,7 +299,7 @@ public class UserService extends BaseService<User> implements IUserService {
 	@Override
 	public List<Bio> getUserDimension(String userKey) {
 		List<Bio> dataList = new ArrayList<Bio>();
-		List<Dimension> dms = dataSession.gets(Dimension.class, "", "", new Object[] {});
+		List<Dimension> dms = dataSession.gets(Dimension.class);
 		List<Bio> subDataList = new ArrayList<Bio>();
 		for (Dimension dm : dms) {
 			String tableName = dm.getTableName();

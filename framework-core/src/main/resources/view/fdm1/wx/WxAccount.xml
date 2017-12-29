@@ -1,0 +1,12 @@
+<fdm>
+	<master entity="com.ubsoft.framework.wx.entity.WxAccount">
+		<sql><![CDATA[
+           	 select * from WX_ACCOUNT T
+            ]]></sql>
+	</master>
+	<detail id="wxMenu" entity="com.ubsoft.framework.wx.entity.WxMenu" fk="accountId" pk="id">
+		<sql><![CDATA[
+           	 select * from WX_MENU T
+            ]]></sql>
+	</detail>
+</fdm>
