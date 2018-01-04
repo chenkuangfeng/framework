@@ -94,7 +94,7 @@ public class XTable extends JdbTable implements IRenderer {
 		TableScrollPane lstTablePane = new TableScrollPane();
 		lstTablePane.setBorder(null);
 		this.setBorder(null);
-		
+			
 		lstTablePane.setViewportView(this);
 		// table特殊处理，只添加scrollPanel;
 		RendererUtil.addComponent(tableMeta, lstTablePane, parent,params);

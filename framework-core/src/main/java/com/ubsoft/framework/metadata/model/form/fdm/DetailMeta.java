@@ -1,13 +1,16 @@
 package com.ubsoft.framework.metadata.model.form.fdm;
 
 import com.ubsoft.framework.core.dal.entity.BioMeta;
+import com.ubsoft.framework.metadata.model.form.FormListenerMeta;
 
 import javax.xml.bind.annotation.*;
+
 import java.io.Serializable;
+import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement (name="detail")
-public class DetailMeta implements Serializable{
+@XmlRootElement(name = "detail")
+public class DetailMeta implements Serializable {
 	@XmlAttribute
 	private String id;
 	@XmlAttribute
@@ -17,41 +20,48 @@ public class DetailMeta implements Serializable{
 	private String fk;
 	@XmlAttribute
 	private String mk;
-	
+
+	/**
+	 * 从父表带到字表的字段映射集合
+	 */
+	@XmlElementWrapper(name = "keymap")
+	@XmlElement(name = "key")
+	private List<KeyMapMeta> keys;
 	@XmlAttribute
 	private String orderBy;
 
 	@XmlTransient
 	private BioMeta bioMeta;
-	public String getId(){
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId(String id){
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getBio(){
+	public String getBio() {
 		return bio;
 	}
 
-	public void setBio(String bio){
+	public void setBio(String bio) {
 		this.bio = bio;
 	}
 
-	public String getSql(){
+	public String getSql() {
 		return sql;
 	}
 
-	public void setSql(String sql){
+	public void setSql(String sql) {
 		this.sql = sql;
 	}
 
-	public String getFk(){
+	public String getFk() {
 		return fk;
 	}
 
-	public void setFk(String fk){
+	public void setFk(String fk) {
 		this.fk = fk;
 	}
 
@@ -78,6 +88,13 @@ public class DetailMeta implements Serializable{
 	public void setOrderBy(String orderBy) {
 		this.orderBy = orderBy;
 	}
-	
-	
+
+	public List<KeyMapMeta> getKeys() {
+		return keys;
+	}
+
+	public void setKeys(List<KeyMapMeta> keys) {
+		this.keys = keys;
+	}
+
 }

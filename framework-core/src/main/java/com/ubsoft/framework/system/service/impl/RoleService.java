@@ -2,7 +2,9 @@ package com.ubsoft.framework.system.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,7 +72,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 
 	@Override
 	public List<Permission> getRolePermission(String roleKey) {
-		String sql = "  select p from Sa_Permission p, SA_Role_Permission r where r.permKey=p.permKey and r.roleKey=? order by p.seq";
+		String sql = "  select p.* from Sa_Permission p, SA_Role_Permission r where r.permKey=p.permKey and r.roleKey=? order by p.seq";
 		List<Permission> up = this.dataSession.select(sql, new Object[] { roleKey },Permission.class);
 		return up;
 	}
@@ -95,7 +97,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 
 	@Override
 	public void setRolePermission(String roleKey, String[] addPermKeys, String[] delPermKeys) {
-		String sql = " delete from RolePermission where roleKey=? and permKey=?";
+		String sql = " delete from SA_Role_Permission where roleKey=? and permKey=?";
 		for (String permKey : delPermKeys) {
 			dataSession.executeUpdate(sql, new Object[] { roleKey, permKey });
 		}
@@ -105,7 +107,7 @@ public class RoleService extends BaseService<Role> implements IRoleService {
 		for (String permKey : addPermKeys) {
 			RolePermission ud = new RolePermission();
 			ud.setPermKey(permKey);
-			ud.setRoleKey(roleKey);
+			ud.setRoleKey(roleKey);			
 			dataSession.save(ud);
 			dataSession.flush();
 

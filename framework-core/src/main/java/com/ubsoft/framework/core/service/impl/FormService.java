@@ -44,6 +44,7 @@ import com.ubsoft.framework.metadata.model.form.ListFormMeta;
 import com.ubsoft.framework.metadata.model.form.SelectFormMeta;
 import com.ubsoft.framework.metadata.model.form.fdm.DetailMeta;
 import com.ubsoft.framework.metadata.model.form.fdm.FdmMeta;
+import com.ubsoft.framework.metadata.model.form.fdm.KeyMapMeta;
 import com.ubsoft.framework.metadata.model.form.fdm.MasterMeta;
 import com.ubsoft.framework.system.entity.UISetting;
 import com.ubsoft.framework.system.model.Subject;
@@ -63,9 +64,9 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 		if (fdmMeta == null) {
 			throw new ComException(ComException.MIN_ERROR_CODE_FDM + 1, "找不到界面数据模型:" + fdmKey);
 		}
-		String sql = this.getMasterSql(fdmMeta, "ID=?", null);
+		String pk = fdmMeta.getMaster().getBioMeta().getPrimaryProperty().getColumnKey();
+		String sql = this.getMasterSql(fdmMeta, "T." + pk + "=?", null);
 		List<Bio> masterBios = dataSession.select(sql, new Object[] { id }, fdmMeta.getMaster().getBio());
-
 		if (masterBios.size() != 1) {
 			throw new DataAccessException(DataAccessException.DAL_ERROR_GET_Entity_ERROR, "记录不唯一。");
 		}
@@ -81,8 +82,8 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 					detailSql += " WHERE  ";
 				}
 				detailSql += "T." + detailMeta.getFk() + "=?";
-				if(detailMeta.getOrderBy()!=null){
-					detailSql+=" order by "+detailMeta.getOrderBy();
+				if (detailMeta.getOrderBy() != null) {
+					detailSql += " order by " + detailMeta.getOrderBy();
 				}
 				String mk = detailMeta.getMk() == null ? "ID" : detailMeta.getMk();
 				Object[] args = new Object[] { masterBio.getObject(mk) };
@@ -119,9 +120,9 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 		}
 		MasterMeta masterMeta = fdmMeta.getMaster();
 		BioMeta masterBioMeta = MemoryBioMeta.getInstance().get(fdmMeta.getMaster().getBio());
-		
-		Bio masterBio=set.getMaster();
-		masterBio.setName(fdmMeta.getMaster().getBio());//设置名称
+
+		Bio masterBio = set.getMaster();
+		masterBio.setName(fdmMeta.getMaster().getBio());// 设置名称
 
 		// 保存前插件
 		fireFormListener("BEFORESAVE", fdmMeta, set);
@@ -142,9 +143,19 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 					} else {
 						refKeyValue = set.getMaster().getObject(masterBioMeta.getPrimaryProperty().getPropertyKey());
 					}
+
 					for (Bio bio : bios) {
+						// 设置外键
 						bio.setObject(detailMeta.getFk(), refKeyValue);
 						bio.setName(detailMeta.getBio());
+						// 设置映射字段
+						if (detailMeta.getKeys() != null) {
+							List<KeyMapMeta> keys = detailMeta.getKeys();
+							for (KeyMapMeta key : keys) {
+								bio.setObject(key.getName(), set.getMaster().getObject(key.getValue()));
+
+							}
+						}
 						dataSession.saveBio(bio);
 					}
 					// dataSession.batchSaveBio(bios);
@@ -185,18 +196,20 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 		Bio master = dataSession.getBio(fdmMeta.getMaster().getBio(), id);
 		set.setMaster(master);
 		fireFormListener("BEFOREDELETE", fdmMeta, set);
-		for (DetailMeta detailMeta : fdmMeta.getDetails()) {
-			String bioName = detailMeta.getBio();
-			Serializable dtId = null;
-			if (detailMeta.getMk() != null) {
-				dtId = (Serializable) master.getObject(detailMeta.getMk());
-			} else {
-				dtId = id;
+		if (fdmMeta.getDetails() != null) {
+			for (DetailMeta detailMeta : fdmMeta.getDetails()) {
+				String bioName = detailMeta.getBio();
+				Serializable dtId = null;
+				if (detailMeta.getMk() != null) {
+					dtId = (Serializable) master.getObject(detailMeta.getMk());
+				} else {
+					dtId = id;
+				}
+				dataSession.deleteBio(bioName, detailMeta.getFk(), new Object[] { dtId });
 			}
-			dataSession.deleteBio(bioName, detailMeta.getFk(), new Object[] { dtId });
 		}
 		String masterBioName = fdmMeta.getMaster().getBio();
-		dataSession.deleteBio(masterBioName, new Object[] { id });
+		dataSession.deleteBio(masterBioName, id);
 		// 注册删除事件监听
 		fireFormListener("AFTERDELETE", fdmMeta, set);
 
@@ -380,19 +393,21 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 			if (formMeta.getId() == null) {
 				formMeta.setId(form.getFormKey());
 			}
-			FdmMeta fdmMeta = null;
-			if (refreshFdm) {
-				fdmMeta = fdmMetaService.refreshFdmMeta(formMeta.getFdm());
-			} else {
-				fdmMeta = MemoryFdmMeta.getInstance().get(formMeta.getFdm());
+			if (formMeta.getFdm() != null) {
+				FdmMeta fdmMeta = null;
+				if (refreshFdm) {
+					fdmMeta = fdmMetaService.refreshFdmMeta(formMeta.getFdm());
+				} else {
+					fdmMeta = MemoryFdmMeta.getInstance().get(formMeta.getFdm());
+				}
+				formMeta.setFdmMeta(fdmMeta);
 			}
-
-			formMeta.setFdmMeta(fdmMeta);
 			MemoryFormMeta.getInstance().put(form.getFormKey(), formMeta);
 			return formMeta;
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return null;
+			throw new ComException(ComException.MIN_ERROR_CODE_FDM + 1, ex);
+
 		}
 	}
 

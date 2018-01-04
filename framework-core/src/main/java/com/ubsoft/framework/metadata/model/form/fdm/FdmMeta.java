@@ -37,7 +37,7 @@ public class FdmMeta implements Serializable{
 	
 	public DetailMeta getDetailMeta(String key){
 		for(DetailMeta dm:details){
-			if(dm.getId().equals(key)){
+			if(dm.getBio().equals(key)||dm.getId().equals(key)){
 				return dm;
 			}
 		}

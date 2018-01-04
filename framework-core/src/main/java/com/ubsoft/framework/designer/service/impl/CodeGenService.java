@@ -34,41 +34,32 @@ public class CodeGenService implements ICodeGenService {
 
 	
 
+
+	@Override
+	public void genEntity(String masterBio, String pkg,String path) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void genService(String masterBio, String pkg,String path) {
+		// TODO Auto-generated method stub
+		
+	}
 	@Override
 	public void genFdm(String masterBio, String[] detailBios) {
 		// TODO Auto-generated method stub
 		
 	}
-
 	@Override
-	public void genEntity(String masterBio, String pkg) {
+	public void genForm(String formFtl, String masterBio, String[] detailBios, String path) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void genService(String masterBio, String pkg) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
-	@Override
-	public void genListForm(String masterBio, String pkg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void genEditForm(String masterBio, String[] detailBios, String pkg) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void genExploreForm(String masterBio, String[] detailBios, String pkg) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 }

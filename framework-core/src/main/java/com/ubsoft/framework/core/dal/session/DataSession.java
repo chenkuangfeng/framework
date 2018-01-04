@@ -2,7 +2,6 @@ package com.ubsoft.framework.core.dal.session;
 
 import java.beans.PropertyDescriptor;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.sql.CallableStatement;
@@ -16,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -47,7 +47,6 @@ public class DataSession implements IDataSession {
 	public Bio getBio(String bioName, Serializable id) {
 		BioMeta meta = MemoryBioMeta.getInstance().get(bioName);
 		return this.getBio(bioName, meta.getPrimaryProperty().getColumnKey(), id);
-
 	}
 
 	@Override
@@ -201,17 +200,17 @@ public class DataSession implements IDataSession {
 			}
 		}
 		if (bio.getStatus().equals("NEW")) {
-			if (property.getPropertyKey().equals("CREATEDBY")) {
+			if (property.getPropertyKey().toUpperCase().equals("CREATEDBY")) {
 				bio.setString("CREATEDBY", Subject.getSubject().getUserKey());
 			}
-			if (property.getPropertyKey().equals("CREATEDDATE")) {
+			if (property.getPropertyKey().toUpperCase().equals("CREATEDDATE")) {
 				bio.setDate("CREATEDDATE", new Date(System.currentTimeMillis()));
 			}
 		} else {
-			if (property.getPropertyKey().equals("UPDATEDBY")) {
+			if (property.getPropertyKey().toUpperCase().equals("UPDATEDBY")) {
 				bio.setString("UPDATEDBY", Subject.getSubject().getUserKey());
 			}
-			if (property.getPropertyKey().equals("UPDATEDDATE")) {
+			if (property.getPropertyKey().toUpperCase().equals("UPDATEDDATE")) {
 				bio.setDate("UPDATEDDATE", new Date(System.currentTimeMillis()));
 			}
 
@@ -484,9 +483,10 @@ public class DataSession implements IDataSession {
 		return this.gets(clazz, new String[] {}, new Object[] {});
 	}
 
-	public <T extends Serializable> List<T> gets(Class<T> clazz,String orderBy) {
-		return this.gets(clazz, new String[] {}, new Object[] {},orderBy);
+	public <T extends Serializable> List<T> gets(Class<T> clazz, String orderBy) {
+		return this.gets(clazz, new String[] {}, new Object[] {}, orderBy);
 	}
+
 	@Override
 	public <T extends Serializable> List<T> gets(Class<T> clazz, String field, Object value) {
 		return this.gets(clazz, new String[] { field }, new Object[] { value });
@@ -531,6 +531,7 @@ public class DataSession implements IDataSession {
 
 	private <T extends Serializable> Map<String, Object> getInsertArgs(T entity, Table ta) {
 		String tableName = ta.name();
+		String primaryKey = ta.primarykey();
 		String versionKey = ta.versionkey().toUpperCase();
 		Map<String, Object> result = new HashMap<String, Object>();
 		StringBuilder sql = new StringBuilder("INSERT INTO ");
@@ -548,17 +549,20 @@ public class DataSession implements IDataSession {
 				continue;
 			}
 			Object value = getReadMethodValue(pd.getReadMethod(), entity);
-			if (value == null) {
+			//设置主键和版本
+			if (versionKey != null && columnName.equals(versionKey)) {
+				value = 0;
+			} else if (primaryKey.toUpperCase().equals(columnName.toUpperCase())) {
+				value = UUID.randomUUID().toString().replace("-", "");
+			}
+			if (value == null)
 				continue;
 
-			}
 			sql.append(columnName);
 			args.append("?");
-			if (versionKey != null && columnName.equals(versionKey)) {
-				params.add(0);
-			} else {
-				params.add(value);
-			}
+
+			params.add(value);
+
 			sql.append(",");
 			args.append(",");
 		}
@@ -665,7 +669,6 @@ public class DataSession implements IDataSession {
 				if (userKey != null) {
 					baseEntity.setCreatedBy(userKey);
 				}
-				baseEntity.setId(UUID.randomUUID().toString().replace("-", ""));
 
 			}
 		}

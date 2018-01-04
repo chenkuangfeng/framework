@@ -108,7 +108,7 @@ public class DbTableMetaService implements IDbTableMetaService {
 			int i = 1;
 			for (DbTableColumnMeta cm : cmList) {
 				Object[] args = new Object[] { bioMeta.getBioKey(), cm.getColumnKey().toUpperCase() };
-				BioPropertyMeta property = dataSession.get(BioPropertyMeta.class, "bioKey=? and columnKey=?", args);
+				BioPropertyMeta property = dataSession.get(BioPropertyMeta.class, new String[]{"bioKey","columnKey"}, args);
 				if (property == null) {
 					property = new BioPropertyMeta();
 				}

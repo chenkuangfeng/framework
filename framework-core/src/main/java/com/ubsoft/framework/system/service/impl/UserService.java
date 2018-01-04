@@ -227,7 +227,7 @@ public class UserService extends BaseService<User> implements IUserService {
 	}
 
 	public void setUserPermission(String userKey, String[] addPermKeys, String[] delPermKeys) {
-		String sql = " delete from UserPermission where userKey=? and permKey=?";
+		String sql = " delete from SA_User_Permission where userKey=? and permKey=?";
 		for (String permKey : delPermKeys) {
 			dataSession.executeUpdate(sql, new Object[] { userKey, permKey });
 		}
@@ -339,10 +339,10 @@ public class UserService extends BaseService<User> implements IUserService {
 	@Override
 	public void saveSecurity(String userKey, List<UserPermission> perms, List<UserDimension> dimensions) {
 
-		String sql2 = "delete UserPermission where userKey=?";
+		String sql2 = "delete SA_User_Permission where userKey=?";
 		dataSession.executeUpdate(sql2, new Object[] { userKey });
 		dataSession.save(perms);
-		String sql = "delete UserDimension where userKey=?";
+		String sql = "delete SA_User_Dimension where userKey=?";
 		dataSession.executeUpdate(sql, new Object[] { userKey });
 		dataSession.save(dimensions);
 

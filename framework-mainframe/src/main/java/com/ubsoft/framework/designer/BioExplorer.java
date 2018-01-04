@@ -47,7 +47,11 @@ public class BioExplorer extends ExplorerForm {
 					this.lstDataSet.goToRow(rowIndex[i]);
 					final String table = lstDataSet.getString("tableKey");
 					setStatusMessage("正在同步" + table);
+					try{
 					dbService.updateBioMetaFromTable("DefaultDS", "", "", new String[] { table });
+					}catch(Exception ex){
+						MessageBox.showException(ex);
+					}
 
 				}
 				setStatusMessage("就绪");

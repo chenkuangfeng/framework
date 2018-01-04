@@ -169,9 +169,7 @@ public class BioMeta extends BaseEntity implements Serializable {
 	public BioPropertyMeta getProperty(String key){
 		key = key.toUpperCase();
 		BioPropertyMeta meta= propertyMap.get(key);
-		if(meta==null){
-			throw new DataAccessException(1,bioName+"不存在属性:"+key);
-		}
+		
 		return meta;
 	}
 

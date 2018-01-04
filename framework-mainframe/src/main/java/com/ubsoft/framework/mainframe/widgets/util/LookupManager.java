@@ -28,7 +28,7 @@ public class LookupManager {
 			beans = lookupCache.get(lkKey);
 		} else {
 			ILookupDetailService lkdService = RpcProxy.getProxy(ILookupDetailService.class);
-			beans = lkdService.gets("lkKey=?", new Object[] { lkKey });
+			beans = lkdService.gets(new String[]{"lkKey"},    new Object[]{lkKey} );
 			lookupCache.put(lkKey, beans);
 		}
 		StorageDataSet dataSet = new StorageDataSet();
@@ -60,7 +60,7 @@ public class LookupManager {
 			beans = lookupCache.get(lkKey);
 		} else {
 			ILookupDetailService lkdService = RpcProxy.getProxy(ILookupDetailService.class);
-			beans = lkdService.gets("lkKey=?", new Object[] { lkKey });
+			beans = lkdService.gets(new String[]{"lkKey"},    new Object[]{lkKey} );
 			lookupCache.put(lkKey, beans);
 		}
 		if (beans != null) {

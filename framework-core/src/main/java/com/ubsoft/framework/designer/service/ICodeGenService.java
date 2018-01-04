@@ -41,34 +41,22 @@ public interface ICodeGenService {
 	 * @param masterBio
 	 * @param pkg
 	 */
-	void genEntity(String masterBio,String pkg);
+	void genEntity(String masterBio,String pkg,String path);
 	/**
 	 * 生成sevices接口和实现类
 	 * @param masterBio
 	 * @param pkg
 	 */
-	void genService(String masterBio,String pkg);
-	/**
-	 * 生成列表界面
-	 * @param masterBio
-	 * @param pkg
-	 */
-	void genListForm(String masterBio,String pkg);
-	/**
-	 * 生成编辑界面
-	 * @param masterBio
-	 * @param detailBios
-	 * @param pkg
-	 */
-	void genEditForm(String masterBio,String[] detailBios,String pkg);
-	/**
-	 * 生成主从结构多表界面
-	 * @param masterBio
-	 * @param detailBios
-	 * @param pkg
-	 */
-	void genExploreForm(String masterBio,String[] detailBios,String pkg);
+	void genService(String masterBio,String pkg,String path);
 	
+	/**
+	 * 生成界面
+	 * @param masterBio
+	 * @param detailBios
+	 * @param pkg
+	 */
+	void genForm(String formFtl,String masterBio,String[] detailBios,String path);
+
 
 
 

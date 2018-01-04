@@ -113,7 +113,7 @@ public class RoleExplorer extends ExplorerForm {
 
 	private void addUserDetail(List<Bio> selectBios) {
 		for (Bio bio : selectBios) {
-			StorageDataSet roleDataSet = detailDataSets.get("roleUser");
+			StorageDataSet roleDataSet = detailDataSets.get("UserRole");
 			roleDataSet.insertRow(false);
 			roleDataSet.setString("userKey", bio.getString("USERKEY"));
 			roleDataSet.setString("userName", bio.getString("USERNAME"));	

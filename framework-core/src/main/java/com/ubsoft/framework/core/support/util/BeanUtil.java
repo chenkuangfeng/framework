@@ -195,7 +195,7 @@ public class BeanUtil {
 				Column column = field.getAnnotation(Column.class);
 				// 输出注解属性
 				String name = column.name();
-				if (name != null) {
+				if (StringUtil.isNotEmpty(name)) {
 					map.put(fieldName.toUpperCase(), name);
 				} else {
 					map.put(fieldName.toUpperCase(), fieldName);
@@ -212,7 +212,7 @@ public class BeanUtil {
 		}
 		return map;
 	}
-	
+
 	public static Object getProperty(Object bean, String property) {
 		boolean hasProperty = false;
 		try {

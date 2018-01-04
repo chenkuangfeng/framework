@@ -143,6 +143,7 @@ public abstract class ListForm extends Form {
 	protected void renderer(FormMeta meta) throws Exception {
 		this.meta = (ListFormMeta) meta;
 		formEngine.rendererForm(meta, this);
+		initPrivateControl(this.getClass(), this);
 		if (meta.getFdm() == null) {
 			return;
 		}
@@ -167,20 +168,22 @@ public abstract class ListForm extends Form {
 					if (toolBarMeta.getChildren() == null)
 						break;
 					for (WidgetMeta wMeta : toolBarMeta.getChildren()) {
-						ButtonMeta btnMeta = (ButtonMeta) wMeta;
-						if (btnMeta.getId() != null && btnMeta.getAction() != null) {
-							XButton btn = (XButton) getComponent(btnMeta.getId());
-							final String action = btnMeta.getAction();
-							btn.addActionListener(new ActionListener() {
-								@Override
-								public void actionPerformed(ActionEvent e) {
-									try {
-										doExecute(action);
-									} catch (Exception ex) {
-										MessageBox.showException(ex);
+						if (wMeta instanceof ButtonMeta) {
+							ButtonMeta btnMeta = (ButtonMeta) wMeta;
+							if (btnMeta.getId() != null && btnMeta.getAction() != null) {
+								XButton btn = (XButton) getComponent(btnMeta.getId());
+								final String action = btnMeta.getAction();
+								btn.addActionListener(new ActionListener() {
+									@Override
+									public void actionPerformed(ActionEvent e) {
+										try {
+											doExecute(action);
+										} catch (Exception ex) {
+											MessageBox.showException(ex);
+										}
 									}
-								}
-							});
+								});
+							}
 						}
 					}
 					break;
@@ -190,6 +193,9 @@ public abstract class ListForm extends Form {
 
 		if (this.mainTable != null && mainTable.getDataSet() != null) {
 			mainDataSet = (StorageDataSet) mainTable.getDataSet();
+			if (meta.getEditable() != null && meta.getEditable() == false) {
+				mainTable.setEditable(false);
+			}
 		}
 		if (meta.getFdmMeta().getMaster().getBioMeta() != null) {
 			DataSetUtil.loadDataSetMetaFromBioMeta(mainDataSet, meta.getFdmMeta().getMaster().getBioMeta());
@@ -345,7 +351,7 @@ public abstract class ListForm extends Form {
 					if (result != null) {
 						List<Bio> data = (List<Bio>) result;
 						// 实体列表
-						//Object entityData = data.get(masterKey);
+						// Object entityData = data.get(masterKey);
 						loading = true;
 						DataSetUtil.fillbackFromBio(data, mainDataSet);
 						DataSetUtil.acceptChanges(mainDataSet);
@@ -396,16 +402,15 @@ public abstract class ListForm extends Form {
 					mainDataSet.goToRow(rowIndex[i]);
 					if (propertyType.equals(TypeUtil.STRING)) {
 						String id = mainDataSet.getString(propertyKey);
-						if(StringUtil.isNotEmpty(id)){
+						if (StringUtil.isNotEmpty(id)) {
 							ids.add(id);
 						}
-					}else{
+					} else {
 						int id = mainDataSet.getInt(propertyKey);
-						if(id!=0){
+						if (id != 0) {
 							ids.add(id);
 						}
 					}
-					
 					deleteIndex[i] = mainDataSet.getInternalRow();
 				}
 
@@ -437,7 +442,6 @@ public abstract class ListForm extends Form {
 									loading = true;
 									for (long index : deleteIndex) {
 										mainDataSet.goToInternalRow(index);
-
 										mainDataSet.deleteRow();
 									}
 									setStatusMessage("就绪");
@@ -446,7 +450,6 @@ public abstract class ListForm extends Form {
 
 								}
 							}
-
 							setBusy(false);
 
 						} catch (Exception e) {

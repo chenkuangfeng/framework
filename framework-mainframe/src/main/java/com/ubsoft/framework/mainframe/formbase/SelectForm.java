@@ -36,6 +36,7 @@ import com.ubsoft.framework.core.dal.model.ConditionNode;
 import com.ubsoft.framework.core.dal.model.ConditionTree;
 import com.ubsoft.framework.core.dal.model.QueryModel;
 import com.ubsoft.framework.core.service.IFormService;
+import com.ubsoft.framework.mainframe.conf.Config;
 import com.ubsoft.framework.mainframe.widgets.component.BusyPanel;
 import com.ubsoft.framework.mainframe.widgets.component.XButton;
 import com.ubsoft.framework.mainframe.widgets.component.XToolBar;
@@ -179,6 +180,9 @@ public abstract class SelectForm extends JDialog {
 		try {
 			this.setBusy(true);
 			FormMeta formMeta = formEngine.getFormMeta(formId);
+			if (Config.getProperty("debug") != null && Config.getProperty("debug").equals("true")) {
+				formMeta = null;
+			}
 			if (formMeta == null) {
 				formMeta = (FormMeta) formService.getFormMeta(formId);
 				formEngine.putFormMeta(formId, formMeta);

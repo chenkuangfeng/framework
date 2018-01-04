@@ -1,19 +1,32 @@
 package com.ubsoft.framework.mainframe.widgets.util;
 
-import com.borland.dx.dataset.*;
+import java.beans.PropertyDescriptor;
+import java.io.ByteArrayInputStream;
+import java.lang.reflect.Method;
+import java.math.BigDecimal;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import com.borland.dx.dataset.Column;
+import com.borland.dx.dataset.DataRow;
+import com.borland.dx.dataset.DataSetView;
+import com.borland.dx.dataset.ProviderHelp;
+import com.borland.dx.dataset.ReadWriteRow;
+import com.borland.dx.dataset.RowStatus;
+import com.borland.dx.dataset.StorageDataSet;
+import com.borland.dx.dataset.Variant;
 import com.ubsoft.framework.core.dal.entity.BioMeta;
 import com.ubsoft.framework.core.dal.entity.BioPropertyMeta;
 import com.ubsoft.framework.core.dal.model.Bio;
 import com.ubsoft.framework.core.dal.util.TypeUtil;
 import com.ubsoft.framework.core.exception.DataAccessException;
 import com.ubsoft.framework.core.support.util.BeanUtil;
-
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
-import java.math.BigDecimal;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.util.*;
 
 public class DataSetUtil {
 	/**
@@ -30,7 +43,7 @@ public class DataSetUtil {
 		typeMapping.put(TypeUtil.LONG, Variant.LONG);
 		typeMapping.put(TypeUtil.SHORT, Variant.SHORT);
 		typeMapping.put(TypeUtil.BIGDECIMAL, Variant.BIGDECIMAL);
-		typeMapping.put(TypeUtil.BYTE_ARRAY, Variant.BYTE_ARRAY);
+		typeMapping.put(TypeUtil.BYTE_ARRAY, Variant.BINARY_STREAM);
 		typeMapping.put(TypeUtil.DATE, Variant.DATE);
 		typeMapping.put(TypeUtil.TIME, Variant.TIME);
 		typeMapping.put(TypeUtil.TIMESTAMP, Variant.TIMESTAMP);
@@ -113,9 +126,12 @@ public class DataSetUtil {
 
 			variant.setBigDecimal((BigDecimal) decObj);
 			break;
-		case Variant.BYTE_ARRAY:
+		case Variant.BINARY_STREAM:
 			Object baObj = TypeUtil.convert(TypeUtil.BYTE_ARRAY, value);
-			variant.setByteArray((byte[]) baObj, 0);
+			//variant.setByteArray((byte[]) baObj, 0);
+			variant.setInputStream(new ByteArrayInputStream((byte[])baObj));
+			
+
 			break;
 		case Variant.DATE:
 			Object dateObj = TypeUtil.convert(TypeUtil.DATE, value);
@@ -155,6 +171,7 @@ public class DataSetUtil {
 			} else if (dataType == Variant.DOUBLE) {
 				bio.setDouble(field, row.getDouble(field));
 			} else if (dataType == Variant.LONG) {
+				
 				bio.setLong(field, row.getLong(field));
 			} else if (dataType == Variant.SHORT) {
 				bio.setShort(field, row.getShort(field));
@@ -166,8 +183,8 @@ public class DataSetUtil {
 				bio.setTimestamp(field, row.getTimestamp(field));
 			} else if (dataType == Variant.TIME) {
 				bio.setTime(field, row.getTime(field));
-			} else if (dataType == Variant.BYTE_ARRAY) {
-				bio.setBinary(field, row.getByteArray(field));
+			} else if (dataType == Variant.BINARY_STREAM) {
+				bio.setBinary(field, row.getByteArray(field)); 
 			} else {
 				throw new DataAccessException(5, "不支持Variant类型：" + dataType);
 			}
@@ -371,6 +388,9 @@ public class DataSetUtil {
 				column.setVisible(0);
 				column.setColumnName(key);
 				if (typeMapping.containsKey(dataType)) {
+					if(dataType.equals(TypeUtil.BYTE_ARRAY)){
+					 System.out.println(dataType);
+					}
 					column.setDataType(typeMapping.get(dataType));
 				} else {
 					throw new RuntimeException("不支持类型" + dataType + "到dataSet转换.");
@@ -906,7 +926,11 @@ public class DataSetUtil {
 				toRow.setTime(field, fromRow.getTime(field));
 			} else if (dataType == Variant.OBJECT) {
 				// toRow.setObject(field, fromRow.getObject(field));
-			} else {
+			} else if (dataType == Variant.BINARY_STREAM) {
+				toRow.setInputStream(field, new ByteArrayInputStream(fromRow.getByteArray(field)));
+				//variant.setInputStream();
+
+			}else {
 				throw new DataAccessException(5, "不支持Variant类型：" + dataType);
 			}
 		}

@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +40,9 @@ import com.borland.dx.dataset.DataChangeEvent;
 import com.borland.dx.dataset.DataSet;
 import com.borland.dx.dataset.EditAdapter;
 import com.borland.dx.dataset.StorageDataSet;
+import com.ubsoft.framework.core.dal.annotation.Column;
+import com.ubsoft.framework.core.dal.annotation.Table;
+import com.ubsoft.framework.core.dal.annotation.Transient;
 import com.ubsoft.framework.core.dal.entity.BioMeta;
 import com.ubsoft.framework.core.dal.model.Bio;
 import com.ubsoft.framework.core.dal.model.BioSet;
@@ -155,6 +159,7 @@ public abstract class ExplorerForm extends Form {
 	protected void renderer(FormMeta meta) throws Exception {
 		this.meta = (ExplorerFormMeta) meta;
 		formEngine.rendererForm(meta, this);
+		initPrivateControl(this.getClass(),this);
 		// 如果没有fdm，只生成界面
 		if (meta.getFdm() == null) {
 			afterRenderer();
@@ -285,8 +290,10 @@ public abstract class ExplorerForm extends Form {
 	 * 生成界面后执行
 	 */
 	protected void afterRenderer() {
-
+		
 	}
+	
+
 
 	/**
 	 * 新建前执行
