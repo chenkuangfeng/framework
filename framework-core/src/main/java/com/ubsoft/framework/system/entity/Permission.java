@@ -13,7 +13,7 @@ public class Permission extends BaseEntity implements Serializable {
 	private String permKey;	
 	@Column(name="PERMNAME",length=100,nullable=false) 
 	private String permName;	
-	@Column(name="PERMMODULE",length=100) 
+	@Column(name="PERMMODULE",length=100)
 	private String permModule;		
 	@Column(name="PERMTYPE",length=100,nullable=false) 
 	private String permType;	
@@ -72,29 +72,33 @@ public class Permission extends BaseEntity implements Serializable {
 	public String getParams() {
 		return params;
 	}
+	
 	public void setParams(String params) {
 		this.params = params;
 	}
+	
 	public Integer getSeq() {
 		return seq;
 	}
 	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}
+	
 	public String getParentPermKey() {
 		return parentPermKey;
 	}
+	
 	public void setParentPermKey(String parentPermKey) {
 		this.parentPermKey = parentPermKey;
 	}
+	
 	public String getIcon() {
 		return icon;
 	}
+	
 	public void setIcon(String icon) {
 		this.icon = icon;
-	}
-	
-	
+	}	
 	
 	
 	

@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="framework-core" />
-        <module name="framework-designer" />
         <module name="framework-mainframe" />
         <module name="framework-web" />
       </profile>

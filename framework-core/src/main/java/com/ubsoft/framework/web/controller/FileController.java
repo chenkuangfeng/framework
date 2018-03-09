@@ -40,7 +40,7 @@ public class FileController extends BaseController {
      *
      * @return
      */
-    @RequestMapping("/form/exportExcel.ctrl")
+    @RequestMapping("/file/exportExcel.ctrl")
     public void exportExcel(HttpServletRequest request, HttpServletResponse response){
         String qmString = request.getParameter("queryModel");
         String columnKeysStr = request.getParameter("columns");// 列key

@@ -22,7 +22,7 @@ import com.ubsoft.framework.mainframe.widgets.util.MessageBox;
 public class MainApp extends JFrame {
 
 	private static LoginFrame loginFrame;
-	private static MainApp mainApp;
+	private static MainApp mainApp; 
 
 	public MainApp() {
 		

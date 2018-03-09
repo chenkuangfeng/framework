@@ -2,6 +2,7 @@ package com.ubsoft.framework.web.tag;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -10,8 +11,11 @@ import javax.servlet.jsp.JspTagException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.Tag;
 
+import com.ubsoft.framework.core.context.AppContext;
+import com.ubsoft.framework.core.service.IFormService;
 import com.ubsoft.framework.system.entity.LookupDetail;
 import com.ubsoft.framework.system.entity.UISetting;
+import com.ubsoft.framework.system.model.Subject;
 
 /**
  * 列表标签
@@ -20,26 +24,13 @@ import com.ubsoft.framework.system.entity.UISetting;
  * 
  */
 public class DataGridTag extends BaseTag {
-	protected String showFilter;
-
-	protected String editable;
-
+	protected String filter;
 	protected String ui;
-
-	public String getShowFilter() {
-		return showFilter;
+	public String getFilter() {
+		return filter;
 	}
-
-	public void setShowFilter(String showFilter) {
-		this.showFilter = showFilter;
-	}
-
-	public String getEditable() {
-		return editable;
-	}
-
-	public void setEditable(String editable) {
-		this.editable = editable;
+	public void setFilter(String filter) {
+		this.filter = filter;
 	}
 
 	public String getUi() {
@@ -92,16 +83,16 @@ public class DataGridTag extends BaseTag {
 		List<UISetting> uiSettings=null;
 		Map<String,UISetting> colMap=null;
 		if(ui!=null){
-//			IFormService formService = (IFormService) AppContext.getBean("formService");
-//			 uiSettings = formService.getUISetting(Subject.getSubject().getUserKey(), ui);
-//			 colMap= new HashMap<String,UISetting>();
-//			 for(UISetting uisetting:uiSettings){
-//				 colMap.put(uisetting.getField(), uisetting);
-//			 }
+			IFormService formService = (IFormService) AppContext.getBean("formService");
+			 uiSettings = formService.getUISetting(Subject.getSubject().getUserKey(), ui);
+			 colMap= new HashMap<String,UISetting>();
+			 for(UISetting uisetting:uiSettings){
+				 colMap.put(uisetting.getField(), uisetting);
+			 }
 		}
 
 		// 生成查询条件输入框
-		if (showFilter == null || showFilter.equals("true")) {
+		if (filter == null || filter.equals("true")) {
 			this.genFilter(body,colMap);
 		}
 		
@@ -158,18 +149,17 @@ public class DataGridTag extends BaseTag {
 			}
 			// 添加默认编辑框,必须grid是editable
 			boolean coleditable=true;
-			if(editable != null && editable.equals("true")){
+			if(editable == null || editable.equals("true")){
 				coleditable=true;
 			}else{
 				coleditable=false;
 			}
-			if(column.enable != null && column.enable.equals("true")){
+			if(column.editable != null && column.editable.equals("true")){
 				coleditable=true;
-			}else if(column.enable != null && column.enable.equals("false")){
+			}else if(column.editable != null && column.editable.equals("false")){
 				coleditable=false;
 			}
-			if (coleditable) {
-				
+			if (coleditable) {				
 				String editor = column.editor;
 				String vtype = column.vtype;
 				String required = column.required;
@@ -215,15 +205,7 @@ public class DataGridTag extends BaseTag {
 					}
 
 				}
-
-				// if(type.equals("text")){
-				// if(editor==null){
-				// column.addStringProperty(body, "editor", "text");
-				// }else{
-				// column.addStringProperty(body, "editor", editor);
-				// }
-				//
-				// }
+				
 			}
 			body.append(">");
 			if (column.label != null) {
@@ -494,7 +476,7 @@ public class DataGridTag extends BaseTag {
 		super.clearPropertyValue();
 		columns.clear();
 		columns = null;
-		showFilter = null;
+		filter = null;
 		editable = null;
 		ui = null;
 	}

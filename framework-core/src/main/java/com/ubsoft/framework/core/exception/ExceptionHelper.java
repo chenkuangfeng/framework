@@ -24,10 +24,12 @@ public class ExceptionHelper {
 	 */
 	public static RuntimeException dealRuntimeException(Throwable e) {
 
-		if (e instanceof ComException) {
-			return dealRuntimeExceptionJson((ComException) e);
-		} else {
-			return dealRuntimeExceptionJson(new ComException(-1, e));
+		Throwable root=getRootCause(e);
+		if(root instanceof ComException){
+			ComException comExp=(ComException)root;
+			throw new RuntimeException(comExp.getCode()+":"+comExp.getOriginalMessage());
+		}else{
+			throw new RuntimeException("-1"+e.getMessage());
 		}
 	}
 

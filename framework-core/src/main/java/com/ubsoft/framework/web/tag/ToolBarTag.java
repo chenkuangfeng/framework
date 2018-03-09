@@ -7,7 +7,7 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.Tag;
 
 public class ToolBarTag extends BaseTag {
-	protected String showPager = "true";// 是否显示分页控件
+	protected String showPager = "true";
 	protected String title;
 
 	public String getTitle() {
@@ -29,7 +29,8 @@ public class ToolBarTag extends BaseTag {
 	public int doStartTag() throws JspTagException {
 		Tag t = this.getParent();
 		StringBuffer body = new StringBuffer();
-		body.append("<div class=\"btn-toolbar\" style=\"padding:2px\">");
+		body.append("<div class=\"btn-toolbar\" style=\"padding:0px\">");
+		title=null;
 		if (title != null) {
 			body.append("<div class=\"btn-group\"> ");
 			body.append("	<div class=\"box-header\" style=\"padding-top:5px;padding-bottom:2px\">");
@@ -45,9 +46,10 @@ public class ToolBarTag extends BaseTag {
 			body.append("<div class=\"btn-group\"> ");
 			body.append("<div  ");
 			addStringProperty(body, "id", id + "_pagerbar");
-			addStringProperty(body, "style", "color:black;margin-top:0px;margin-bottom:0px");// background:#efefef;border:1px
-																					// solid
-																					// #ddd;
+			addStringProperty(body, "style", "color:black;margin-top:0px;margin-bottom:0px;height:25px");// background:#efefef;border:1px
+			// solid
+			//addStringProperty(body, "class", "easyui-pagination");
+																		// #ddd;
 			// addStringProperty(body, "data-options",
 			// "buttons:$('#"+id+"_pg')");
 			// addStringProperty(body, "showPageList", "false");

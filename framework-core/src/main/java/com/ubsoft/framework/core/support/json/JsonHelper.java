@@ -107,7 +107,7 @@ public class JsonHelper {
 		JSONUtils.getMorpherRegistry().registerMorpher(
 				new DateMorpher(new String[] { "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd'T'HH:mm:ss", "yyyy-MM-dd" }));
 		JSONArray jsonArray = JSONArray.fromObject(json);
-		return JSONArray.toList(jsonArray, valueClz);
+		return (List)JSONArray.toCollection(jsonArray, valueClz);
 	}
 
 	public static final String array2Json(Object[] obj) {

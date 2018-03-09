@@ -1,10 +1,11 @@
 package com.ubsoft.framework.core.dal.session;
 
-import com.ubsoft.framework.core.dal.model.Bio;
-import com.ubsoft.framework.core.dal.model.PageResult;
-
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+
+import com.ubsoft.framework.core.dal.model.Bio;
+import com.ubsoft.framework.core.dal.model.PageResult;
 
 /**
  * 数据库dao层操作类，原则上支持所有数据库和hive、 hbase、
@@ -59,6 +60,8 @@ public interface IDataSession {
 	List<Bio> query(String sql, Object[] params, int limit);
 
 	PageResult<Bio> query(String sql, int pageSize, int pageNumber, Object[] params);
+	
+	
 
 	// 获取bean
 	<T extends Serializable> T get(Class<T> clazz, Serializable id);

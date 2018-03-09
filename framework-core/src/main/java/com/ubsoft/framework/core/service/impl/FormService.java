@@ -181,7 +181,6 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 			dataSession.saveBio(bio);
 			fireFormListener("AFTERSAVE", fdmMeta, bioSet);
 		}
-
 		return set;
 	}
 
@@ -205,7 +204,7 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 				} else {
 					dtId = id;
 				}
-				dataSession.deleteBio(bioName, detailMeta.getFk(), new Object[] { dtId });
+				dataSession.deleteBio(bioName, detailMeta.getFk(),  dtId);
 			}
 		}
 		String masterBioName = fdmMeta.getMaster().getBio();
@@ -248,7 +247,7 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 	private void setDefaultUnPermission(FormMeta meta) {
 		String formId = meta.getId();
 		Map<String, Boolean> formPermission = new HashMap<String, Boolean>();
-		// 按钮权限
+		//按钮权限
 		String savePermKey = formId.toUpperCase() + "_SAVE";
 		String newPermKey = formId.toUpperCase() + "_NEW";
 		String delPermKey = formId.toUpperCase() + "_DEL";
@@ -305,10 +304,15 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 		if (fdmMeta == null) {
 			throw new ComException(ComException.MIN_ERROR_CODE_FDM + 1, "找不到界面数据模型:" + fdmId);
 		}
-		String orderBy = queryModel.getOrderBy();// 默认排序
-		// if (StringUtil.isEmpty(orderBy)) {
-		// orderBy = "T.createddate desc";
-		// }
+		String orderBy = queryModel.getOrderBy();
+		
+		
+		if(orderBy!=null){
+			if(orderBy.indexOf(".")==-1){
+				orderBy="T."+orderBy;
+			}
+		}
+		
 		ConditionTree ctree = queryModel.getConditionTree();// 条件树
 		String condition = ctree.transferCondition();// 条件字符串
 		Object[] params = ctree.transferParameter();// 查询参数
@@ -343,7 +347,7 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 
 	@Override
 	public List<UISetting> getUISetting(String userKey, String uiKey) {
-		List<UISetting> uiSettingList = dataSession.gets(UISetting.class, "userKey=? and uiKey=?", new Object[] { userKey, uiKey });
+		List<UISetting> uiSettingList = dataSession.gets(UISetting.class, new String[]{"userKey","uiKey"}, new Object[] { userKey, uiKey });
 		return uiSettingList;
 	}
 
@@ -351,8 +355,8 @@ public class FormService extends BaseService<Serializable> implements IFormServi
 	public List<UISetting> saveUISetting(List<UISetting> settings) {
 		String userKey = settings.get(0).getUserKey();
 		String uiKey = settings.get(0).getUiKey();
-		String hql = "delete from UISetting where userKey=? and uiKey=?";
-		dataSession.executeUpdate(hql, new Object[] { userKey, uiKey });
+		String sql = "delete from SA_UI_SETTING where userKey=? and uiKey=?";
+		dataSession.executeUpdate(sql, new Object[] { userKey, uiKey });
 		dataSession.save(settings);
 		return settings;
 	}

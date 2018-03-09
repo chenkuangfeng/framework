@@ -42,7 +42,7 @@ public class BioMetaService extends BaseService<BioMeta> implements IBioMetaServ
 	}
 
 	private void setPropertyMeta(BioMeta bioMeta) {
-		List<BioPropertyMeta> propertyMeta = dataSession.gets(BioPropertyMeta.class, "bioKey",  bioMeta.getBioKey());
+		List<BioPropertyMeta> propertyMeta = dataSession.gets(BioPropertyMeta.class, "bioKey",  bioMeta.getBioKey(),"seq");
 		Set<BioPropertyMeta> propertySet = new HashSet<BioPropertyMeta>();
 		propertySet.addAll(propertyMeta);
 		bioMeta.setPropertySet(propertySet);

@@ -46,8 +46,8 @@ public class Task extends BaseEntity {
 	/**
 	 * 是否记录日志
 	 */
-	@Column(name="LOG")
-	private boolean log;
+	@Column(name="LOGABLE")
+	private String logable;
 
 	public String getTaskKey() {
 		return taskKey;
@@ -130,12 +130,15 @@ public class Task extends BaseEntity {
 		this.sqlValue = sqlValue;
 	}
 
-	public boolean isLog() {
-		return log;
+	
+	
+
+	public String getLogable() {
+		return logable;
 	}
 
-	public void setLog(boolean log) {
-		this.log = log;
+	public void setLogable(String logable) {
+		this.logable = logable;
 	}
 
 	public String getRemarks() {

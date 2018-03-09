@@ -381,7 +381,7 @@ public class DataSetUtil {
 		Set<BioPropertyMeta> properties = meta.getPropertySet();
 		for (BioPropertyMeta property : properties) {
 			String key = property.getPropertyKey();
-			String dataType = property.getDataType().toLowerCase();
+			String dataType = property.getDataType();
 			Column column = dataSet.hasColumn(key);
 			if (column == null) {
 				column = new Column();
@@ -393,7 +393,7 @@ public class DataSetUtil {
 					}
 					column.setDataType(typeMapping.get(dataType));
 				} else {
-					throw new RuntimeException("不支持类型" + dataType + "到dataSet转换.");
+					throw new RuntimeException("不支持BioMeta数据类型" + dataType + "到dataSet转换.");
 				}
 				dataSet.addColumn(column);
 			}

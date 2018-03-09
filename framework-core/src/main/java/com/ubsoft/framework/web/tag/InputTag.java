@@ -234,11 +234,12 @@ public class InputTag extends BaseTag {
 			}
 			body.append("<label for=\"").append(id).append("\">");
 			if (label != null) {
+				
 				if (this.required != null && required.equals("true")) {
-					String labelRequeird = label + "<font color='red'>*</font>";
+					String labelRequeird = label + ":<font color='red'>*</font>";
 					body.append(labelRequeird).append("</label>");
 				} else {
-					body.append(label).append("</label>");
+					body.append(label).append(":").append("</label>");
 				}
 			} else {
 				body.append("&nbsp;").append("</label>");

@@ -1,7 +1,35 @@
 package com.ubsoft.framework.web.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.ContextLoader;
+
 import com.ubsoft.framework.core.conf.AppConfig;
-import com.ubsoft.framework.core.dal.model.*;
+import com.ubsoft.framework.core.dal.model.Bio;
+import com.ubsoft.framework.core.dal.model.BioSet;
+import com.ubsoft.framework.core.dal.model.ConditionLeafNode;
+import com.ubsoft.framework.core.dal.model.ConditionTree;
+import com.ubsoft.framework.core.dal.model.PageResult;
+import com.ubsoft.framework.core.dal.model.QueryModel;
 import com.ubsoft.framework.core.dal.util.DynamicDataSource;
 import com.ubsoft.framework.core.dal.util.SQLUtil;
 import com.ubsoft.framework.core.exception.ComException;
@@ -20,25 +48,6 @@ import com.ubsoft.framework.system.model.Subject;
 import com.ubsoft.framework.system.service.ILookupDetailService;
 import com.ubsoft.framework.system.service.IOrgService;
 import com.ubsoft.framework.system.service.IPermService;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.context.ContextLoader;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.Serializable;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RequestMapping("/")
 @RestController
@@ -47,7 +56,6 @@ public class FormController extends BaseController {
 	IFormService formService;
 	@Autowired
 	ILookupDetailService lookupService;
-
 	@Autowired
 	IPermService permService;
 	@Autowired
@@ -130,7 +138,7 @@ public class FormController extends BaseController {
 	 * @return
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("/form/saveForm.ctrl")
+	@RequestMapping("/form/save.ctrl")
 	public String saveForm() {
 		String unitName = getUnitName();
 		if (unitName != null) {
@@ -153,7 +161,7 @@ public class FormController extends BaseController {
 			formService.saveForm(fdmKey, bioSet);
 			// 返回id,前台重新加载,后期优化
 			res.put("ret", bioSet);
-
+			res.put("id", bioSet.getMaster().get("id"));
 			res.put("status", "S");
 			return JsonHelper.bean2Json(res);
 		} catch (Exception ex) {
@@ -169,8 +177,8 @@ public class FormController extends BaseController {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@RequestMapping("/form/saveForms.ctrl")
-	public String saveForms() {
+	@RequestMapping("/form/saveList.ctrl")
+	public String saveList() {
 		String unitName = getUnitName();
 		if (unitName != null) {
 			DynamicDataSource.setDataSource(unitName);
@@ -178,21 +186,12 @@ public class FormController extends BaseController {
 		Map<String, Object> res = new HashMap<String, Object>();
 		String fdmKey = request.getParameter("fdm");
 		String requestData = request.getParameter("data");
-		FdmMeta fdmMeta = MemoryFdmMeta.getInstance().get(fdmKey);
 		try {
-			Map jsonConfig = new HashMap();
-			jsonConfig.put("master", Bio.class);
-			if (fdmMeta.getDetails() != null) {
-				for (DetailMeta meta : fdmMeta.getDetails()) {
-					String detailBioKey = meta.getId() == null ? meta.getBio() : meta.getId();
-					jsonConfig.put(detailBioKey, Bio.class);
-				}
-			}
-			BioSet bioSet = (BioSet) JsonHelper.json2Bean(requestData, BioSet.class, jsonConfig);
-			formService.saveForm(fdmKey, bioSet);
-			// 返回id,前台重新加载,后期优化
-			res.put("ret", bioSet);
-
+			List<Bio> listBio = JsonHelper.json2List(requestData, Bio.class);
+			// BioSet bioSet = (BioSet) JsonHelper.json2Bean(requestData,
+			// BioSet.class, jsonConfig);
+			formService.saveForm(fdmKey, listBio);
+			res.put("ret", listBio);
 			res.put("status", "S");
 			return JsonHelper.bean2Json(res);
 		} catch (Exception ex) {
@@ -216,14 +215,14 @@ public class FormController extends BaseController {
 		Map<String, Object> res = new HashMap<String, Object>();
 		String fdmId = request.getParameter("fdm");
 		String ids = request.getParameter("ids");
-		
+
 		Serializable[] delIds = (Serializable[]) JsonHelper.json2Array(ids, Serializable.class);
 		try {
 			FdmMeta fdmMeta = MemoryFdmMeta.getInstance().get(fdmId);
 			if (fdmMeta == null) {
 				throw new ComException(ComException.MIN_ERROR_CODE_FDM, "不存在FDM：" + fdmId);
 			}
-			formService.deleteForm(fdmId, delIds);			
+			formService.deleteForm(fdmId, delIds);
 			res.put("status", "S");
 			return JsonHelper.bean2Json(res);
 		} catch (Exception ex) {
@@ -378,17 +377,16 @@ public class FormController extends BaseController {
 	 * 界面通用查询Controller
 	 * 
 	 * @return
+	 * @throws Exception
 	 */
 	@RequestMapping("/form/exportExcel.ctrl")
-	public void exportExcel(HttpServletRequest request, HttpServletResponse response) {
-		String qmString = request.getParameter("queryModel");
-		String columnKeysStr = request.getParameter("columns");// 列key
+	public void exportExcel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String qmString = URLDecoder.decode(request.getParameter("queryModel"), "UTF-8");
+		String columnKeysStr = URLDecoder.decode(request.getParameter("columns"), "UTF-8");// 列key
 		String unitName = getUnitName();
-
 		if (StringUtil.isNotEmpty(unitName)) {
 			DynamicDataSource.setDataSource(unitName);
 		}
-
 		final SXSSFWorkbook workbook = new SXSSFWorkbook();
 		final Sheet sheet = workbook.createSheet("sheet1");
 		final List<ExcelColumn> columns = JsonHelper.json2List(columnKeysStr, ExcelColumn.class);
@@ -469,7 +467,7 @@ public class FormController extends BaseController {
 		AppConfig.initCache(cachePath);
 		// 加载fdm
 		AppConfig.initMetadata();
-		AppConfig.initEsb(""); 
+		AppConfig.initEsb("");
 		MemoryLookup.getInstance().clear();
 
 		return "ok";

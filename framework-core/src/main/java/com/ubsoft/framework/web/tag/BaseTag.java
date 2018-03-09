@@ -19,6 +19,7 @@ public class BaseTag extends TagSupport {
 	protected String visible;;
 	protected String style;
 	protected String css;
+	protected String editable;
 
 	public String getId() {
 		return id;
@@ -103,6 +104,14 @@ public class BaseTag extends TagSupport {
 		style = null;
 		css = null;
 
+	}
+
+	public String getEditable() {
+		return editable;
+	}
+
+	public void setEditable(String editable) {
+		this.editable = editable;
 	}
 
 	protected String addSessionIdParams(String url) {

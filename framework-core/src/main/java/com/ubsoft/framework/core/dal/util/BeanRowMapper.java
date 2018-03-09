@@ -42,6 +42,9 @@ public class BeanRowMapper<T> implements RowMapper<T> {
 					System.out.println(column.toLowerCase()+"字段在"+mappedClass.getName()+"中不存在");
 					continue;
 				}
+//				if(mappedClass.getSimpleName().equals("Session")){
+//				System.out.println(mappedClass+"-"+column.toLowerCase());
+//				}
 				if (pd.getWriteMethod() != null) {
 					Object value = TypeUtil.getResultSetValue(rs, index, pd);
 					Object[] args = new Object[1];

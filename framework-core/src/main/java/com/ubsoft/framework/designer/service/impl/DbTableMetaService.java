@@ -116,7 +116,7 @@ public class DbTableMetaService implements IDbTableMetaService {
 				i++;
 				property.setBioId(bioMeta.getId());
 				property.setBioKey(bioMeta.getBioKey());
-				//if (property.getPropertyKey() == null) {
+				if (property.getPropertyKey() == null) {
 					String popertyKey=this.getPropertKey(cm.getColumnKey());
 					property.setPropertyKey(popertyKey);
 				//}
@@ -130,12 +130,12 @@ public class DbTableMetaService implements IDbTableMetaService {
 					}
 				}
 				property.setColumnKey(cm.getColumnKey().toUpperCase());
-				if (property.getDataType() == null) {
+				//if (property.getDataType() == null) {
 					// oracle number类型都是bigdecimal,如果没有小数, 转换成int
 					String dataType = TypeUtil.SQL_TYPE_MAPPING.get(cm.getDataType());
-					if (dataType.equals("bigdecimal")) {
+					if (dataType.equals("BigDecimal")) {
 						if (cm.getDigits() == 0) {
-							dataType = "integer";
+							dataType = "Integer";
 						}
 					}
 					property.setDataType(dataType);
@@ -145,6 +145,9 @@ public class DbTableMetaService implements IDbTableMetaService {
 				property.setNullable(cm.getNullable()+"");
 				if (cm.getColumnKey().toUpperCase().equals(tableMeta.getPrimaryKey().toUpperCase())) {
 					property.setPrimaryKey("1");
+				}
+				if(cm.getColumnKey().equals("version")){
+					property.setVersionKey("1");
 				}
 				dataSession.save(property);
 			}

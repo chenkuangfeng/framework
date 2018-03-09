@@ -45,8 +45,6 @@
 	<cache name="WXACCOUNT" maxElementsInMemory="100000" eternal="true"
 		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="0"
 		memoryStoreEvictionPolicy="LFU" />
-	<cache name="tablemeta" maxElementsInMemory="100000" eternal="true"
-		overflowToDisk="true" timeToIdleSeconds="3600" timeToLiveSeconds="0"
-		memoryStoreEvictionPolicy="LFU" />
+	
 
 </ehcache>

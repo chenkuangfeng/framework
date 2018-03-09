@@ -94,7 +94,6 @@ public class XColumn extends Column implements IRenderer {
 			this.genColumnByType(type);
 		}
 		// 设置数据类型
-		dataType = dataType.toLowerCase();
 		this.setColumnDataType(dataType);
 		// 下拉框数据
 		String code = colMeta.getCode();
@@ -136,7 +135,7 @@ public class XColumn extends Column implements IRenderer {
 		} else if (dataType.equals(TypeUtil.BYTE_ARRAY)) {
 			variantDataType = Variant.BYTE_ARRAY;
 		} else {
-			MessageBox.showError("不支持数据类型:" + dataType);
+			MessageBox.showError("列不支持数据类型:" + dataType);
 		}
 		setDataType(variantDataType);
 

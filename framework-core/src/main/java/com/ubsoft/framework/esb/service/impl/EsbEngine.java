@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ubsoft.framework.core.service.ITransactionService;
+import com.ubsoft.framework.core.support.util.StringUtil;
 import com.ubsoft.framework.esb.cache.MemoryAppKey;
 import com.ubsoft.framework.esb.cache.MemoryEndpoint;
 import com.ubsoft.framework.esb.entity.AppKey;
@@ -39,15 +40,15 @@ public class EsbEngine  implements IEsbEngine {
 	 * 加载接口和route并初始化服务，容器启动时候执行。
 	 */
 	public void initEngine() {
-		List<Endpoint> listEP = epService.gets("status='1'",new Object[]{}); 		
+		List<Endpoint> listEP = epService.gets("status","1"); 		
 		//缓存接口
 		for (Endpoint ep : listEP) {
-			List<Route> listRoute = routeService.gets("epId=? and status='1' order by seq ", new Object[] { ep.getId() });
+			List<Route> listRoute = routeService.gets(new String[]{"epId","status"} , new Object[] { ep.getId(),"1" },"seq");
 			ep.setRoutes(listRoute);
 			MemoryEndpoint.getInstance().put(ep.getEpKey(), ep);			
 		}
 		//缓存APPKEY
-		List<AppKey> listAK=appKeyService.gets("status='1'", new Object[]{});
+		List<AppKey> listAK=appKeyService.gets("status", "1");
 		for(AppKey ak : listAK){
 			MemoryAppKey.getInstance().put(ak.getAppKey(), ak);
 		}
@@ -108,7 +109,7 @@ public class EsbEngine  implements IEsbEngine {
 					logService.error(log);
 					break;// 退出循环
 				} else {
-					if (rp.isLog()) {
+					if (StringUtil.isTrue(rp.getLogable())) {
 						logService.info(log);
 					}
 				}

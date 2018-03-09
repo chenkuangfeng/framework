@@ -8,7 +8,6 @@ import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -61,9 +60,10 @@ public class MainFrame extends JPanel {
 
 	public MainFrame(MainApplet applet) throws Exception {
 		initComponents();
-		JInternalFrame mm = new JInternalFrame();
+		//JInternalFrame mm = new JInternalFrame();
 
 		this.applet = applet;
+		mainFrame = this;
 
 	}
 

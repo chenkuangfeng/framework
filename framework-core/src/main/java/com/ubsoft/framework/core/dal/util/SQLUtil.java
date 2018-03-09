@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.ubsoft.framework.core.dal.model.Bio;
-import com.ubsoft.framework.core.support.util.FreeMarkerUtil;
+import com.ubsoft.framework.core.support.util.FreemarkerUtil;
 import com.ubsoft.framework.system.cache.MemoryDimension;
 import com.ubsoft.framework.system.model.Subject;
 
@@ -55,16 +55,16 @@ public class SQLUtil {
 
 	public static String getPageSql(String sql, int pageSize, int pageNo, String dbType) {
 		int startNum = pageSize * (pageNo - 1); // 0 10
-		int endNum = startNum + pageNo; // 10 20
+		int endNum = startNum + pageSize; // 10 20
 		StringBuffer sb = new StringBuffer();
 		if (dbType.equals("oracle")) {
 			sb.append("SELECT * FROM ");
 			sb.append("(");
 			sb.append("SELECT T.*, ROWNUM RN ");
-			sb.append("FROM (").append(sql).append(") T");
+			sb.append("FROM (").append(sql).append(") T ");
 			sb.append("WHERE ROWNUM <=").append(endNum);
 			sb.append(")");
-			sb.append("WHERE RN >").append(startNum);
+			sb.append(" WHERE RN >").append(startNum);
 		}
 		if (dbType.equals("mysql")) {
 			sb.append(sql).append(" limit ").append(startNum + 1).append(",").append(pageSize);
@@ -89,9 +89,8 @@ public class SQLUtil {
 		return sql;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static String freeMarkerSql(String sql, Map<String, Object> mapParams) {
-		FreeMarkerUtil futl = FreeMarkerUtil.getInstance();
-		int i = 0;
 		Map root = new HashMap();
 		for (Map.Entry entry : mapParams.entrySet()) {
 			String name = entry.getKey().toString();
@@ -104,12 +103,7 @@ public class SQLUtil {
 			// 设置当前组织
 			root.put("orgKey", Subject.getSubject().getSession().getOrgKey());
 		}
-		try {
-			sql = futl.parseString(sql, root);
-		} catch (TemplateException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		sql = FreemarkerUtil.parseString(sql, root);
 		return sql;
 	}
 

@@ -51,7 +51,7 @@ public class QrtzTaskService implements IQrtzTaskService {
 			}
 			// 如果无className参数则使用默认GeneralJob
 			if (className == null || className.equals("")) {
-				className = "com.framework.scheduler.job.GeneralJob";
+				className = "com.ubsoft.framework.scheduler.job.GeneralJob";
 			}
 			// JOB状态
 			final Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(className);

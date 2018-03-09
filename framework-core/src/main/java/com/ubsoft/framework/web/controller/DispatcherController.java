@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ubsoft.framework.core.exception.ComException;
 import com.ubsoft.framework.core.support.json.JsonHelper;
+import com.ubsoft.framework.core.support.util.StringUtil;
+import com.ubsoft.framework.system.model.Subject;
 
 @RequestMapping("/")
 @Controller
@@ -24,8 +26,13 @@ public class DispatcherController extends BaseController {
 	@ResponseBody
 	public String dispatcher() throws UnsupportedEncodingException {
 		String serviceName = request.getParameter("serviceName");
-		String methodName = request.getParameter("methodName");
+		String methodName = request.getParameter("methodName");		
 		try {
+			if(StringUtil.isNotEmpty(serviceName)){
+				if(!Subject.getSubject().isPermitted(serviceName+"."+methodName)){
+					throw new ComException(ComException.MIN_ERROR_CODE_SECURITY,"没有调用权限.");
+				}
+			}
 			String unitName = this.getUnitName();
 			String params = request.getParameter("params");
 			Object[] resultParmas = null;
@@ -34,6 +41,7 @@ public class DispatcherController extends BaseController {
 			} else {
 				resultParmas = new Object[] {};
 			}
+			
 			Object obj = transactionService.execute(unitName, serviceName, methodName, resultParmas);
 			Map<String, Object> res = new HashMap<String, Object>();
 			res.put("status", "S");

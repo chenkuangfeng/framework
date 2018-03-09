@@ -11,8 +11,10 @@ import org.quartz.PersistJobDataAfterExecution;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ubsoft.framework.core.conf.AppConfig;
+import com.ubsoft.framework.core.exception.ComException;
 import com.ubsoft.framework.core.service.ITransactionService;
 import com.ubsoft.framework.core.support.util.IPUtil;
+import com.ubsoft.framework.core.support.util.StringUtil;
 import com.ubsoft.framework.esb.cache.MemoryEndpoint;
 import com.ubsoft.framework.esb.entity.Endpoint;
 import com.ubsoft.framework.esb.model.Exchange;
@@ -62,22 +64,27 @@ public class GeneralJob implements Job {
 				} 
 				if (task.getTaskType().equals("API")) {
 					Endpoint ep = MemoryEndpoint.getInstance().get(serviceName);
+					if(ep==null){
+						throw new ComException(ComException.MIN_ERROR_CODE_GATEWAY+10,"API:"+serviceName+"不存在.");
+					}
 					Exchange ex = new Exchange();
 					ex.setEndpoint(ep);
 					Message msg = new Message();
 					msg.setMessageId(task.getTaskKey());
 					ex.setIn(msg);
+					
 					engine.process(ep, ex);
 					end = new Timestamp(System.currentTimeMillis());
 				} else {
 					transaciontService.execute(task.getUnitName(), serviceName, "execute", new Object[] { task });
 					end = new Timestamp(System.currentTimeMillis());
 				}
-				if (task.isLog()) {
+				if (StringUtil.isTrue(task.getLogable())) {
 					this.log(task, start, end, "INFOR", "成功");
 				}
 			}
 		} catch (Exception ex) {
+			ex.printStackTrace();
 			if (task != null) {
 				this.log(task, start, end, "ERROR", ex.getMessage());
 			}

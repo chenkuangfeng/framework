@@ -37,7 +37,7 @@ public class ToolBarButtonTag extends BaseTag {
 			}
 		}
 		StringBuffer body = new StringBuffer();
-		body.append("<button style=\"padding-top:4px;padding-bottom:4px\" class=\"btn btn-default\"");
+		body.append("<button style=\"margin-top:2px;margin-bottom:2px;padding-left:5px;padding-rigth:5px;padding-top:2px;padding-bottom:2px\" class=\"btn btn-small btn-default\"");
 		if (permKey != null) {
 			if (Subject.getSubject() != null && !Subject.getSubject().isPermitted(permKey)) {
 				this.addStringProperty(body, "disabled", "disabled");

@@ -48,7 +48,6 @@ public class TaskService extends BaseService<Task> implements ITaskService {
 			Task task = get(id);
 			JobDetailModel jobDetail = getJobDetail(task);
 			qrtzTaskService.resumeJob(jobDetail);
-
 		}
 
 	}
@@ -69,8 +68,7 @@ public class TaskService extends BaseService<Task> implements ITaskService {
 		for (String id : taskIds) {
 			Task task = get(id);
 			JobDetailModel jobDetail = getJobDetail(task);
-			qrtzTaskService.startJob(jobDetail);
-		
+			qrtzTaskService.startJob(jobDetail);		
 		}
 
 	}

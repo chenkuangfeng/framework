@@ -48,6 +48,13 @@ public class LoginFrame extends JFrame {
 
 	public LoginFrame(MainApplet applet) {
 		this.applet = applet;
+		try {
+			this.initComponents();
+		} catch (Exception e) {
+			MessageBox.showError(e.getMessage());
+			e.printStackTrace();
+		}
+
 	}
 
 	private void initComponents() throws Exception {
@@ -143,7 +150,7 @@ public class LoginFrame extends JFrame {
 					MessageBox.showInfo("请输入密码!");
 					return;
 				}
-				if (app != null) {
+				if (app != null||applet!=null) {
 					IUserService userService = RpcProxy.getProxy(IUserService.class);
 					try {
 						Session session = userService.login(txtUser.getText(), txtPwd.getText());
@@ -153,7 +160,12 @@ public class LoginFrame extends JFrame {
 						context.setUserName(session.getUserName());
 						context.setOrgName(session.getOrgName());
 						SessionContext.setContext(context);
+						if(app!=null){
 						app.initApp();
+						}
+						if(applet!=null){
+							applet.initApp();
+						}
 					} catch (Exception ex) {
 						MessageBox.showException(ex);
 					}

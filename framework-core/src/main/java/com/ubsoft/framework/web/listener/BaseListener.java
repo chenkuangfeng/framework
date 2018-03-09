@@ -32,7 +32,7 @@ public class BaseListener implements ServletContextListener {
 			if (expireDate.getTime() < today.getTime()) {
 				// 有效期
 				logger.error("License 已过期!");
-				System.exit(0);
+				//System.exit(0);
 
 			} else {
 				System.out.println("-license有效期截止到"+license[license.length - 1]+"-");
@@ -40,13 +40,14 @@ public class BaseListener implements ServletContextListener {
 
 		} catch (Exception e) {
 			logger.error("找不到license信息.");
-			System.exit(0);
+			//System.exit(0);
 
 		}
 		// 设置缓存配置文件路径
 		String cachePath = event.getServletContext().getRealPath("/WEB-INF/conf/ehcache.xml");
 		String configPath = event.getServletContext().getRealPath("/WEB-INF/conf/config.xml");
-		String fdmPath = event.getServletContext().getRealPath("/WEB-INF/fdm/");
+		//String fdmPath = event.getServletContext().getRealPath("/WEB-INF/fdm/");
+		AppConfig.webRootPath = event.getServletContext().getRealPath("/");
 		// 加载系统全局配置信息
 		AppConfig.initConfig(configPath);
 		// 加载系统服务器端缓存
@@ -54,7 +55,6 @@ public class BaseListener implements ServletContextListener {
 		AppConfig.sprintContext = ContextLoader.getCurrentWebApplicationContext();
 		// 加载fdm
 		AppConfig.initMetadata();
-		AppConfig.webRootPath = event.getServletContext().getRealPath("/");		
 		//IDbTableMetaService ds = (IDbTableMetaService) AppContext.getBean("dbTableMetaService");		
 		//ds.initDbTableMeta("DefaultDS", null, null);
 		

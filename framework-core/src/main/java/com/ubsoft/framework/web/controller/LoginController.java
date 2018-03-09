@@ -53,7 +53,7 @@ public class LoginController extends BaseController {
 				if (StringUtil.isNotEmpty(mobile) && mobile.equals("true")) {
 					mv.addObject("mobile", "true");
 				}
-				mv.setViewName("redirect:/app.ctrl?ui="+uiType);
+				mv.setViewName("redirect:/app.ctrl?ui=1");//+uiType
 
 			} catch (Exception e) {
 				mv.addObject("logo", AppConfig.getDataItem("logo"));

@@ -26,7 +26,6 @@
 		<property name="initialPoolSize" value="1"></property>
 		<property name="maxIdleTime" value="20"></property>
 	</bean>
-
 	<bean id="CJDGDS" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="jdbcUrl"
@@ -39,24 +38,20 @@
 		<property name="initialPoolSize" value="1"></property>
 		<property name="maxIdleTime" value="20"></property>
 	</bean>
-	<bean id="dynamicDataSource"
-		class="com.ubsoft.framework.core.dal.util.DynamicDataSource">
+	<bean id="dynamicDataSource" class="com.ubsoft.framework.core.dal.util.DynamicDataSource">
 		<property name="targetDataSources">
 			<map key-type="java.lang.String">
 				<entry value-ref="DefaultDS" key="DefaultDS"></entry>
 				<entry value-ref="CJDGDS" key="CJDGDS"></entry>
-
 			</map>
 		</property>
 		<property name="defaultTargetDataSource" ref="DefaultDS"></property>
 	</bean>
-
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<property name="dataSource">
 			<ref bean="dynamicDataSource" />
 		</property>
 	</bean>
-	
 	<bean id="namedParameterJdbcTemplate"
 		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dynamicDataSource"></constructor-arg>
@@ -64,21 +59,18 @@
 
 	<bean id="jdbcTemplateTransactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dynamicDataSource"></property>	
-	</bean>	
+		<property name="dataSource" ref="dynamicDataSource"></property>
+	</bean>
 	<!-- 设置需要进行Spring注解扫描的类包 -->
 	<context:component-scan base-package="com.ubsoft.framework,com.lachapelle">
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	
+
 	<!-- Enable @AspectJ support -->
 	<aop:aspectj-autoproxy />
 	<!-- 使用注解方式定义事务 -->
-
 	<tx:annotation-driven transaction-manager="jdbcTemplateTransactionManager" />
-	
-
 </beans>
 
 

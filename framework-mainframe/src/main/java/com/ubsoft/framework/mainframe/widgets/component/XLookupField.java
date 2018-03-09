@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 
 import com.borland.dbswing.JdbTextField;
 import com.borland.dx.dataset.ColumnAware;
+import com.borland.dx.dataset.DataChangeEvent;
+import com.borland.dx.dataset.DataChangeListener;
 import com.borland.dx.dataset.DataSet;
 import com.borland.dx.dataset.Variant;
 import com.ubsoft.framework.core.dal.model.Bio;
@@ -126,9 +128,23 @@ public class XLookupField extends JPanel implements IRenderer, ActionListener, C
 				dataSet.getStorageDataSet().addColumn(xcol);
 			}
 		}
+		dataSet.addDataChangeListener(new DataChangeListener(){
+			@Override
+			public void dataChanged(DataChangeEvent arg0) {
+			
+				
+			}
+
+			@Override
+			public void postRow(DataChangeEvent arg0) throws Exception {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		this.setDataSet(dataSet);
 	}
-
+	
 	@SuppressWarnings("unused")
 	@Override
 	public void actionPerformed(ActionEvent e) {

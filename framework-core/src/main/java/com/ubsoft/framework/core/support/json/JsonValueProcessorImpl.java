@@ -63,6 +63,7 @@ public class JsonValueProcessorImpl implements JsonValueProcessor {
 				obj[i] = sf.format(dates[i]);
 			}
 		}
+		
 		return obj;
 	}
 

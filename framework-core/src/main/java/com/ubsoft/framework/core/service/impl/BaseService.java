@@ -3,6 +3,8 @@ package com.ubsoft.framework.core.service.impl;
 import com.ubsoft.framework.core.dal.model.Bio;
 import com.ubsoft.framework.core.dal.session.IDataSession;
 import com.ubsoft.framework.core.service.IBaseService;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 @Transactional
 public class BaseService<T extends Serializable> implements IBaseService<T> {
+	protected final Logger logger = Logger.getLogger(getClass());
 
 	protected Class<T> clazz;
 	@Autowired

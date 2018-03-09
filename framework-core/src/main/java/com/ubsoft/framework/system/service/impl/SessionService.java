@@ -68,7 +68,12 @@ public class SessionService extends BaseService<Session> implements ISessionServ
 			if (session == null) {
 				Date minDate = new Date(System.currentTimeMillis() - sessionTimout * 60 * 1000);
 				// 不超时的session
-				session = this.get("sessionId=? and lastAccessTime>=?", new Object[] { sessionId, minDate });
+				//session = this.get("sessionId=? and lastAccessTime>=?", new Object[] { sessionId, minDate });
+				String sql="select * from SA_SESSION where sessionId=? and lastAccessTime>=?";
+				List<Session> sessions=dataSession.select(sql, new Object[] { sessionId, minDate }, Session.class);
+				if(sessions.size()>0){
+					session=sessions.get(0);
+				}
 				if (null != session) {
 					session.setLastAccessTime(new Date(System.currentTimeMillis()));
 					save(session);

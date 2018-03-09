@@ -523,17 +523,26 @@ public abstract class ExplorerForm extends Form {
 		setStatusMessage("正在删除......");
 		if (mainTable.getSelectedRowCount() > 0) {
 			int[] rowIndex = mainTable.getSelectedRows();
-			final List<String> ids = new ArrayList<String>();
+			final List<Serializable> ids = new ArrayList<Serializable>();
 			final long[] deleteIndex = new long[rowIndex.length];
 			int n = JOptionPane.showConfirmDialog(null, "是否确认删除" + mainTable.getSelectedRowCount() + "条记录?", "确认删除", JOptionPane.YES_NO_OPTION);
 			if (n == 0) {
+				MasterMeta masterMeta = meta.getFdmMeta().getMaster();
+				String propertyKey = masterMeta.getBioMeta().getPrimaryProperty().getPropertyKey();
+				String propertyType = masterMeta.getBioMeta().getPrimaryProperty().getDataType();
 				for (int i = 0; i < rowIndex.length; i++) {
 					lstDataSet.goToRow(rowIndex[i]);
-					String id = lstDataSet.getString("id");
-					if (StringUtil.isNotEmpty(id)) {
-						ids.add(id);
+					if (propertyType.equals(TypeUtil.STRING)) {
+						String id = lstDataSet.getString(propertyKey);
+						if (StringUtil.isNotEmpty(id)) {
+							ids.add(id);
+						}
+					} else {
+						int id = lstDataSet.getInt(propertyKey);
+						if (id != 0) {
+							ids.add(id);
+						}
 					}
-
 					deleteIndex[i] = lstDataSet.getInternalRow();
 				}
 
@@ -541,9 +550,9 @@ public abstract class ExplorerForm extends Form {
 					@Override
 					protected Object doInBackground() throws Exception {
 						try {
-							String[] deleteIds = new String[ids.size()];
+							Serializable[] deleteIds = new Serializable[ids.size()];
 							int i = 0;
-							for (String id : ids) {
+							for (Serializable id : ids) {
 								deleteIds[i] = id;
 								i++;
 							}

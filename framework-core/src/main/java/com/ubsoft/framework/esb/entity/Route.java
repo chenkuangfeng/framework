@@ -33,8 +33,8 @@ public class Route extends BaseEntity {
 	private String routeModule ;//路由调用的服务或者地址，serviceName，http地址，webservice地址等	
 	@Column(name="SEQ")
 	private Integer seq;//序号
-	@Column(name="LOG")
-	private boolean log ;
+	@Column(name="logable")
+	private String logable ;
 	@Column(name="PARAMS",length = 100)
 	
 	private String params;
@@ -85,12 +85,13 @@ public class Route extends BaseEntity {
 		this.routeModule = routeModule;
 	}
 
-	public boolean isLog() {
-		return log;
+	
+	public String getLogable() {
+		return logable;
 	}
 
-	public void setLog(boolean log) {
-		this.log = log;
+	public void setLogable(String logable) {
+		this.logable = logable;
 	}
 
 	public Integer getSeq() {

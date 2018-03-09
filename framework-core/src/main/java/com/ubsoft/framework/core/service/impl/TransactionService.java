@@ -43,7 +43,7 @@ public class TransactionService implements ApplicationContextAware, ITransaction
 			long start = System.currentTimeMillis();
 			try {
 				DynamicDataSource.setDataSource(unitName);
-
+				
 				Object bean = cxt.getBean(serviceName);
 				Object result = callMethod(bean, methodName, params);
 				return result;
@@ -152,7 +152,7 @@ public class TransactionService implements ApplicationContextAware, ITransaction
 		}
 		//BaseService 泛型方法处理
 		if (target instanceof BaseService && methodName.equals("save")) {
-			result = ReflectUtil.callMethod(bean, methodName, params, new Class[] { Serializable.class });
+			result = ReflectUtil.callMethod(bean, methodName, params, new Class[ ] { Serializable.class });
 		} else if(target instanceof FormService &&  methodName.equals("load")) {
 			result = ReflectUtil.callMethod(bean, methodName, params,new Class[] {String.class, Serializable.class });
 		}else{

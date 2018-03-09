@@ -211,6 +211,13 @@ public class AppConfig {
 		if (lstPermission != null) {
 			for (Permission perm : lstPermission) {
 				MemoryPermission.getInstance().put(perm.getPermKey(), perm.getPermModule());
+				//功能权限需要ba module也放在缓存,记录serviceName+methodName;
+				// 只有在权限表里面的才管理权限
+				// 判断是否在权限表里面，服务名和方法放在value里面，permKey放在key里面
+				if(perm.getPermType().equals("FUNC")){
+					MemoryPermission.getInstance().put(perm.getPermModule(), perm.getPermKey());
+				}
+
 			}
 		}
 		// 加载数据维度基本信息，特殊处理
@@ -233,6 +240,7 @@ public class AppConfig {
 
 		// 任务
 		ds.execute("taskService", "initTask", new Object[] {});
+		ds.execute("rptService", "initReport", new Object[] {});
 		hadInitCache = true;
 		// 清空页面缓存
 		// MemoryPage.getInstance().clear();
@@ -240,7 +248,7 @@ public class AppConfig {
 	}
 
 	public static void initEsb(String quartzPath) {
-		// System.setProperty("org.quartz.properties", quartzPath);
+		//System.setProperty("org.quartz.properties", quartzPath);
 		ITransactionService ds = (ITransactionService) AppContext.getBean("transactionService");
 		ds.execute("esbEngine", "initEngine", new Object[] {});
 	}

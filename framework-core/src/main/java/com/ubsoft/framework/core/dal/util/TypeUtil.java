@@ -22,24 +22,25 @@ import com.ubsoft.framework.core.support.util.StringUtil;
 
 public class TypeUtil {
     
-	public static String STRING = String.class.getSimpleName().toLowerCase();
-	public static String STRING_ARRAY = String[].class.getSimpleName().toLowerCase();
-	public static String INTEGER = Integer.class.getSimpleName().toLowerCase();
+	public static String STRING = String.class.getSimpleName();
+	public static String STRING_ARRAY = String[].class.getSimpleName();
+	public static String INTEGER = Integer.class.getSimpleName();
 	public static String INT = "int";
-	public static String INTEGER_ARRAY = Integer[].class.getSimpleName().toLowerCase();
+	public static String INTEGER_ARRAY = Integer[].class.getSimpleName();
 	public static String INT_ARRAY ="int[]";
 
-	public static String DATE = Date.class.getSimpleName().toLowerCase();
-	public static String TIMESTAMP = Timestamp.class.getSimpleName().toLowerCase();
-	public static String TIME = Time.class.getSimpleName().toLowerCase();
-	public static String DOUBLE = Double.class.getSimpleName().toLowerCase();
-	public static String SHORT = Short.class.getSimpleName().toLowerCase();
-	public static String BIGDECIMAL = BigDecimal.class.getSimpleName().toLowerCase();
-	public static String FLOAT = Float.class.getSimpleName().toLowerCase();
-	public static String LONG = Long.class.getSimpleName().toLowerCase();
-	public static String BOOLEAN = Boolean.class.getSimpleName().toLowerCase();
-	public static String BYTE = Byte.class.getSimpleName().toLowerCase();
-	public static String BYTE_ARRAY = Byte[].class.getSimpleName().toLowerCase();
+	public static String DATE = Date.class.getSimpleName();
+	public static String TIMESTAMP = Timestamp.class.getSimpleName();
+	public static String TIME = Time.class.getSimpleName();
+	public static String DOUBLE = Double.class.getSimpleName();
+	public static String SHORT = Short.class.getSimpleName();
+	public static String BIGDECIMAL = BigDecimal.class.getSimpleName();
+	public static String FLOAT = Float.class.getSimpleName();
+	public static String LONG = Long.class.getSimpleName();
+
+	public static String BOOLEAN = Boolean.class.getSimpleName();
+	public static String BYTE = Byte.class.getSimpleName();
+	public static String BYTE_ARRAY = Byte[].class.getSimpleName();
 
 	//java.sql.types影射到java类型
 	public static Map<Integer,String> SQL_TYPE_MAPPING= new HashMap<Integer,String>();
@@ -83,7 +84,7 @@ public class TypeUtil {
 	 * @return
 	 */
 	public static Object convert(String targetType, Object value) {
-		targetType = targetType.toLowerCase();
+		//targetType = targetType.toLowerCase();
 		if (StringUtil.isEmpty(value) || value instanceof JSONNull) {
 			return null;
 		}
@@ -98,7 +99,7 @@ public class TypeUtil {
 			}
 			return Integer.parseInt(value.toString());
 
-		} else if (targetType.equals(DOUBLE)) {
+		} else if (targetType.equals(DOUBLE)||targetType.equals("double")) {
 
 			if (value instanceof Double) {
 				return (Double) value;
@@ -106,7 +107,7 @@ public class TypeUtil {
 				return Double.parseDouble(value.toString());
 			}
 
-		} else if (targetType.equals(LONG)) {
+		} else if (targetType.equals(LONG)||targetType.equals("long")) {
 
 			if (value instanceof Long) {
 				return (Long) value;
@@ -122,7 +123,7 @@ public class TypeUtil {
 				return new BigDecimal(value.toString());
 			}
 
-		} else if (targetType.equals(FLOAT)) {
+		} else if (targetType.equals(FLOAT)||targetType.equals("float")) {
 			if (value instanceof Float) {
 				return (Float) value;
 			} else {
@@ -260,7 +261,7 @@ public class TypeUtil {
 
 	protected static Object getResultSetValue(ResultSet rs, int index, String targetType) throws SQLException {
 		Object value = null;
-		targetType = targetType.toLowerCase();
+		//targetType = targetType.toLowerCase();
 		if (targetType.equals(STRING)) {
 			value = rs.getObject(index);
 			if (value instanceof Clob) {
@@ -278,16 +279,16 @@ public class TypeUtil {
 			value = rs.getShort(index);
 		} else if (targetType.equals(INTEGER)||targetType.equals(INT)) {
 			value = rs.getInt(index);
-		} else if (targetType.equals(LONG)) {
+		} else if (targetType.equals(LONG)||targetType.equals("long")) {
 			value = rs.getLong(index);
-		} else if (targetType.equals(FLOAT)) {
+		} else if (targetType.equals(FLOAT)||targetType.equals("float")) {
 			value = rs.getFloat(index);
-		} else if (targetType.equals(DOUBLE)) {
+		} else if (targetType.equals(DOUBLE)||targetType.equals("double")) {
 			value = rs.getDouble(index);
 		} else if (targetType.equals(BIGDECIMAL)) {
 			return rs.getBigDecimal(index);
 		} else if (targetType.equals(DATE)) {
-			return rs.getDate(index);
+			return rs.getTimestamp(index);
 		} else if (targetType.equals(TIME)) {
 			return rs.getTime(index);
 		} else if (targetType.equals(TIMESTAMP)) {

@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.CallableStatementCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.ubsoft.framework.core.cache.MemoryBioMeta;
@@ -42,6 +42,9 @@ public class DataSession implements IDataSession {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
+	 @Autowired
+	 NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	@Override
 	public Bio getBio(String bioName, Serializable id) {
@@ -231,6 +234,7 @@ public class DataSession implements IDataSession {
 			String columnKey = property.getColumnKey();
 			setDefaultValue(property, bio);
 			Object value = bio.getObject(propertyKey);
+			value=TypeUtil.convert(property.getDataType(), value);
 			if (value == null) {
 				continue;
 			}
@@ -273,7 +277,8 @@ public class DataSession implements IDataSession {
 		for (BioPropertyMeta property : meta.getPropertySet()) {
 			String propertyKey = property.getPropertyKey();
 			String columnKey = property.getColumnKey();
-			Object value = bio.getObject(propertyKey);
+			Object value = bio.getObject(propertyKey);			
+			value=TypeUtil.convert(property.getDataType(), value);
 			setDefaultValue(property, bio);
 			// 主键不更新
 			if (StringUtil.isTrue(property.getPrimaryKey())) {
@@ -383,7 +388,7 @@ public class DataSession implements IDataSession {
 			throw new DataAccessException(DataAccessException.MIN_ERROR_CODE_DAL, "BioMeta:" + bioName + "不存在");
 
 		}
-		sql.append("DELETE FROM ").append(meta.getTableKey()).append(" WHERE ");
+		sql.append("DELETE FROM ").append(meta.getTableKey());//.append(" WHERE ");
 		if (properties != null && properties.length > 0) {
 			sql.append(" WHERE ");
 			int count = properties.length;
@@ -397,7 +402,7 @@ public class DataSession implements IDataSession {
 				i++;
 			}
 		}
-		jdbcTemplate.update(sql.toString(), new Object[] { value });
+		jdbcTemplate.update(sql.toString(), value );
 	}
 
 	private String getDbType() {
@@ -450,12 +455,13 @@ public class DataSession implements IDataSession {
 		return this.select(sql, params, limit, bioName);
 	}
 
+	
+
 	@Override
 	public PageResult<Bio> query(String sql, int pageSize, int pageNumber, Object[] params) {
 		String bioName = null;
 		return this.select(sql, pageSize, pageNumber, params, bioName);
 	}
-
 	@Override
 	public <T extends Serializable> T get(Class<T> clazz, Serializable id) {
 		Table ta = clazz.getAnnotation(Table.class);
@@ -738,7 +744,6 @@ public class DataSession implements IDataSession {
 
 	@Override
 	public <T extends Serializable> List<T> select(String sql, Object[] params, Class<T> clazz) {
-
 		sql = SQLUtil.parseSql(sql, this.getDbType());
 		List<T> result = jdbcTemplate.query(sql, params, new BeanRowMapper<T>(clazz));
 		return result;

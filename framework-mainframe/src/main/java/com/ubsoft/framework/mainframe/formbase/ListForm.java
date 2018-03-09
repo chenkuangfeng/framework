@@ -13,7 +13,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -211,6 +210,11 @@ public abstract class ListForm extends Form {
 		boolean bFind = false;
 		int j = 0;
 		for (int i = 0; i < mainDataSet.getRowCount(); i++) {
+			//可以用这种方式循环
+//			Variant var= new Variant();
+//			mainDataSet.getVariant("id", i, var);
+//			var.getString();
+			
 			mainDataSet.goToRow(i);
 			if (dataSet.getString("id").equals(mainDataSet.getString("id"))) {
 				bFind = true;
@@ -320,6 +324,7 @@ public abstract class ListForm extends Form {
 		return true;
 	}
 
+	
 	/**
 	 * 执行保存
 	 */
@@ -373,6 +378,7 @@ public abstract class ListForm extends Form {
 		worker.execute();
 	}
 
+	 
 	protected void afterSave(List<Bio> result) {
 
 	}
@@ -575,12 +581,16 @@ public abstract class ListForm extends Form {
 	protected void addDataSetListener() {
 		this.mainDataSet.addEditListener(new EditAdapter() {
 			public void modifying(DataSet dataSet) {
+				if (mainDataSet.isEditing()) {
+					mainDataSet.post();
+				}
 				if (!loading) {
 					setModified(true);
 				}
 			}
 
 		});
+
 		this.mainDataSet.addDataChangeListener(new DataChangeAdapter() {
 			public void dataChanged(DataChangeEvent event) {
 				if (!loading) {
